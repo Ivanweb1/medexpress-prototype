@@ -228,10 +228,12 @@ h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.02em; font-weight: 60
 .about-facts div { min-height: 110px; padding: 22px; border-right: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; }
 .about-facts strong { font-size: 22px; }
 .about-facts span { margin-top: 7px; color: var(--muted); font-size: 10px; }
-.mission-layout { display: grid; grid-template-columns: .85fr 1fr; gap: 65px 90px; }
+.mission-layout { display: grid; grid-template-columns: .85fr 1fr; gap: 48px 90px; }
 .mission-copy .lead { margin-top: 0; }
 .mission-copy p { color: var(--text); font-size: 14px; line-height: 1.75; }
-.mission-quote { grid-column: 1 / -1; max-width: 950px; margin: 10px 0 0 auto; padding: 34px 0 0 70px; border-top: 1px solid var(--black); font-size: clamp(28px, 3vw, 44px); line-height: 1.25; letter-spacing: -.035em; }
+.mission-quote { grid-column: 1 / -1; margin: 0; padding: 30px 34px; border: 1px solid var(--line); background: var(--white); display: grid; grid-template-columns: 180px 1fr; gap: 40px; align-items: start; }
+.mission-quote span { color: var(--muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; }
+.mission-quote p { max-width: 930px; margin: 0; font-size: clamp(25px, 2.5vw, 38px); line-height: 1.3; letter-spacing: -.035em; }
 .clinic-directions { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--black); border-left: 1px solid var(--line); }
 .clinic-directions article { min-height: 270px; padding: 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; }
 .clinic-directions article > span, .advantage-main > span, .advantage-list article > span { color: var(--muted); font-size: 10px; }
@@ -330,7 +332,7 @@ h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.02em; font-weight: 60
   .faq-row span { text-align: left; }
   .about-facts, .clinic-directions { grid-template-columns: 1fr 1fr; }
   .mission-layout, .equipment-layout, .equipment-heading, .documents-cta, .final-record { grid-template-columns: 1fr; gap: 38px; }
-  .mission-quote { grid-column: auto; padding-left: 0; }
+  .mission-quote { grid-column: auto; grid-template-columns: 1fr; gap: 16px; padding: 24px; }
   .equipment-layout { grid-template-areas: "head" "visual" "details"; }
   .equipment-heading { grid-area: head; }
   .equipment-heading .label, .equipment-heading h2, .equipment-heading p { grid-column: auto; grid-row: auto; }
