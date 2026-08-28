@@ -1,0 +1,26 @@
+const sectionByTitle = (title) => [...document.querySelectorAll('.content-section')].find((section) => section.querySelector('h2')?.textContent.trim() === title);
+const setSection = (title, markup) => {
+  const section = sectionByTitle(title);
+  if (section) section.insertAdjacentHTML('beforeend', markup);
+  section?.querySelector('.placeholder')?.remove();
+};
+
+if (location.pathname.includes('/doctors/')) {
+  setSection('О враче', '<div class="prototype-copy"><p>Здесь будет краткое описание профессионального опыта врача подхода к пациентам и основных направлений работы</p><div class="fact-panel"><div><span>Специальность</span><strong>Будет указана после заполнения анкеты</strong></div><div><span>Стаж</span><strong>Количество лет</strong></div><div><span>Квалификация</span><strong>Категория и учёная степень</strong></div></div></div>');
+  setSection('Образование', '<div class="timeline"><div class="timeline-row"><span>Год</span><div><strong>Основное медицинское образование</strong><small>Учебное заведение и специальность</small></div></div><div class="timeline-row"><span>Год</span><div><strong>Ординатура или профессиональная переподготовка</strong><small>Учебное заведение и направление</small></div></div><div class="timeline-row"><span>Год</span><div><strong>Повышение квалификации</strong><small>Название программы</small></div></div></div>');
+  setSection('С какими вопросами можно обратиться', '<div class="tag-grid"><span>Проблема или симптом</span><span>Направление диагностики</span><span>Профилактическое обследование</span><span>Повторная консультация</span><span>Расшифровка результатов</span><span>Дополнительное направление работы</span></div>');
+  setSection('Услуги и цены', '<div class="price-table"><div class="price-row"><span>Название услуги врача</span><strong>от 0 ₽</strong><a href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a></div><div class="price-row"><span>Название консультации или исследования</span><strong>от 0 ₽</strong><a href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a></div><div class="price-row"><span>Дополнительная услуга</span><strong>от 0 ₽</strong><a href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a></div></div>');
+  setSection('Отзывы', '<div class="review-cards"><article class="review-card"><p>Здесь будет текст подтверждённого отзыва пациента о приёме и работе специалиста</p><span>Имя пациента и дата</span></article><article class="review-card"><p>Здесь будет второй подтверждённый отзыв пациента</p><span>Имя пациента и дата</span></article></div>');
+}
+
+if (location.pathname.includes('/services/')) {
+  setSection('Описание и кому подходит', '<div class="prototype-copy"><p>Здесь будет понятное описание услуги её назначения и ситуаций когда пациенту стоит обратиться в медицинский центр</p><div class="fact-panel"><div><span>Продолжительность</span><strong>Будет указана</strong></div><div><span>Результат</span><strong>Что получает пациент</strong></div><div><span>Возраст</span><strong>Ограничения будут указаны</strong></div></div></div>');
+  setSection('Что входит', '<div class="tag-grid"><span>Этап или исследование</span><span>Этап или исследование</span><span>Заключение специалиста</span><span>Рекомендации по результатам</span></div>');
+  setSection('Подготовка', '<div class="step-list"><div class="step-row"><span>01</span><div><strong>За несколько дней до приёма</strong><small>Первый пункт подготовки</small></div></div><div class="step-row"><span>02</span><div><strong>В день исследования</strong><small>Что можно есть пить и брать с собой</small></div></div><div class="step-row"><span>03</span><div><strong>Перед кабинетом</strong><small>Последний пункт подготовки</small></div></div></div>');
+  setSection('Стоимость', '<div class="price-table"><div class="price-row"><span>Основное исследование</span><strong>от 0 ₽</strong><a href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a></div><div class="price-row"><span>Расширенное исследование</span><strong>от 0 ₽</strong><a href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a></div><div class="price-row"><span>Комплексная услуга</span><strong>от 0 ₽</strong><a href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a></div></div>');
+  const doctorsMarkup = '<div class="mini-doctors"><article class="mini-doctor"><div class="placeholder"><span>Фото</span></div><div><strong>Имя врача</strong><span>Специальность</span></div></article><article class="mini-doctor"><div class="placeholder"><span>Фото</span></div><div><strong>Имя врача</strong><span>Специальность</span></div></article></div>';
+  const faqMarkup = '<div class="faq-list"><div class="faq-row"><strong>Частый вопрос об услуге</strong><span>Место для раскрывающегося ответа</span></div><div class="faq-row"><strong>Второй вопрос об услуге</strong><span>Место для раскрывающегося ответа</span></div><div class="faq-row"><strong>Когда будут готовы результаты</strong><span>Место для раскрывающегося ответа</span></div></div>';
+  setSection('Врачи которые проводят исследование', doctorsMarkup);
+  setSection('Вопросы и ответы', faqMarkup);
+  setSection('Врачи и вопросы', `<h3>Врачи которые проводят услугу</h3>${doctorsMarkup}<h3 style="margin-top:32px">Вопросы и ответы</h3>${faqMarkup}`);
+}

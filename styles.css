@@ -176,6 +176,43 @@ h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.02em; font-weight: 60
 .contact-page-grid .form-prototype { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 10px; align-items: end; }
 .contact-page-grid .form-prototype__title, .contact-page-grid small { grid-column: 1 / -1; }
 .contact-page-grid .form-row, .contact-page-grid .form-prototype .button { margin: 0; }
+.prototype-copy { display: grid; grid-template-columns: 1.2fr .8fr; gap: 50px; }
+.prototype-copy p { margin: 0; color: var(--text); font-size: 14px; line-height: 1.75; }
+.fact-panel { padding: 22px; border: 1px solid var(--line); background: var(--white); display: grid; gap: 14px; }
+.fact-panel div { display: flex; flex-direction: column; gap: 4px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.fact-panel div:last-child { padding-bottom: 0; border-bottom: 0; }
+.fact-panel span { color: var(--muted); font-size: 10px; }
+.fact-panel strong { font-size: 13px; }
+.timeline { border-top: 1px solid var(--black); }
+.timeline-row { display: grid; grid-template-columns: 110px 1fr; gap: 26px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.timeline-row span { color: var(--muted); font-size: 11px; }
+.timeline-row strong { font-size: 14px; }
+.timeline-row small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; }
+.tag-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.tag-grid span { min-height: 64px; padding: 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; align-items: center; font-size: 12px; }
+.price-table { border-top: 1px solid var(--black); }
+.price-row { display: grid; grid-template-columns: 1fr auto auto; gap: 22px; align-items: center; min-height: 70px; border-bottom: 1px solid var(--line); }
+.price-row span { font-size: 13px; }
+.price-row strong { font-size: 13px; white-space: nowrap; }
+.price-row a { padding-bottom: 3px; border-bottom: 1px solid var(--black); font-size: 11px; font-weight: 600; }
+.review-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.review-card { min-height: 180px; padding: 22px; border: 1px solid var(--line); background: var(--white); display: flex; flex-direction: column; }
+.review-card p { color: var(--muted); font-size: 12px; line-height: 1.65; }
+.review-card span { margin-top: auto; font-size: 11px; font-weight: 600; }
+.step-list { border-top: 1px solid var(--black); }
+.step-row { display: grid; grid-template-columns: 38px 1fr; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.step-row span { color: var(--muted); font-size: 11px; }
+.step-row strong { font-size: 13px; }
+.step-row small { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; }
+.mini-doctors { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.mini-doctor { padding: 14px; border: 1px solid var(--line); background: var(--white); display: grid; grid-template-columns: 90px 1fr; gap: 16px; align-items: center; }
+.mini-doctor .placeholder { min-height: 100px; padding: 8px; }
+.mini-doctor strong { display: block; margin-bottom: 5px; font-size: 13px; }
+.mini-doctor span { color: var(--muted); font-size: 10px; }
+.faq-list { border-top: 1px solid var(--black); }
+.faq-row { min-height: 66px; padding: 18px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr 150px; align-items: center; gap: 20px; }
+.faq-row strong { font-size: 13px; }
+.faq-row span { color: var(--muted); text-align: right; font-size: 10px; }
 
 @media (max-width: 980px) {
   .navigation, .header-phone { display: none; }
@@ -226,4 +263,9 @@ h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.02em; font-weight: 60
   .contact-page-grid .form-prototype__title, .contact-page-grid small { grid-column: auto; }
   .document-list a { grid-template-columns: 28px 1fr; padding: 14px 0; }
   .document-list small { grid-column: 2; }
+  .prototype-copy, .tag-grid, .review-cards, .mini-doctors { grid-template-columns: 1fr; }
+  .price-row { grid-template-columns: 1fr auto; padding: 14px 0; }
+  .price-row a { grid-column: 1 / -1; justify-self: start; }
+  .faq-row { grid-template-columns: 1fr; gap: 7px; }
+  .faq-row span { text-align: left; }
 }
