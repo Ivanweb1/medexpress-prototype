@@ -6,6 +6,8 @@
   --gray: #e2e2e2;
   --gray-light: #f2f2f2;
   --white: #ffffff;
+  --brand-blue: #60aec9;
+  --brand-blue-dark: #176784;
 }
 
 * { box-sizing: border-box; }
@@ -42,6 +44,7 @@ h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.02em; font-weight: 60
 
 .placeholder { min-height: 150px; background: var(--gray); display: flex; align-items: center; justify-content: center; padding: 24px; color: var(--muted); text-align: center; border: 1px solid var(--line); }
 .placeholder span { font-size: 12px; }
+.placeholder > span { display: none; }
 .placeholder--hero { min-height: 460px; flex-direction: column; gap: 8px; }
 .placeholder--hero strong { color: var(--text); font-size: 16px; }
 .placeholder--large { min-height: 500px; }
@@ -73,9 +76,25 @@ h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.02em; font-weight: 60
 
 .doctors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .doctor-card { background: var(--white); border: 1px solid var(--line); padding: 16px; min-height: 360px; display: flex; flex-direction: column; }
+.doctor-card-photo { width: 100%; height: 300px; object-fit: cover; object-position: center top; background: var(--gray); }
+.placeholder--large.has-doctor-photo { padding: 0; overflow: hidden; }
+.placeholder--large.has-doctor-photo img { width: 100%; height: 100%; min-height: 500px; object-fit: cover; object-position: center top; }
+@media (max-width: 700px) { .placeholder--large.has-doctor-photo img { min-height: 330px; } }
 .doctor-card > span { margin-top: 18px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
 .doctor-card h3 { margin: 8px 0 10px; font-size: 21px; }
 .doctor-card p { color: var(--muted); font-size: 12px; line-height: 1.5; }
+.service-card .number { display: none; }
+
+/* Unified button system */
+.button,.card-action,.floating-record{min-height:58px;height:auto;border-radius:999px;padding:0 24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;line-height:1.15;text-align:center;box-shadow:none;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.button,.card-action{border:1px solid var(--black);background:var(--white);color:var(--black)}
+.button--dark,.card-action--dark,.floating-record{border:1px solid var(--black);background:var(--black);color:var(--white)}
+.button:hover,.card-action:hover{transform:translateY(-2px)}
+.button:not(.button--dark):hover,.card-action:not(.card-action--dark):hover{background:var(--gray)}
+.button--dark:hover,.card-action--dark:hover,.floating-record:hover{background:#176784;border-color:#176784;color:var(--white)}
+.card-actions{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.card-actions .card-action{width:100%}
+@media(max-width:700px){.button,.card-action,.floating-record{min-height:54px;padding:0 20px}}
 .card-actions { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); display: grid; grid-template-columns: .8fr 1.2fr; gap: 8px; }
 .card-action { height: 48px; padding: 0 10px; border: 1px solid var(--black); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 11px; line-height: 1.25; font-weight: 600; }
 .card-action--dark { background: var(--black); color: var(--white); }
@@ -340,3 +359,12 @@ h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.02em; font-weight: 60
   .gallery-main { grid-column: 1 / -1; grid-row: auto; }
   .final-record__actions { flex-direction: column; }
 }
+
+/* Final button normalization across internal pages */
+.button,.card-action,.floating-record{min-height:58px!important;height:auto!important;border-radius:999px!important;padding:0 24px!important;font-size:13px!important;font-weight:700!important;line-height:1.15!important;box-shadow:none!important}
+.button--dark,.card-action--dark,.floating-record{background:var(--brand-blue)!important;border-color:var(--brand-blue)!important;color:var(--white)!important}
+.button:not(.button--dark),.card-action:not(.card-action--dark){background:var(--white);border-color:var(--black);color:var(--black)}
+.card-actions{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important}
+.card-actions .card-action{width:100%}
+.button--dark:hover,.card-action--dark:hover,.floating-record:hover{background:var(--brand-blue-dark)!important;border-color:var(--brand-blue-dark)!important;color:var(--white)!important}
+@media(max-width:700px){.button,.card-action,.floating-record{min-height:54px!important;padding:0 20px!important}}

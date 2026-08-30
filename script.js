@@ -33,3 +33,68 @@ navigation?.querySelectorAll('a').forEach((link) => {
   });
 });
 
+const equipmentGallery = document.querySelector('[data-equipment-gallery]');
+
+if (equipmentGallery) {
+  const slides = [...equipmentGallery.querySelectorAll('.diagnostic-slides img')];
+  const dots = [...equipmentGallery.querySelectorAll('.diagnostic-dots button')];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let activeSlide = 0;
+  let galleryTimer;
+
+  const showSlide = (index) => {
+    activeSlide = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === activeSlide));
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === activeSlide;
+      dot.classList.toggle('is-active', isActive);
+      dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+    });
+  };
+
+  const stopGallery = () => window.clearInterval(galleryTimer);
+  const startGallery = () => {
+    stopGallery();
+    if (!reduceMotion) galleryTimer = window.setInterval(() => showSlide(activeSlide + 1), 3000);
+  };
+
+  dots.forEach((dot, index) => dot.addEventListener('click', () => {
+    showSlide(index);
+    startGallery();
+  }));
+
+  equipmentGallery.addEventListener('mouseenter', stopGallery);
+  equipmentGallery.addEventListener('mouseleave', startGallery);
+  equipmentGallery.addEventListener('focusin', stopGallery);
+  equipmentGallery.addEventListener('focusout', startGallery);
+  document.addEventListener('visibilitychange', () => document.hidden ? stopGallery() : startGallery());
+  startGallery();
+}
+
+const doctorsSlider = document.querySelector('[data-doctors-slider]');
+
+if (doctorsSlider) {
+  const track = doctorsSlider.querySelector('[data-doctors-track]');
+  const previousButton = doctorsSlider.querySelector('[data-doctors-prev]');
+  const nextButton = doctorsSlider.querySelector('[data-doctors-next]');
+
+  const updateDoctorControls = () => {
+    const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+    previousButton.disabled = track.scrollLeft <= 2;
+    nextButton.disabled = track.scrollLeft >= maxScroll - 2;
+  };
+
+  const moveDoctors = (direction) => {
+    const firstCard = track.querySelector('.doctor');
+    if (!firstCard) return;
+    const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
+    track.scrollBy({ left: direction * (firstCard.getBoundingClientRect().width + gap), behavior: 'smooth' });
+  };
+
+  previousButton.addEventListener('click', () => moveDoctors(-1));
+  nextButton.addEventListener('click', () => moveDoctors(1));
+  track.addEventListener('scroll', updateDoctorControls, { passive: true });
+  window.addEventListener('resize', updateDoctorControls);
+  updateDoctorControls();
+}
+
