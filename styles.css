@@ -368,3 +368,7 @@ h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.02em; font-weight: 60
 .card-actions .card-action{width:100%}
 .button--dark:hover,.card-action--dark:hover,.floating-record:hover{background:var(--brand-blue-dark)!important;border-color:var(--brand-blue-dark)!important;color:var(--white)!important}
 @media(max-width:700px){.button,.card-action,.floating-record{min-height:54px!important;padding:0 20px!important}}
+@media(max-width:720px){
+  .header__inner .menu-button{margin-left:auto;appearance:none;-webkit-appearance:none;color:var(--black);font:inherit;font-size:13px;font-weight:700;line-height:1;min-height:44px;border-radius:999px}
+  .floating-record{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 32px)}
+}

@@ -117,6 +117,29 @@
 .floating-record{min-height:58px;padding:0 9px 0 24px;background:var(--blue);box-shadow:none}
 @media(max-width:720px){.btn,.mini-btn,.service-button,.doctor-action,.all-doctors-button{min-height:54px!important;padding:0 20px!important}.floating-record{min-height:54px}}
 
+/* Mobile controls: explicit sizing avoids native Safari styles and grid image overflow. */
+@media(max-width:720px){
+  .header-main{grid-template-columns:minmax(0,1fr) auto}
+  .header-main .brand{min-width:0}
+  .header-main .brand img{flex-shrink:0}
+  .header-main .header-actions{display:none}
+  .header-main .menu-button{justify-self:end;appearance:none;-webkit-appearance:none;color:var(--ink);font:inherit;font-size:13px;font-weight:700;line-height:1;min-height:44px;height:44px;padding:0 18px}
+  .doctor-heading-actions{justify-content:space-between;align-items:center;flex-wrap:nowrap;gap:12px}
+  .doctor-heading-actions .doctor-slider-controls{flex:0 0 auto}
+  .doctor-heading-actions .all-doctors-button{flex:0 0 auto;gap:10px;padding:0 14px!important}
+  .partner-logo{display:flex;align-items:center;justify-content:center;min-width:0;height:128px;padding:20px 28px}
+  .partner-logo img{display:block;flex:0 1 auto;width:100%;height:auto;min-width:0;max-width:240px;max-height:88px;object-fit:contain;object-position:center}
+  .floating-record{min-height:54px;padding:0 22px;gap:0;max-width:calc(100vw - 32px);right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));justify-content:center;line-height:1.15}
+  .floating-record span{display:inline}
+  .floating-record b{display:none}
+}
+@media(max-width:360px){
+  .header-main .brand{gap:8px}
+  .header-main .brand strong{font-size:12px}
+  .header-main .brand small{font-size:7px}
+  .header-main .menu-button{padding:0 14px}
+}
+
 /* Uniform gallery corners */
 .diagnostic-photo{border-radius:24px}
 @media(max-width:720px){.diagnostic-photo{border-radius:22px}}
