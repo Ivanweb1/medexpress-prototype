@@ -1,0 +1,81 @@
+/* Contact page uses the approved homepage palette, header, footer and buttons. */
+.contacts-page main h1,.contacts-page main h2,.contacts-page main h3{margin:0;line-height:1.08;letter-spacing:-.04em}
+.contacts-page main h2{font-size:clamp(34px,3.8vw,58px)}
+.contacts-page main h3{font-size:24px;letter-spacing:-.025em}
+.contacts-page main em{font-style:normal;color:var(--blue)}
+.contacts-page a:focus-visible,.contacts-page button:focus-visible{outline:3px solid var(--blue-dark);outline-offset:5px}
+.contacts-page .navigation a[aria-current="page"]{color:var(--blue-dark);text-decoration:underline;text-underline-offset:7px}
+.contacts-breadcrumbs{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;padding:26px 0 42px}
+.contacts-breadcrumbs a:hover{color:var(--blue-dark)}
+.contacts-intro{padding-bottom:56px}
+.contacts-intro__grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,6vw,88px);align-items:end}
+.contacts-intro h1{font-size:clamp(48px,5.2vw,80px)}
+.contacts-intro__copy{max-width:530px;padding-bottom:5px}
+.contacts-intro__copy p{font-size:18px;line-height:1.7;color:var(--muted);margin:0 0 28px}
+.contacts-location{padding-bottom:90px}
+.contacts-location__grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.contacts-location__map{position:relative;min-height:580px;overflow:hidden;border-radius:26px;background:var(--pale)}
+.contacts-location__map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.contacts-location__info{display:flex;flex-direction:column;gap:30px;padding:42px;background:var(--pale);border-radius:26px;min-width:0}
+.contacts-page .contacts-address h2{font-size:clamp(28px,2.6vw,40px);line-height:1.2}
+.contacts-detail{border-top:1px solid var(--line);padding-top:24px}
+.contacts-label{display:block;font-size:13px;color:var(--muted);margin-bottom:10px}
+.contacts-phone{display:inline-block;font-size:clamp(22px,2vw,30px);font-weight:800;letter-spacing:-.04em;white-space:nowrap}
+.contacts-phone:hover{color:var(--blue-dark)}
+.contacts-page .contacts-detail h3{font-size:18px;letter-spacing:-.02em}
+.contacts-hours{margin:18px 0 0;display:grid;gap:12px}
+.contacts-hours>div{display:flex;justify-content:space-between;gap:18px;font-size:14px}
+.contacts-hours dt{color:var(--muted)}
+.contacts-hours dd{margin:0;font-weight:700;white-space:nowrap}
+.contacts-map-link{width:100%;margin-top:auto;gap:16px}
+.contacts-connect{background:var(--cream)}
+.contacts-methods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.contacts-method{padding:34px;background:white;border:1px solid var(--line);border-radius:24px;display:flex;flex-direction:column;align-items:flex-start}
+.contacts-method__icon{display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:var(--pale);color:var(--blue-dark);margin-bottom:28px}
+.contacts-method__icon svg{width:28px;height:28px;display:block}
+.contacts-method p{margin:16px 0 30px;color:var(--muted);font-size:15px;line-height:1.7}
+.contacts-method .btn{margin-top:auto;width:100%}
+.contacts-community{display:flex;align-items:center;justify-content:space-between;gap:26px;padding-top:34px;margin-top:36px;border-top:1px solid var(--line)}
+.contacts-community p{color:var(--muted);font-size:14px;margin:0}
+.contacts-community .text-link{gap:12px;flex-shrink:0}
+@media(max-width:1100px){
+  .contacts-location__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .contacts-location__info{padding:30px}
+  .contacts-method{padding:26px}
+  .contacts-methods{gap:12px}
+  .contacts-hours>div{font-size:13px;gap:12px}
+  .contacts-page .contacts-map-link{padding-inline:16px!important;font-size:12px!important;gap:10px}
+}
+@media(max-width:800px){
+  .contacts-intro__grid{grid-template-columns:1fr;gap:26px}
+  .contacts-intro__copy{max-width:600px}
+  .contacts-location__grid{grid-template-columns:1fr}
+  .contacts-location__info{grid-row:1;padding:32px;gap:26px}
+  .contacts-location__map{min-height:420px}
+  .contacts-methods{grid-template-columns:1fr}
+  .contacts-method{padding:30px}
+  .contacts-method p{max-width:560px}
+  .contacts-method .btn{width:auto;min-width:220px}
+  .contacts-community{align-items:flex-start;flex-direction:column;gap:18px}
+}
+@media(max-width:720px){
+  .contacts-breadcrumbs{padding:22px 0 30px;font-size:11px}
+  .contacts-intro{padding-bottom:36px}
+  .contacts-intro h1{font-size:clamp(44px,10vw,60px)}
+  .contacts-intro__copy p{font-size:16px;margin-bottom:24px}
+  .contacts-location{padding-bottom:64px}
+  .contacts-location__info{padding:28px 24px;border-radius:22px}
+  .contacts-location__map{border-radius:22px;min-height:390px}
+  .contacts-hours>div{font-size:13px;gap:10px}
+  .contacts-phone{font-size:24px}
+  .contacts-page main h2{font-size:clamp(32px,8vw,42px)}
+  .contacts-page .contacts-address h2{font-size:30px}
+  .contacts-method{padding:28px 24px;border-radius:22px}
+  .contacts-method .btn{width:100%;min-width:0}
+  .contacts-community .text-link{font-size:13px;flex-shrink:1}
+}
+@media(max-width:360px){
+  .contacts-location__info{padding-inline:20px}
+  .contacts-hours>div{font-size:12px}
+  .contacts-phone{font-size:22px}
+}

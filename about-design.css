@@ -1,0 +1,150 @@
+/* About page shares the approved homepage tokens, buttons and site chrome. */
+.about-page main h1,.about-page main h2,.about-page main h3{margin:0;line-height:1.08;letter-spacing:-.045em}
+.about-page main h2{font-size:clamp(34px,3.8vw,58px)}
+.about-page main h3{font-size:26px;letter-spacing:-.025em}
+.about-page main em{font-style:normal;color:var(--blue)}
+.about-page main p{color:var(--muted)}
+.about-page main figure{margin:0}
+.about-page main section[id]{scroll-margin-top:30px}
+.about-page a:focus-visible,.about-page button:focus-visible{outline:3px solid var(--blue-dark);outline-offset:5px}
+.about-page .navigation a[aria-current="page"]{color:var(--blue-dark);text-decoration:underline;text-underline-offset:7px}
+.clinic-breadcrumbs{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;padding:26px 0 32px}
+.clinic-breadcrumbs a:hover{color:var(--blue-dark)}
+.clinic-intro{padding-bottom:64px}
+.clinic-intro__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:44px;align-items:stretch}
+.clinic-intro__copy{padding:30px 0;align-self:center}
+.clinic-intro h1{font-size:clamp(40px,4.1vw,64px);overflow-wrap:break-word}
+.clinic-intro h1 em{display:block}
+.clinic-intro__copy>p{font-size:18px;line-height:1.65;max-width:580px;margin:26px 0 32px}
+.clinic-actions{display:flex;flex-wrap:wrap;align-items:center;gap:20px}
+.clinic-intro__photo{position:relative;min-height:420px;overflow:hidden;border-radius:26px;background:var(--sky)}
+.clinic-intro__photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.clinic-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:44px}
+.clinic-facts div{border-top:1px solid var(--line);padding-top:20px;display:flex;flex-direction:column;gap:5px}
+.clinic-facts strong{font-size:17px}
+.clinic-facts span{font-size:13px;color:var(--muted)}
+.clinic-mission{background:var(--cream);padding-block:88px}
+.clinic-mission .clinic-split,.clinic-mission .clinic-principle{grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,5vw,72px)}
+.about-page .clinic-mission h2{max-width:15ch;font-size:clamp(34px,3.2vw,48px)}
+.clinic-mission .clinic-copy{padding-top:34px}
+.clinic-mission .clinic-copy p:last-child{margin-bottom:0}
+.about-page .clinic-mission .clinic-lead{font-size:21px;line-height:1.55}
+.clinic-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8vw}
+.clinic-copy p{font-size:16px;line-height:1.8;margin:0 0 22px}
+.about-page main .clinic-lead{font-size:23px;line-height:1.5;color:var(--ink)}
+.clinic-principle{display:grid;border-top:1px solid var(--line);padding-top:32px;margin-top:40px;align-items:start}
+.clinic-principle .eyebrow{margin:7px 0 0}
+.clinic-principle p{margin:0;font-size:clamp(21px,1.8vw,27px);line-height:1.5;letter-spacing:-.025em;color:var(--ink)!important;max-width:36ch}
+.clinic-directions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.clinic-direction{padding:32px;border-radius:24px;background:var(--pale);display:flex;flex-direction:column;align-items:flex-start;min-height:340px;min-width:0}
+.clinic-direction__top{display:flex;align-items:center;gap:16px;min-height:56px;width:100%;margin-bottom:26px}
+.clinic-direction__icon{display:grid;place-items:center;flex:0 0 56px;width:56px;height:56px;border-radius:16px;background:white;color:var(--blue-dark)}
+.clinic-direction__icon svg{width:30px;height:30px;display:block}
+.clinic-direction:nth-child(3n+2){background:var(--cream)}
+.clinic-direction:nth-child(3n){background:#f0f5f6}
+.clinic-direction__category{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--blue-dark);font-weight:700}
+.clinic-direction h3{max-width:330px}
+.clinic-direction p{margin:16px 0 26px;font-size:14px;line-height:1.65}
+.clinic-direction .btn{margin-top:auto;width:100%}
+.clinic-lab-mark{height:56px;width:150px;min-width:0}
+.clinic-lab-mark img{width:100%;height:100%;object-fit:contain}
+.clinic-care{background:var(--pale)}
+.clinic-care__team>p{max-width:510px;font-size:17px;margin:26px 0}
+.clinic-portraits{display:flex;gap:10px;margin:30px 0}
+.clinic-portraits img{width:clamp(58px,6vw,82px);height:clamp(58px,6vw,82px);border-radius:50%;object-fit:cover;object-position:center 18%;border:3px solid white}
+.clinic-values{display:flex;flex-direction:column;justify-content:center}
+.clinic-values article{border-top:1px solid var(--line);padding:30px 0}
+.clinic-values article:last-child{border-bottom:1px solid var(--line)}
+.clinic-values p{font-size:16px;line-height:1.75;max-width:500px;margin:14px 0 0}
+.clinic-equipment{background:var(--ink);color:white}
+.clinic-equipment__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center}
+.clinic-equipment .eyebrow{color:var(--blue)}
+.clinic-equipment p{color:#bdd1d6!important;line-height:1.8}
+.clinic-equipment .clinic-lead{color:white!important;margin:28px 0 18px}
+.clinic-equipment__tags{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 36px}
+.clinic-equipment__tags span{border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:9px 14px;font-size:12px;color:#dcebf0}
+.clinic-media-slider{min-width:0}
+.clinic-gallery-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;outline-offset:6px}
+.clinic-gallery-track::-webkit-scrollbar{display:none}
+.clinic-gallery-track figure{flex:0 0 calc((100% - 20px)/2);min-width:0;scroll-snap-align:start}
+.clinic-gallery-track img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:24px;background:var(--pale)}
+.clinic-gallery-track figcaption{margin-top:16px;padding:0 2px 4px;font-size:14px;line-height:1.6;overflow-wrap:anywhere;color:var(--muted)}
+.clinic-media-slider--equipment .clinic-gallery-track figure{flex-basis:100%}
+.clinic-media-slider--equipment .clinic-gallery-track img{aspect-ratio:578/600;object-position:center}
+.clinic-media-slider--equipment figcaption{color:#bdd1d6}
+.clinic-gallery-nav{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:24px}
+.clinic-gallery-nav[hidden]{display:none}
+.clinic-gallery-heading{grid-template-columns:minmax(0,1fr) minmax(240px,.65fr)}
+.clinic-gallery-heading-actions{justify-self:end;width:100%;max-width:400px}
+.clinic-gallery-heading-actions .clinic-gallery-nav{margin-top:20px}
+.clinic-gallery-count{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.clinic-gallery-arrows{display:flex;gap:10px}
+.clinic-gallery-arrows button{display:grid;place-items:center;width:58px;height:58px;flex:0 0 58px;padding:0;border:1px solid #9ccddd;border-radius:50%;background:var(--pale);color:var(--blue-dark);cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.clinic-gallery-arrows svg{display:block;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.clinic-gallery-arrows button:hover:not(:disabled){background:var(--blue);border-color:var(--blue);color:var(--ink)}
+.clinic-gallery-arrows button:disabled{opacity:.35;cursor:default}
+.clinic-media-slider--equipment .clinic-gallery-count{color:#bdd1d6}
+.clinic-media-slider--equipment .clinic-gallery-arrows button{background:transparent;border-color:#729ca6;color:white}
+.clinic-media-slider--equipment .clinic-gallery-arrows button:hover:not(:disabled){background:var(--blue);border-color:var(--blue);color:var(--ink)}
+.clinic-documents{display:flex;align-items:center;justify-content:space-between;gap:36px;padding:40px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.clinic-documents h2{font-size:32px!important}
+.clinic-documents p{margin:14px 0 0}
+.clinic-documents .btn{flex-shrink:0}
+.clinic-record{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:60px;align-items:center;padding:60px;border-radius:28px;background:var(--pale)}
+.clinic-record>div>p{margin:24px 0 30px}
+.clinic-record__details{border-left:1px solid var(--line);padding-left:40px}
+.clinic-record__details>span{display:block;font-size:12px;color:var(--blue-dark);margin-bottom:12px}
+.clinic-record__details strong{display:block;font-size:26px;letter-spacing:-.025em}
+.clinic-record__details p{font-size:15px;line-height:1.8}
+.clinic-record__details .text-link{gap:12px}
+@media(max-width:1100px){
+  .clinic-intro__grid{grid-template-columns:1fr;gap:24px}
+  .clinic-intro__copy{padding:12px 0}
+  .clinic-intro h1{max-width:800px;font-size:clamp(44px,6vw,64px)}
+  .clinic-intro__copy>p{max-width:700px}
+  .clinic-intro__photo{min-height:0;aspect-ratio:3/2}
+  .clinic-directions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .clinic-equipment__grid,.clinic-split{gap:40px}
+  .clinic-record{padding:40px;gap:30px;grid-template-columns:1.5fr 1fr}
+  .clinic-record__details{padding-left:28px}
+}
+@media(max-width:720px){
+  .clinic-breadcrumbs{padding:22px 0 28px;font-size:11px}
+  .clinic-intro{padding-bottom:48px}
+  .clinic-intro h1{font-size:clamp(32px,8.5vw,52px)}
+  .clinic-intro__copy>p{font-size:16px;margin:24px 0}
+  .clinic-intro__photo{border-radius:22px}
+  .clinic-actions{gap:18px}
+  .clinic-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px;margin-top:28px}
+  .clinic-facts strong{font-size:14px}
+  .clinic-facts span{font-size:12px}
+  .clinic-split,.clinic-equipment__grid{grid-template-columns:1fr;gap:32px}
+  .about-page main h2{font-size:clamp(32px,8vw,42px)}
+  .about-page main h3{font-size:24px}
+  .about-page main .clinic-lead{font-size:20px}
+  .clinic-mission{padding-block:64px}
+  .clinic-mission .clinic-split,.clinic-mission .clinic-principle{grid-template-columns:1fr;gap:24px}
+  .clinic-mission .clinic-copy{padding-top:0}
+  .about-page .clinic-mission h2{max-width:18ch}
+  .clinic-principle{gap:18px;margin-top:26px;padding-top:28px}
+  .clinic-principle p{font-size:24px}
+  .clinic-directions{grid-template-columns:1fr}
+  .clinic-direction{min-height:0;padding:28px;border-radius:22px}
+  .clinic-direction .btn{align-self:stretch}
+  .clinic-values article{padding:24px 0}
+  .clinic-equipment__grid>div:last-child{grid-row:1}
+  .clinic-equipment .btn{width:100%;gap:14px}
+  .clinic-gallery-track figure{flex-basis:100%}
+  .clinic-gallery-track img{border-radius:22px}
+  .clinic-gallery-heading{grid-template-columns:1fr}
+  .clinic-gallery-heading-actions{justify-self:stretch;max-width:none}
+  .clinic-gallery-nav{margin-top:20px}
+  .clinic-gallery-arrows button{width:54px;height:54px;flex-basis:54px}
+  .clinic-documents{flex-direction:column;align-items:flex-start;gap:24px}
+  .clinic-documents h2{font-size:28px!important}
+  .clinic-record{grid-template-columns:1fr;padding:30px 24px;border-radius:24px;gap:32px}
+  .clinic-record .clinic-actions{align-items:stretch;flex-direction:column;gap:12px}
+  .clinic-record .btn{padding-inline:14px!important;gap:12px}
+  .clinic-record__details{border-left:0;border-top:1px solid var(--line);padding:26px 0 0}
+  .clinic-record__details strong{font-size:23px}
+}
