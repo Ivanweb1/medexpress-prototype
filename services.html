@@ -2,46 +2,77 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Услуги Мед-ЭКСПРЕСС в Аргаяше: анализы СИТИЛАБ, направления УЗИ, консультации врачей и массаж позвоночника. Запись онлайн или по телефону.">
   <title>Услуги — Мед-ЭКСПРЕСС</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260831-brand-blue">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home-design.css?v=20260831-brand-blue">
+  <link rel="stylesheet" href="services-design.css?v=20260831-services">
 </head>
-<body data-depth="0">
-  <div data-site-header></div>
-  <main>
-    <section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="index.html">Главная</a><span>Услуги</span></div><span class="label">Направления</span><h1>Услуги медицинского центра</h1><p>Медицинские анализы ультразвуковая диагностика консультации врачей и массаж</p></div></section>
+<body class="services-page">
+  <header class="site-header" id="top">
+    <div class="header-note"><div class="shell"><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно 8:00–16:00 · вс 9:00–13:00</span></div></div>
+    <div class="shell header-main">
+      <a class="brand" href="index.html" aria-label="Мед-ЭКСПРЕСС, главная"><img src="assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a>
+      <button class="menu-button" type="button" aria-expanded="false">Меню</button>
+      <nav class="navigation" aria-label="Основная навигация"><a href="services.html" aria-current="page">Услуги</a><a href="doctors.html">Врачи</a><a href="about.html">О клинике</a><a href="index.html#prices">Цены</a><a href="contacts.html">Контакты</a></nav>
+      <div class="header-actions"><a class="phone" href="tel:+79617958759">+7 (961) 795-87-59</a><a class="btn btn--small" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a></div>
+    </div>
+  </header>
+  <main id="main">
+    <section class="catalog-intro shell">
+      <nav class="catalog-breadcrumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span aria-hidden="true">/</span><span aria-current="page">Услуги</span></nav>
+      <div class="catalog-intro__grid">
+        <div><span class="eyebrow">Услуги медицинского центра</span><h1>Здоровье семьи<br><em>в надёжных руках</em></h1></div>
+        <div class="catalog-intro__copy"><p>Медицинские анализы, ультразвуковая диагностика, консультации врачей и массаж — рядом с домом, в Аргаяше.</p><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться на приём <span aria-hidden="true">→</span></a></div>
+      </div>
+      <nav class="catalog-navigation" aria-label="Быстрый переход к направлению">
+        <a href="#analyses">Анализы</a><a href="#ultrasound">УЗИ</a><a href="#consultations">Консультации врачей</a><a href="#massage">Массаж</a>
+      </nav>
+    </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-head"><div><span class="label">Основные услуги</span><h2>Направления медицинской помощи</h2></div><p>Услуги расположены в порядке приоритета медицинского центра</p></div>
-        <div class="services-grid">
-          <article class="service-card"><div class="placeholder"><span>Изображение направления</span></div><div class="service-card__body"><span class="number">01</span><h3>Медицинские анализы</h3><p>Сотрудничаем с лабораторией СИТИЛАБ</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/service.html?name=Медицинские%20анализы">Подробнее об услуге</a></div></div></article>
-          <article class="service-card"><div class="placeholder"><span>Изображение направления</span></div><div class="service-card__body"><span class="number">02</span><h3>УЗИ</h3><p>Все направления ультразвуковой диагностики</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/general-ultrasound.html">Подробнее об услуге</a></div></div></article>
-          <article class="service-card"><div class="placeholder"><span>Изображение направления</span></div><div class="service-card__body"><span class="number">03</span><h3>Консультации врачей</h3><p>Кардиолог невролог эндокринолог и гинеколог</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/service.html?name=Консультации%20врачей">Подробнее об услуге</a></div></div></article>
-          <article class="service-card"><div class="placeholder"><span>Изображение направления</span></div><div class="service-card__body"><span class="number">04</span><h3>Массаж позвоночника</h3><p>Массаж для здоровья спины</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/service.html?name=Массаж%20позвоночника">Подробнее об услуге</a></div></div></article>
-        </div>
+    <section class="catalog-main shell" aria-labelledby="directions-title">
+      <div class="catalog-section-heading"><span class="eyebrow">С чего начнём</span><h2 id="directions-title">Основные направления</h2></div>
+      <div class="catalog-main-grid">
+        <article class="catalog-card catalog-card--lab" id="analyses" data-service-card>
+          <div class="catalog-card__visual"><img src="assets/citilab-transparent.png" alt="СИТИЛАБ" width="1354" height="559" loading="lazy"></div>
+          <div class="catalog-card__body"><h3>Медицинские анализы</h3><p>Лабораторные исследования в партнёрстве с СИТИЛАБ.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=Медицинские%20анализы">Подробнее</a></div></div>
+        </article>
+        <article class="catalog-card catalog-card--uzi" id="ultrasound-overview" data-service-card>
+          <div class="catalog-card__visual"><span class="catalog-main-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 4 6 3-4 8-6-3zM10 5l1-2M10 15l2 2c3 3 7 1 7-2V9M3 16a8 8 0 0 0 8 5M5 15a5 5 0 0 0 5 3"/></svg></span></div>
+          <div class="catalog-card__body"><h3>УЗИ</h3><p>Все направления ультразвуковой диагностики.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/general-ultrasound.html">Подробнее</a></div></div>
+        </article>
+        <article class="catalog-card catalog-card--consult" id="consultations" data-service-card>
+          <div class="catalog-card__visual"><span class="catalog-main-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v5a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 12v3a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10" r="2"/></svg></span></div>
+          <div class="catalog-card__body"><h3>Консультации врачей</h3><p>Кардиолог, невролог, эндокринолог и гинеколог.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=Консультации%20врачей">Подробнее</a></div></div>
+        </article>
+        <article class="catalog-card catalog-card--spine" id="massage" data-service-card>
+          <div class="catalog-card__visual"><span class="catalog-main-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c-4 4 4 6 0 10s0 6 0 8M7 4l8 2M8 9l8 1M7 14l8 2M8 19l8 1"/></svg></span></div>
+          <div class="catalog-card__body"><h3>Массаж позвоночника</h3><p>Массаж для здоровья спины.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=Массаж%20позвоночника">Подробнее</a></div></div>
+        </article>
       </div>
     </section>
 
-    <section class="section section--gray">
-      <div class="container">
-        <div class="section-head"><div><span class="label">УЗИ</span><h2>Направления ультразвуковой диагностики</h2></div><p>Выберите нужное направление чтобы посмотреть описание подготовку стоимость и врачей</p></div>
-        <div class="services-grid">
-          <article class="service-card"><div class="placeholder"><span>Изображение услуги</span></div><div class="service-card__body"><span class="number">01</span><h3>УЗИ сердца сосудов и суставов</h3><p>Сердце сосуды головы и шеи плечевые и коленные суставы</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/service.html?name=УЗИ%20сердца%20сосудов%20и%20суставов">Подробнее об услуге</a></div></div></article>
-          <article class="service-card"><div class="placeholder"><span>Изображение услуги</span></div><div class="service-card__body"><span class="number">02</span><h3>Общее УЗИ</h3><p>Ультразвуковые исследования внутренних органов</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/general-ultrasound.html">Подробнее об услуге</a></div></div></article>
-          <article class="service-card"><div class="placeholder"><span>Изображение услуги</span></div><div class="service-card__body"><span class="number">03</span><h3>УЗИ для женщин</h3><p>Экспертная диагностика женского здоровья</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/service.html?name=УЗИ%20для%20женщин">Подробнее об услуге</a></div></div></article>
-          <article class="service-card"><div class="placeholder"><span>Изображение услуги</span></div><div class="service-card__body"><span class="number">04</span><h3>Комплексные УЗИ для женщин</h3><p>Несколько исследований за один визит</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/service.html?name=Комплексные%20УЗИ%20для%20женщин">Подробнее об услуге</a></div></div></article>
-          <article class="service-card"><div class="placeholder"><span>Изображение услуги</span></div><div class="service-card__body"><span class="number">05</span><h3>УЗИ при беременности</h3><p>Скрининги 3D и 4D фото и видео плода</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/service.html?name=УЗИ%20при%20беременности">Подробнее об услуге</a></div></div></article>
-          <article class="service-card"><div class="placeholder"><span>Изображение услуги</span></div><div class="service-card__body"><span class="number">06</span><h3>Комплексные УЗИ для мужчин</h3><p>Комплексная диагностика мужского здоровья</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/service.html?name=Комплексные%20УЗИ%20для%20мужчин">Подробнее об услуге</a></div></div></article>
-          <article class="service-card"><div class="placeholder"><span>Изображение услуги</span></div><div class="service-card__body"><span class="number">07</span><h3>УЗИ детям</h3><p>Ультразвуковая диагностика для детей</p><div class="card-actions"><a class="card-action card-action--dark" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu">Записаться</a><a class="card-action" href="services/service.html?name=УЗИ%20детям">Подробнее об услуге</a></div></div></article>
+    <section class="section catalog-ultrasound" id="ultrasound" aria-labelledby="ultrasound-title">
+      <div class="shell">
+        <div class="section-title"><div><span class="eyebrow">Ультразвуковая диагностика</span><h2 id="ultrasound-title">УЗИ для взрослых<br>и детей</h2></div><div><p>Выберите исследование или комплекс обследований.</p><a class="btn btn--outline" href="doctors.html">Наши врачи <span aria-hidden="true">→</span></a></div></div>
+        <div class="catalog-ultrasound-grid">
+          <article class="catalog-ultrasound-card" data-service-card><span class="catalog-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8ZM4 12h4l2-4 3 8 2-4h5"/></svg></span><div class="catalog-ultrasound-card__body"><h3>УЗИ сердца, сосудов и суставов</h3><p>Сердце, сосуды головы и шеи, плечевые и коленные суставы.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=УЗИ%20сердца%20сосудов%20и%20суставов">Подробнее</a></div></div></article>
+          <article class="catalog-ultrasound-card" data-service-card><span class="catalog-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 4 6 3-4 8-6-3zM10 5l1-2M10 15l2 2c3 3 7 1 7-2V9M3 16a8 8 0 0 0 8 5M5 15a5 5 0 0 0 5 3"/></svg></span><div class="catalog-ultrasound-card__body"><h3>Общее УЗИ</h3><p>Ультразвуковые исследования внутренних органов.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/general-ultrasound.html">Подробнее</a></div></div></article>
+          <article class="catalog-ultrasound-card" data-service-card><span class="catalog-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M12 13v8M8 18h8"/></svg></span><div class="catalog-ultrasound-card__body"><h3>УЗИ для женщин</h3><p>Ультразвуковая диагностика женского здоровья.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=УЗИ%20для%20женщин">Подробнее</a></div></div></article>
+          <article class="catalog-ultrasound-card" data-service-card><span class="catalog-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8l10-5ZM2 12l10 5 10-5M2 16l10 5 10-5"/></svg></span><div class="catalog-ultrasound-card__body"><h3>Комплексные УЗИ для женщин</h3><p>Несколько исследований за один визит.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=Комплексные%20УЗИ%20для%20женщин">Подробнее</a></div></div></article>
+          <article class="catalog-ultrasound-card" data-service-card><span class="catalog-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4a8 8 0 1 0 7 0M9 4c0 3 2 4 4 4M9 15c2 2 4 2 6 0M8 11h.01M16 11h.01M13 3c3 0 3 4 0 4"/></svg></span><div class="catalog-ultrasound-card__body"><h3>УЗИ при беременности</h3><p>Скрининги, 3D- и 4D-исследования, фото и видео плода.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=УЗИ%20при%20беременности">Подробнее</a></div></div></article>
+          <article class="catalog-ultrasound-card" data-service-card><span class="catalog-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="15" r="6"/><path d="m13.5 10.5 7-7M15 3h6v6"/></svg></span><div class="catalog-ultrasound-card__body"><h3>Комплексные УЗИ для мужчин</h3><p>Комплексная диагностика мужского здоровья.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=Комплексные%20УЗИ%20для%20мужчин">Подробнее</a></div></div></article>
+          <article class="catalog-ultrasound-card" data-service-card><span class="catalog-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><path d="M5 10h14M12 8v8M8 22l4-6 4 6"/></svg></span><div class="catalog-ultrasound-card__body"><h3>УЗИ детям</h3><p>Ультразвуковая диагностика для детей.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=УЗИ%20детям">Подробнее</a></div></div></article>
+          <aside class="catalog-help"><span class="catalog-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 3-3 1c-1 5 1 9 4 12s7 5 12 4l1-3-5-3-2 2c-3-1-5-3-6-6l2-2-3-5Z"/></svg></span><div><span class="eyebrow">Поможем с записью</span><h3>Остались вопросы?</h3><p>Позвоните администратору: уточним информацию об услугах и доступное время приёма.</p><a class="catalog-help__phone" href="tel:+79617958759">+7 (961) 795-87-59</a><a class="btn" href="contacts.html">Связаться с центром <span aria-hidden="true">→</span></a></div></aside>
         </div>
       </div>
     </section>
   </main>
-  <div data-site-footer></div>
+  <footer class="site-footer"><div class="shell footer-grid"><div><a class="brand brand--footer" href="index.html"><img src="assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a><p>Профессиональная медицинская помощь для жителей Аргаяшского района.</p></div><nav><strong>Разделы</strong><a href="services.html">Услуги</a><a href="doctors.html">Врачи</a><a href="about.html">О клинике</a><a href="contacts.html">Контакты</a></nav><nav><strong>Пациентам</strong><a href="documents.html">Документы</a><a href="documents/document.html?name=Прейскурант">Прейскурант</a><a href="documents/document.html?name=Лицензия">Лицензия</a></nav><div><strong>Связаться</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно с 8:00</span></div></div><div class="shell footer-bottom"><span>© Мед-ЭКСПРЕСС</span><a href="documents/document.html?name=Политика%20конфиденциальности">Политика конфиденциальности</a><span>Информация на сайте не является публичной офертой</span></div></footer>
+  <a class="floating-record" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener"><span>Записаться</span><b aria-hidden="true">→</b></a>
   <script src="script.js?v=20260831-brand-blue"></script>
 </body>
 </html>
