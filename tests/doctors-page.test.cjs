@@ -63,6 +63,14 @@ test('doctor names use two lines and Orekhova is identified as the founder', () 
   assert.match(home, /doctor-orekhova\.png[\s\S]*?Основатель Мед-ЭКСПРЕСС · врач УЗД/);
 });
 
+test('homepage doctor slider uses every available portrait', () => {
+  const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  assert.equal([...home.matchAll(/<article class="doctor">/g)].length, 10);
+  assert.equal([...home.matchAll(/src="assets\/doctor-[^"]+\.png"/g)].length, 8);
+  assert.equal([...home.matchAll(/class="doctor-photo doctor-photo--placeholder"/g)].length, 2);
+  for (const file of ['doctor-pavlichuk.png', 'doctor-yakupova.png', 'doctor-fedorkina.png', 'doctor-pinaeva.png']) assert.match(home, new RegExp(file));
+});
+
 test('each specialty filters cards and updates accessible pressed state and count', () => {
   const { cards, buttons, count } = setup();
   const expected = { all: 10, uzi: 5, gynecology: 2, cardiology: 1, neurology: 1, endocrinology: 1 };
