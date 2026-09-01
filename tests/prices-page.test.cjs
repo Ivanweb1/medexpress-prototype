@@ -26,6 +26,17 @@ test('price page uses the approved site chrome and supplied starting prices', ()
   assert.match(html, /Кардиологический комплекс/);
   assert.match(html, /services\/cardiology\.html#cardio-complex/);
   assert.match(html, /Гастроэнтерологический комплекс/);
+  assert.match(html, /id="consultation-prices"/);
+  assert.match(html, /Приём врача-кардиолога[\s\S]*?1 800 ₽[\s\S]*?повторный — 1 500 ₽/);
+  assert.match(html, /И\. В\. Бойко[\s\S]*?2 200 ₽/);
+  assert.match(html, /id="gynecology-prices"/);
+  assert.match(html, /ЭХО-гистеросальпингография[\s\S]*?5 000 ₽/);
+  assert.match(html, /Поддерживающий пессарий АРАБИН[\s\S]*?8 500 ₽/);
+  assert.match(html, /id="functional-prices"/);
+  assert.match(html, /Суточное холтеровское мониторирование ЭКГ[\s\S]*?2 500 ₽/);
+  assert.match(html, /<span>ЭКГ<\/span><strong>600 ₽/);
+  assert.match(html, /НГГ[\s\S]*?1 000 ₽/);
+  assert.match(html, /НКТГ[\s\S]*?1 200 ₽/);
   assert.doesNotMatch(html, /На согласовании|Цена не указана|— ₽/);
 });
 
@@ -35,6 +46,7 @@ test('every page uses either the current header and footer or the shared current
     const staticChrome = html.includes('class="site-header"') && html.includes('class="site-footer"');
     const renderedChrome = html.includes('data-site-header') && html.includes('data-site-footer') && html.includes('home-design.css');
     assert.ok(staticChrome || renderedChrome, file);
+    assert.match(html, /home-design\.css\?v=20260901-chrome-unified/, file);
     assert.doesNotMatch(html, /index\.html#prices|href="#prices"/);
   }
   const source = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
@@ -42,6 +54,19 @@ test('every page uses either the current header and footer or the shared current
   assert.match(source, /class="site-footer"/);
   assert.match(source, /prices\.html/);
   assert.doesNotMatch(source, /class="header"|class="footer"|index\.html#prices/);
+});
+
+test('document pages use the exact homepage chrome classes', () => {
+  for (const file of ['documents.html', 'documents/document.html']) {
+    const html = fs.readFileSync(path.join(root, file), 'utf8');
+    for (const marker of ['class="site-header"', 'class="header-note"', 'class="shell header-main"', 'class="navigation"', 'class="header-actions"', 'class="site-footer"', 'class="shell footer-grid"', 'class="shell footer-bottom"']) {
+      assert.match(html, new RegExp(marker), `${file}: ${marker}`);
+    }
+    assert.doesNotMatch(html, /data-site-header|data-site-footer|class="header"|class="footer"/);
+  }
+  const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
+  assert.match(css, /\.site-header \.navigation\{margin-left:0\}/);
+  assert.match(css, /\.floating-record\{min-height:0;height:auto;border:0\}/);
 });
 
 test('all local links and assets on the price page resolve', () => {

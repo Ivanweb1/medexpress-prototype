@@ -25,11 +25,11 @@ function setup() {
   return { cards, buttons, filters, count };
 }
 
-test('ten doctors preserved with Orekhova first and nine real portraits', () => {
+test('ten doctors preserved with Orekhova first and ten real portraits', () => {
   assert.equal(articles.length, 10);
   assert.match(articles[0], /Екатерина Владимировна<br>Орехова/);
-  assert.equal([...html.matchAll(/src="assets\/doctor-[^"]+"/g)].length, 9);
-  assert.equal([...html.matchAll(/class="team-portrait__neutral"/g)].length, 1);
+  assert.equal([...html.matchAll(/src="assets\/doctor-[^"]+"/g)].length, 10);
+  assert.equal([...html.matchAll(/class="team-portrait__neutral"/g)].length, 0);
   assert.doesNotMatch(html, /Фото врача|Фото позже/);
   for (const article of articles) {
     assert.match(article, />Записаться<\/a>/);
@@ -66,9 +66,9 @@ test('doctor names use two lines and Orekhova is identified as the founder', () 
 test('homepage doctor slider uses every available portrait', () => {
   const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   assert.equal([...home.matchAll(/<article class="doctor">/g)].length, 10);
-  assert.equal([...home.matchAll(/src="assets\/doctor-[^"]+\.png"/g)].length, 9);
-  assert.equal([...home.matchAll(/class="doctor-photo doctor-photo--placeholder"/g)].length, 1);
-  for (const file of ['doctor-pavlichuk.png', 'doctor-yakupova.png', 'doctor-fedorkina.png', 'doctor-pinaeva.png', 'doctor-makovetskaya.png']) assert.match(home, new RegExp(file));
+  assert.equal([...home.matchAll(/src="assets\/doctor-[^"]+\.png"/g)].length, 10);
+  assert.equal([...home.matchAll(/class="doctor-photo doctor-photo--placeholder"/g)].length, 0);
+  for (const file of ['doctor-pavlichuk.png', 'doctor-yakupova.png', 'doctor-fedorkina.png', 'doctor-pinaeva.png', 'doctor-boyko.png', 'doctor-makovetskaya.png']) assert.match(home, new RegExp(file));
 });
 
 test('each specialty filters cards and updates accessible pressed state and count', () => {
