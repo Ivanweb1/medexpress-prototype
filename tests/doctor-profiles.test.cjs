@@ -10,29 +10,34 @@ const context = { window: {} };
 vm.runInNewContext(dataSource, context);
 const doctors = context.window.ME_DOCTORS;
 
-test('all nine generic profiles contain approved names, schedule and services', () => {
+test('all nine generic profiles contain approved names and services', () => {
   assert.equal(Object.keys(doctors).length, 9);
   for (const doctor of Object.values(doctors)) {
     assert.match(doctor.name, /^[А-ЯЁ][а-яё-]+ [А-ЯЁ][а-яё-]+ [А-ЯЁ][а-яё-]+$/);
     assert.ok(doctor.role);
     assert.ok(doctor.specialty);
-    assert.ok(doctor.schedule);
     assert.ok(doctor.services.length);
   }
+  assert.equal(doctors['Разина Якупова'].schedule, undefined);
+  assert.equal(doctors['Елена Федоркина'].schedule, undefined);
 });
 
 test('key professional facts are preserved from supplied doctor information', () => {
   assert.equal(doctors['Екатерина Мыжевских'].experience, '29 лет');
   assert.equal(doctors['Ирина Павличук'].experience, 'Более 35 лет');
+  assert.equal(doctors['Ирина Павличук'].photo, 'doctor-pavlichuk.png');
   assert.equal(doctors['Елена Денисова'].experience, 'Более 40 лет');
   assert.equal(doctors['Лилия Назмутдинова'].education.length, 2);
   assert.equal(doctors['Елена Федоркина'].experience, '19 лет');
+  assert.equal(doctors['Разина Якупова'].photo, 'doctor-yakupova.png');
+  assert.equal(doctors['Елена Федоркина'].photo, 'doctor-fedorkina.png');
   assert.equal(doctors['Юлия Пинаева'].experience, '12 лет');
+  assert.equal(doctors['Юлия Пинаева'].photo, 'doctor-pinaeva.png');
   assert.ok(doctors['Ирина Бойко'].qualifications.includes('Заслуженный врач Российской Федерации'));
   assert.equal(doctors['Мария Маковецкая'].experience, '13 лет');
 });
 
-test('generic profile renderer builds a complete page for every doctor', () => {
+test('generic profile renderer shows only supplied doctor information', () => {
   for (const [key, doctor] of Object.entries(doctors)) {
     const mount = { innerHTML: '' };
     const local = {
@@ -43,12 +48,28 @@ test('generic profile renderer builds a complete page for every doctor', () => {
     vm.runInNewContext(profileSource, local);
     assert.match(mount.innerHTML, new RegExp(doctor.name.split(' ')[0]));
     assert.ok(mount.innerHTML.includes(doctor.services[0]));
-    assert.ok(mount.innerHTML.includes(doctor.schedule));
-    assert.match(mount.innerHTML, /Квалификация/);
-    assert.match(mount.innerHTML, /Образование/);
+    if (doctor.schedule) assert.ok(mount.innerHTML.includes(doctor.schedule));
+    else assert.doesNotMatch(mount.innerHTML, /Расписание/);
+    if (doctor.qualifications?.length) assert.match(mount.innerHTML, /Квалификация/);
+    else assert.doesNotMatch(mount.innerHTML, /Профессиональный уровень|<h2>Квалификация<\/h2>/);
+    if (doctor.education?.length) assert.match(mount.innerHTML, /<h2>Образование<\/h2>/);
+    else assert.doesNotMatch(mount.innerHTML, /<h2>Образование<\/h2>/);
     assert.match(mount.innerHTML, /Услуги врача/);
-    assert.match(mount.innerHTML, /Отзывы о враче/);
+    assert.doesNotMatch(mount.innerHTML, /Отзывы|На согласовании|Информация уточняется|Стаж уточняется|data-pending-content/);
     assert.doesNotMatch(mount.innerHTML, /undefined|null/);
+  }
+});
+
+test('education and symptom blocks appear only for doctors with supplied facts', () => {
+  for (const [key, doctor] of Object.entries(doctors)) {
+    const mount = { innerHTML: '' };
+    vm.runInNewContext(profileSource, {
+      window: { ME_DOCTORS: doctors, location: { search: '?name=' + encodeURIComponent(key) } },
+      document: { querySelector: () => mount, title: '' },
+      URLSearchParams,
+    });
+    assert.equal(mount.innerHTML.includes('<h2>Образование</h2>'), key === 'Лилия Назмутдинова');
+    assert.equal(mount.innerHTML.includes('С какими вопросами'), ['Лилия Назмутдинова', 'Ирина Бойко'].includes(key));
   }
 });
 

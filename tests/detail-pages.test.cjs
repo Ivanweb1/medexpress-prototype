@@ -38,7 +38,7 @@ for (const file of pages) {
     }
   });
 
-  test(file + ': native FAQ has four questions with meaningful answers and no script dependency', () => {
+  if (file.startsWith('services/')) test(file + ': native FAQ has four questions with meaningful answers and no script dependency', () => {
     const details = [...html.matchAll(/<details(?: open)?>([\s\S]*?)<\/details>/g)];
     assert.equal(details.length, 4);
     details.forEach(([, body]) => {
@@ -55,18 +55,16 @@ test('mobile styles keep photos separate from text and collapse page grids', () 
   assert.match(css, /\.profile-hero,\.service-hero\{grid-template-columns:1fr/);
 });
 
-test('doctor page includes the complete review structure with labeled pending content', () => {
+test('doctor page contains only the supplied professional information', () => {
   const html = fs.readFileSync(path.join(root, pages[0]), 'utf8');
-  for (const id of ['about-doctor', 'experience', 'education', 'doctor-directions', 'services-doctor', 'doctor-reviews', 'doctor-schedule', 'visit', 'booking']) {
+  for (const id of ['about-doctor', 'experience', 'doctor-directions', 'services-doctor', 'doctor-schedule', 'booking']) {
     assert.ok(html.includes('id="' + id + '"'), id);
   }
-  assert.equal([...html.matchAll(/class="detail-review-draft"/g)].length, 2);
   assert.equal([...html.matchAll(/<li><span>УЗИ/g)].length, 4);
   assert.match(html, /Более 30 лет/);
   assert.match(html, /Кандидат медицинских наук/);
   assert.match(html, /По субботам, по предварительной записи/);
-  assert.match(html, /На согласовании/);
-  assert.match(html, /Текст пока не предоставлен/);
+  assert.doesNotMatch(html, /id="education"|id="doctor-reviews"|id="visit"|Отзывы|На согласовании|data-pending-content/);
   assert.doesNotMatch(html, /class="detail-jumps"|← Все врачи центра/);
 });
 
@@ -95,7 +93,7 @@ test('new sections include designed components and a refreshed stylesheet URL', 
   const service = fs.readFileSync(path.join(root, pages[1]), 'utf8');
   assert.equal([...service.matchAll(/class="detail-procedure-card"/g)].length, 3);
   const doctor = fs.readFileSync(path.join(root, pages[0]), 'utf8');
-  assert.equal([...doctor.matchAll(/class="detail-timeline-marker"/g)].length, 3);
+  assert.equal([...doctor.matchAll(/class="detail-timeline-marker"/g)].length, 0);
   assert.match(doctor, /detail-schedule-panel/);
   assert.match(service, /class="detail-price-heading"/);
 });
