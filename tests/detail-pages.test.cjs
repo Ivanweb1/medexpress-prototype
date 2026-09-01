@@ -61,7 +61,10 @@ test('doctor page includes the complete review structure with labeled pending co
     assert.ok(html.includes('id="' + id + '"'), id);
   }
   assert.equal([...html.matchAll(/class="detail-review-draft"/g)].length, 2);
-  assert.equal([...html.matchAll(/class="detail-price-item"/g)].length, 3);
+  assert.equal([...html.matchAll(/<li><span>УЗИ/g)].length, 4);
+  assert.match(html, /Более 30 лет/);
+  assert.match(html, /Кандидат медицинских наук/);
+  assert.match(html, /По субботам, по предварительной записи/);
   assert.match(html, /На согласовании/);
   assert.match(html, /Текст пока не предоставлен/);
   assert.doesNotMatch(html, /class="detail-jumps"|← Все врачи центра/);
@@ -77,4 +80,22 @@ test('service page includes full study structure and supplied landscape photogra
   assert.match(html, /Ниже нет действующих медицинских рекомендаций/);
   assert.equal([...html.matchAll(/class="detail-price-item"/g)].length, 3);
   assert.doesNotMatch(html, /class="detail-jumps"|← Все направления УЗИ/);
+});
+
+test('new sections include designed components and a refreshed stylesheet URL', () => {
+  for (const file of pages) {
+    const html = fs.readFileSync(path.join(root, file), 'utf8');
+    assert.match(html, /detail-design.css\?v=(?:20260831-layout-v2|20260901-doctors)/);
+    const cards = [...html.matchAll(/<article class="detail-draft-card"[^>]*>([\s\S]*?)<\/article>/g)];
+    assert.ok(cards.length > 0);
+    for (const [, card] of cards) {
+      assert.match(card, /class="detail-block-icon"/);
+    }
+  }
+  const service = fs.readFileSync(path.join(root, pages[1]), 'utf8');
+  assert.equal([...service.matchAll(/class="detail-procedure-card"/g)].length, 3);
+  const doctor = fs.readFileSync(path.join(root, pages[0]), 'utf8');
+  assert.equal([...doctor.matchAll(/class="detail-timeline-marker"/g)].length, 3);
+  assert.match(doctor, /detail-schedule-panel/);
+  assert.match(service, /class="detail-price-heading"/);
 });

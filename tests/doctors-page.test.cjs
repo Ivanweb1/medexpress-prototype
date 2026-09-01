@@ -27,7 +27,7 @@ function setup() {
 
 test('ten doctors preserved with Orekhova first and four real portraits', () => {
   assert.equal(articles.length, 10);
-  assert.match(articles[0], /Екатерина<br>Орехова/);
+  assert.match(articles[0], /Екатерина<br>Владимировна<br>Орехова/);
   assert.equal([...html.matchAll(/src="assets\/doctor-[^"]+"/g)].length, 4);
   assert.equal([...html.matchAll(/class="team-portrait__neutral"/g)].length, 6);
   assert.doesNotMatch(html, /Фото врача|Фото позже/);
