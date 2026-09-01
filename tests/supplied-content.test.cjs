@@ -7,11 +7,12 @@ const root = path.join(__dirname, '..');
 
 test('massage page contains the supplied programmes, apparatus description and contact', () => {
   const html = fs.readFileSync(path.join(root, 'services/spine-massage.html'), 'utf8');
-  for (const value of ['Серагем', 'Сканирование позвоночника', 'Инфракрасное воздействие', '18 минут', '500 ₽', '36,5 минут', '1 000 ₽', '+7 (961) 795-87-59']) {
+  for (const value of ['Аппарат для физиотерапевтического массажа', 'Сканирование позвоночника', 'Инфракрасное воздействие', '18 минут', '500 ₽', '36,5 минут', '1 000 ₽', '+7 (961) 795-87-59']) {
     assert.match(html, new RegExp(value.replace(/[+()]/g, '\\$&')));
   }
   assert.match(html, /src="\.\.\/assets\/massage-bed.png"/);
   assert.match(html, /имеются противопоказания/i);
+  assert.doesNotMatch(html, /Серагем|Ceragem/i);
   assert.doesNotMatch(html, /\+79000930686|\+7 \(900\) 093-06-86/);
   assert.equal([...html.matchAll(/tel:\+79617958759/g)].length, 5);
 });
