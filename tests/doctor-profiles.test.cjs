@@ -35,6 +35,7 @@ test('key professional facts are preserved from supplied doctor information', ()
   assert.equal(doctors['Юлия Пинаева'].photo, 'doctor-pinaeva.png');
   assert.ok(doctors['Ирина Бойко'].qualifications.includes('Заслуженный врач Российской Федерации'));
   assert.equal(doctors['Мария Маковецкая'].experience, '13 лет');
+  assert.equal(doctors['Мария Маковецкая'].photo, 'doctor-makovetskaya.png');
 });
 
 test('generic profile renderer shows only supplied doctor information', () => {

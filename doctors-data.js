@@ -161,6 +161,7 @@ window.ME_DOCTORS = {
     role: 'Врач УЗД',
     specialty: 'Врач ультразвуковой диагностики',
     experience: '13 лет',
+    photo: 'doctor-makovetskaya.png',
     schedule: 'Два раза в месяц по воскресеньям, по предварительной записи',
     workExperience: '13 лет работы в Областном перинатальном центре',
     services: [
