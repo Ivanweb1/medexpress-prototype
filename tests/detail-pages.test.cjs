@@ -63,6 +63,7 @@ test('doctor page contains only the supplied professional information', () => {
   assert.equal([...html.matchAll(/<li><span>УЗИ/g)].length, 4);
   assert.match(html, /Более 30 лет/);
   assert.match(html, /Кандидат медицинских наук/);
+  assert.match(html, /<h1><em>Екатерина Владимировна<\/em><br>Орехова<\/h1>/);
   assert.match(html, /По субботам, по предварительной записи/);
   assert.doesNotMatch(html, /id="education"|id="doctor-reviews"|id="visit"|Отзывы|На согласовании|data-pending-content/);
   assert.doesNotMatch(html, /class="detail-jumps"|← Все врачи центра/);

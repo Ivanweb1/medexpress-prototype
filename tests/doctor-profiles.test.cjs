@@ -47,6 +47,8 @@ test('generic profile renderer shows only supplied doctor information', () => {
     };
     vm.runInNewContext(profileSource, local);
     assert.match(mount.innerHTML, new RegExp(doctor.name.split(' ')[0]));
+    const [givenName, patronymic, surname] = doctor.name.split(' ');
+    assert.ok(mount.innerHTML.includes(`<h1><em>${givenName} ${patronymic}</em><br>${surname}</h1>`));
     assert.ok(mount.innerHTML.includes(doctor.services[0]));
     if (doctor.schedule) assert.ok(mount.innerHTML.includes(doctor.schedule));
     else assert.doesNotMatch(mount.innerHTML, /Расписание/);

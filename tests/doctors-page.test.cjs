@@ -47,7 +47,8 @@ test('filter enables progressively and shows everyone initially', () => {
 
 test('active specialty filter uses white text on the brand-blue background', () => {
   const css = fs.readFileSync(path.join(root, 'doctors-design.css'), 'utf8');
-  assert.match(css, /\.team-filters button\[aria-pressed="true"\]\{[^}]*background:var\(--blue\)[^}]*color:#fff/);
+  assert.match(css, /\.team-filters button\[aria-pressed="true"\]\{[^}]*background:var\(--blue\)[^}]*color:#fff!important/);
+  assert.match(html, /doctors-design\.css\?v=20260901-tabs-white/);
 });
 
 test('doctor names use two lines and Orekhova is identified as the founder', () => {

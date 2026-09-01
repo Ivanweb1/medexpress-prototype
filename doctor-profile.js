@@ -11,9 +11,9 @@
 
   const escape = (value) => String(value).replace(/[&<>"']/g, (symbol) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[symbol]);
   const list = (items) => items.map((item) => '<li>' + escape(item) + '</li>').join('');
-  const firstSpace = doctor.name.indexOf(' ');
-  const firstName = escape(doctor.name.slice(0, firstSpace));
-  const restName = escape(doctor.name.slice(firstSpace + 1));
+  const [givenName, patronymic, ...surnameParts] = doctor.name.split(' ');
+  const highlightedName = escape([givenName, patronymic].filter(Boolean).join(' '));
+  const surname = escape(surnameParts.join(' '));
   const portrait = doctor.photo
     ? '<img src="../assets/' + escape(doctor.photo) + '" alt="' + escape(doctor.name) + '" width="600" height="700" fetchpriority="high">'
     : '<div class="profile-portrait__neutral" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2"><circle cx="60" cy="40" r="19"/><path d="M25 102V91a35 35 0 0 1 70 0v11M47 66l13 17 13-17M60 83v19"/></svg></div>';
@@ -40,7 +40,7 @@
   mount.innerHTML = `
     <section class="shell detail-hero detail-hero--profile">
       <nav class="detail-breadcrumbs" aria-label="Хлебные крошки"><a href="../index.html">Главная</a><span aria-hidden="true">/</span><a href="../doctors.html">Врачи</a><span aria-hidden="true">/</span><span aria-current="page">${escape(doctor.shortName)}</span></nav>
-      <div class="profile-hero"><div class="profile-portrait">${portrait}</div><div class="profile-summary"><span class="eyebrow">${escape(doctor.role)}</span><h1>${firstName}<br><em>${restName}</em></h1><p class="detail-lead">${escape(doctor.specialty)}</p><div class="detail-actions"><a class="btn" href="${booking}" target="_blank" rel="noopener">Записаться к врачу <span aria-hidden="true">→</span></a><a class="btn btn--outline" href="#doctor-services">Услуги врача</a></div><dl class="profile-facts">${facts.map(([term, value]) => '<div><dt>' + escape(term) + '</dt><dd>' + escape(value) + '</dd></div>').join('')}</dl></div></div>
+      <div class="profile-hero"><div class="profile-portrait">${portrait}</div><div class="profile-summary"><span class="eyebrow">${escape(doctor.role)}</span><h1><em>${highlightedName}</em><br>${surname}</h1><p class="detail-lead">${escape(doctor.specialty)}</p><div class="detail-actions"><a class="btn" href="${booking}" target="_blank" rel="noopener">Записаться к врачу <span aria-hidden="true">→</span></a><a class="btn btn--outline" href="#doctor-services">Услуги врача</a></div><dl class="profile-facts">${facts.map(([term, value]) => '<div><dt>' + escape(term) + '</dt><dd>' + escape(value) + '</dd></div>').join('')}</dl></div></div>
     </section>
     <section class="detail-section detail-cream"><div class="shell detail-editorial"><div><span class="eyebrow">О враче</span><h2>Опыт и<br><em>направления работы</em></h2></div><div class="detail-copy"><p class="detail-lead">${escape(doctor.specialty)}</p>${aboutFacts}</div></div></section>
     ${qualificationsSection}
