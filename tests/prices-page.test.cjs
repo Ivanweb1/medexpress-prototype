@@ -6,7 +6,7 @@ const path = require('node:path');
 const root = path.join(__dirname, '..');
 const pages = [
   'index.html', 'services.html', 'doctors.html', 'about.html', 'contacts.html',
-  'prices.html', 'documents.html', 'services/service.html',
+  'prices.html', 'documents.html', 'services/service.html', 'services/spine-massage.html',
   'services/general-ultrasound.html', 'doctors/profile.html',
   'doctors/ekaterina-orekhova.html', 'documents/document.html'
 ];
@@ -20,6 +20,11 @@ test('price page uses the approved site chrome and supplied starting prices', ()
   for (const value of ['от 185 ₽', 'от 900 ₽', 'от 1 500 ₽', 'от 500 ₽']) assert.match(html, new RegExp(value));
   assert.match(html, /Программа 36,5 минут<\/span><strong>1 000 ₽/);
   assert.match(html, /Программа 18 минут<\/span><strong>500 ₽/);
+  assert.match(html, /Мужское здоровье №2/);
+  assert.match(html, /6 200 ₽/);
+  assert.match(html, /экономия 900 ₽/);
+  assert.match(html, /Кардиологический комплекс/);
+  assert.match(html, /Гастроэнтерологический комплекс/);
   assert.doesNotMatch(html, /На согласовании|Цена не указана|— ₽/);
 });
 

@@ -77,7 +77,10 @@ test('service page includes full study structure and supplied landscape photogra
   assert.match(html, /src="\.\.\/assets\/general-ultrasound-exam.png"/);
   assert.match(html, /service-hero-photo--landscape/);
   assert.match(html, /Ниже нет действующих медицинских рекомендаций/);
-  assert.equal([...html.matchAll(/class="detail-price-item"/g)].length, 3);
+  assert.equal([...html.matchAll(/class="detail-price-item"/g)].length, 13);
+  assert.match(html, /УЗИ органов брюшной полости/);
+  assert.match(html, /1 400 ₽/);
+  assert.doesNotMatch(html, /Цена не указана|— ₽/);
   assert.doesNotMatch(html, /class="detail-jumps"|← Все направления УЗИ/);
 });
 
