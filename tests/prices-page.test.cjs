@@ -16,8 +16,10 @@ test('price page uses the approved site chrome and supplied starting prices', ()
   assert.match(html, /class="site-header"/);
   assert.match(html, /class="site-footer"/);
   assert.match(html, /href="prices\.html" aria-current="page"/);
-  assert.equal([...html.matchAll(/class="price-row"/g)].length, 4);
-  for (const value of ['от 185 ₽', 'от 900 ₽', 'от 1 500 ₽', 'от 1 000 ₽']) assert.match(html, new RegExp(value));
+  assert.equal([...html.matchAll(/class="price-row(?:\s[^"]*)?"/g)].length, 4);
+  for (const value of ['от 185 ₽', 'от 900 ₽', 'от 1 500 ₽', 'от 500 ₽']) assert.match(html, new RegExp(value));
+  assert.match(html, /Программа 36,5 минут<\/span><strong>1 000 ₽/);
+  assert.match(html, /Программа 18 минут<\/span><strong>500 ₽/);
   assert.doesNotMatch(html, /На согласовании|Цена не указана|— ₽/);
 });
 
