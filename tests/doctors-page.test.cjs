@@ -27,7 +27,7 @@ function setup() {
 
 test('ten doctors preserved with Orekhova first and eight real portraits', () => {
   assert.equal(articles.length, 10);
-  assert.match(articles[0], /Екатерина<br>Владимировна<br>Орехова/);
+  assert.match(articles[0], /Екатерина Владимировна<br>Орехова/);
   assert.equal([...html.matchAll(/src="assets\/doctor-[^"]+"/g)].length, 8);
   assert.equal([...html.matchAll(/class="team-portrait__neutral"/g)].length, 2);
   assert.doesNotMatch(html, /Фото врача|Фото позже/);
@@ -43,6 +43,23 @@ test('filter enables progressively and shows everyone initially', () => {
   assert.equal(cards.filter(card => !card.hidden).length, 10);
   assert.equal(count.textContent, 'Специалистов: 10');
   assert.equal(buttons[0].attributes['aria-pressed'], 'true');
+});
+
+test('active specialty filter uses white text on the brand-blue background', () => {
+  const css = fs.readFileSync(path.join(root, 'doctors-design.css'), 'utf8');
+  assert.match(css, /\.team-filters button\[aria-pressed="true"\]\{[^}]*background:var\(--blue\)[^}]*color:#fff/);
+});
+
+test('doctor names use two lines and Orekhova is identified as the founder', () => {
+  const cards = [...html.matchAll(/<article class="team-card"[\s\S]*?<\/article>/g)].map((match) => match[0]);
+  assert.equal(cards.length, 10);
+  for (const card of cards) {
+    const heading = card.match(/<h2>([\s\S]*?)<\/h2>/)?.[1] || '';
+    assert.equal((heading.match(/<br>/g) || []).length, 1);
+  }
+  assert.match(cards[0], /Основатель Мед-ЭКСПРЕСС · врач УЗД/);
+  const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  assert.match(home, /doctor-orekhova\.png[\s\S]*?Основатель Мед-ЭКСПРЕСС · врач УЗД/);
 });
 
 test('each specialty filters cards and updates accessible pressed state and count', () => {

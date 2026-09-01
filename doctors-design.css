@@ -14,7 +14,7 @@
 .team-filters[hidden],.team-card[hidden]{display:none}
 .team-filters button{appearance:none;-webkit-appearance:none;font:inherit;font-size:13px;font-weight:700;line-height:1.2;min-height:48px;padding:12px 22px;color:var(--ink);border:1px solid var(--line);border-radius:999px;background:white;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
 .team-filters button:hover{background:var(--pale);border-color:var(--blue-dark)}
-.team-filters button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:var(--ink)}
+.team-filters button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
 .team-count{font-size:13px;color:var(--muted);margin:20px 0 0}
 .team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 14px;align-items:stretch}
 .team-card{min-width:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:24px;background:white;overflow:hidden}
@@ -24,7 +24,7 @@
 .team-portrait__neutral svg{width:48%;max-width:170px;height:auto;opacity:.4}
 .team-card__body{position:relative;display:flex;flex:1;flex-direction:column;padding:24px;background:white}
 .team-specialty{margin:0 0 10px;color:var(--blue-dark);font-size:12px;font-weight:600}
-.doctors-page .team-card h2{font-size:clamp(21px,1.7vw,25px);line-height:1.2;letter-spacing:-.03em;overflow-wrap:anywhere;margin-bottom:24px}
+.doctors-page .team-card h2{font-size:clamp(20px,1.55vw,23px);line-height:1.2;letter-spacing:-.03em;overflow-wrap:normal;margin-bottom:24px}
 .team-card__actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line)}
 .team-card__actions .btn{width:100%;min-width:0;padding:0 10px!important}
 .team-help{padding:80px 0;background:var(--cream)}
@@ -63,6 +63,6 @@
 @media(max-width:620px){
   .team-grid{grid-template-columns:1fr}
   .team-portrait{aspect-ratio:1/1.08}
-  .doctors-page .team-card h2{font-size:27px}
+  .doctors-page .team-card h2{font-size:25px}
 }
 @media(prefers-reduced-motion:reduce){.team-filters button{transition:none}}
