@@ -54,3 +54,38 @@ document.querySelectorAll('[data-clinic-gallery]').forEach((gallery) => {
   controls.hidden = false;
   update();
 });
+
+document.querySelectorAll('[data-intro-gallery]').forEach((gallery) => {
+  const slides = [...gallery.querySelectorAll('[data-intro-slide]')];
+  const dots = [...gallery.querySelectorAll('[data-intro-dots] button')];
+  if (slides.length < 2 || dots.length !== slides.length || !gallery.addEventListener) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let active = 0;
+  let timer;
+  const show = (index) => {
+    active = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === active));
+    dots.forEach((dot, dotIndex) => {
+      const selected = dotIndex === active;
+      dot.classList.toggle('is-active', selected);
+      dot.setAttribute('aria-current', String(selected));
+    });
+  };
+  const stop = () => window.clearInterval(timer);
+  const start = () => {
+    stop();
+    if (!reducedMotion) timer = window.setInterval(() => show(active + 1), 3000);
+  };
+
+  dots.forEach((dot, index) => dot.addEventListener('click', () => {
+    show(index);
+    start();
+  }));
+  gallery.addEventListener('mouseenter', stop);
+  gallery.addEventListener('mouseleave', start);
+  gallery.addEventListener('focusin', stop);
+  gallery.addEventListener('focusout', start);
+  show(0);
+  start();
+});

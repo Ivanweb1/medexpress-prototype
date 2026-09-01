@@ -95,3 +95,16 @@ test('all local about-page resources and page links exist', () => {
     assert.ok(!heading[1].includes('.'), 'Heading should not contain a full stop');
   }
 });
+
+test('intro gallery uses the three supplied photos and advances every three seconds', () => {
+  const root = path.join(__dirname, '..');
+  const html = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'about-design.css'), 'utf8');
+  assert.equal((html.match(/data-intro-slide/g) || []).length, 3);
+  assert.equal((html.match(/data-intro-dots/g) || []).length, 1);
+  for (const image of ['about-intro-1.jpg', 'about-intro-2.jpg', 'about-intro-3.jpg']) assert.match(html, new RegExp(image));
+  assert.doesNotMatch(html.match(/<figure class="clinic-intro__photo"[\s\S]*?<\/figure>/)?.[0] || '', /about-team-new\.png/);
+  assert.match(source, /setInterval\(\(\) => show\(active \+ 1\), 3000\)/);
+  assert.match(source, /prefers-reduced-motion: reduce/);
+  assert.match(css, /\.clinic-intro__photo img\.is-active\{opacity:1/);
+});
