@@ -18,7 +18,7 @@ test('all nine generic profiles contain approved names and services', () => {
     assert.ok(doctor.specialty);
     assert.ok(doctor.services.length);
   }
-  assert.equal(doctors['Разина Якупова'].schedule, undefined);
+  assert.equal(doctors['Разина Якупова'].schedule, 'Ежедневно, по предварительной записи');
   assert.equal(doctors['Елена Федоркина'].schedule, undefined);
 });
 
@@ -30,6 +30,8 @@ test('key professional facts are preserved from supplied doctor information', ()
   assert.equal(doctors['Лилия Назмутдинова'].education.length, 2);
   assert.equal(doctors['Елена Федоркина'].experience, '19 лет');
   assert.equal(doctors['Разина Якупова'].photo, 'doctor-yakupova.png');
+  assert.equal(doctors['Разина Якупова'].experience, '20 лет');
+  assert.equal(doctors['Разина Якупова'].education.length, 4);
   assert.equal(doctors['Елена Федоркина'].photo, 'doctor-fedorkina.png');
   assert.equal(doctors['Юлия Пинаева'].experience, '12 лет');
   assert.equal(doctors['Юлия Пинаева'].photo, 'doctor-pinaeva.png');
@@ -71,8 +73,8 @@ test('education and symptom blocks appear only for doctors with supplied facts',
       document: { querySelector: () => mount, title: '' },
       URLSearchParams,
     });
-    assert.equal(mount.innerHTML.includes('<h2>Образование</h2>'), key === 'Лилия Назмутдинова');
-    assert.equal(mount.innerHTML.includes('С какими вопросами'), ['Лилия Назмутдинова', 'Ирина Бойко'].includes(key));
+    assert.equal(mount.innerHTML.includes('<h2>Образование</h2>'), ['Разина Якупова', 'Лилия Назмутдинова'].includes(key));
+    assert.equal(mount.innerHTML.includes('С какими вопросами'), ['Разина Якупова', 'Лилия Назмутдинова', 'Ирина Бойко'].includes(key));
   }
 });
 

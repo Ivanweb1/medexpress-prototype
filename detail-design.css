@@ -140,6 +140,53 @@
   .detail-specialist h3{font-size:21px}
   .detail-specialist .eyebrow{font-size:10px}
 }
+
+/* Cardiology service: clinical editorial layout within the shared brand system. */
+.cardio-hero{grid-template-columns:minmax(0,1.05fr) minmax(360px,.78fr)}
+.cardio-hero__portrait{position:relative;margin:0;min-height:590px;border-radius:28px;overflow:hidden;background:var(--pale)}
+.cardio-hero__portrait img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center top}
+.cardio-hero__portrait::after{content:"";position:absolute;inset:50% 0 0;background:linear-gradient(transparent,rgba(8,53,65,.88))}
+.cardio-hero__portrait figcaption{position:absolute;z-index:1;left:32px;right:32px;bottom:30px;color:white;display:flex;flex-direction:column;gap:8px}
+.cardio-hero__portrait figcaption span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#bfeafb}
+.cardio-hero__portrait figcaption strong{font-size:21px;line-height:1.3}
+.cardio-facts{display:flex;flex-wrap:wrap;gap:18px;margin:30px 0 0;padding-top:26px;border-top:1px solid var(--line)}
+.cardio-facts span{display:flex;min-width:130px;flex-direction:column;gap:4px;color:var(--muted);font-size:12px}
+.cardio-facts b{font-size:18px;color:var(--ink)}
+.cardio-signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cardio-signal{padding:34px;border:1px solid var(--line);border-radius:26px;background:white}
+.cardio-signal>span{display:inline-flex;padding:8px 12px;border-radius:999px;background:var(--pale);color:var(--blue-dark);font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.cardio-signal--urgent{background:var(--ink);color:white;border-color:var(--ink)}
+.cardio-signal--urgent>span{background:rgba(54,174,247,.16);color:#8ed8ff}
+.cardio-signal ul{list-style:none;margin:22px 0 0;padding:0}
+.cardio-signal li{position:relative;padding:18px 0 18px 28px;border-top:1px solid var(--line);line-height:1.6;font-size:15px}
+.cardio-signal li::before{content:"";position:absolute;left:1px;top:25px;width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.cardio-signal--urgent li{border-color:rgba(255,255,255,.14);color:#d7e8ec}
+.cardio-diagnostics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.cardio-diagnostics article{min-height:290px;padding:32px;border:1px solid var(--line);border-radius:26px;display:flex;flex-direction:column;background:white}
+.cardio-diagnostics article:nth-child(2){background:var(--pale)}
+.cardio-diagnostics article:nth-child(3){background:var(--cream)}
+.cardio-diagnostics b{color:var(--blue-dark);font-size:12px;letter-spacing:.12em}
+.cardio-diagnostics h3{margin-top:auto!important;font-size:28px!important}
+.cardio-diagnostics p{margin:16px 0 0;color:var(--muted);line-height:1.65;font-size:14px}
+.cardio-package{display:grid;grid-template-columns:minmax(0,.85fr) minmax(420px,1.15fr);gap:clamp(40px,7vw,110px);align-items:center}
+.cardio-package__intro>p{max-width:500px;margin:24px 0 30px;color:var(--muted);font-size:17px;line-height:1.75}
+.cardio-package__card{position:relative;padding:38px;border-radius:28px;background:var(--ink);color:white;box-shadow:0 28px 80px rgba(11,57,69,.14)}
+.cardio-package__badge{display:inline-flex;padding:8px 12px;border-radius:999px;background:var(--blue);color:var(--ink);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.cardio-package__card ul{list-style:none;margin:28px 0;padding:0}
+.cardio-package__card li{padding:16px 0;border-top:1px solid rgba(255,255,255,.14);font-size:16px}
+.cardio-package__card li::before{content:"✓";display:inline-block;margin-right:12px;color:var(--blue);font-weight:800}
+.cardio-package__price{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.cardio-package__price>div{padding:20px;border-radius:18px;background:rgba(255,255,255,.08)}
+.cardio-package__price small{display:block;color:#bdd1d6;margin-bottom:8px}
+.cardio-package__price strong{font-size:34px;color:white}.cardio-package__price b{font-size:24px;color:var(--blue)}
+.cardio-package__card>p{margin:22px 0 0;color:#bdd1d6;font-size:12px;line-height:1.7}
+.cardio-doctor{display:grid;grid-template-columns:300px minmax(0,1fr);gap:clamp(32px,6vw,86px);align-items:center;border:1px solid var(--line);border-radius:28px;overflow:hidden;background:white}
+.cardio-doctor__photo{height:420px;background:var(--pale)}
+.cardio-doctor__photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+.cardio-doctor>div:last-child{padding:38px 60px 38px 0}
+.cardio-doctor p{max-width:620px;margin:24px 0 0;color:var(--muted);font-size:16px;line-height:1.7}
+@media(max-width:850px){.cardio-hero{grid-template-columns:1fr 320px}.cardio-hero__portrait{min-height:510px}.cardio-package{grid-template-columns:1fr}.cardio-doctor>div:last-child{padding-right:34px}.cardio-diagnostics article{min-height:250px;padding:26px}}
+@media(max-width:700px){.cardio-hero{grid-template-columns:1fr}.cardio-hero__portrait{min-height:0;aspect-ratio:6/7}.cardio-signal-grid,.cardio-diagnostics{grid-template-columns:1fr}.cardio-diagnostics article{min-height:230px}.cardio-package{grid-template-columns:1fr}.cardio-package__card{padding:28px;border-radius:24px}.cardio-doctor{grid-template-columns:1fr}.cardio-doctor__photo{height:auto;aspect-ratio:6/7}.cardio-doctor>div:last-child{padding:28px}.cardio-package__price{grid-template-columns:1fr}.cardio-signal{padding:26px;border-radius:22px}}
 @media(max-width:360px){.detail-specialist{grid-template-columns:1fr}.detail-specialist>img{height:auto;aspect-ratio:6/7}}
 
 /* Designed content sections; pending labels distinguish unapproved information. */

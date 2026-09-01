@@ -24,12 +24,23 @@ test('document pages publish the current licence and supplied requisites', () =>
 });
 
 test('all local links and assets on the massage and document detail pages resolve', () => {
-  for (const file of ['services/spine-massage.html', 'documents/document.html']) {
+  for (const file of ['services/spine-massage.html', 'services/cardiology.html', 'documents/document.html']) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
     for (const [, url] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
       if (/^(https?:|tel:|mailto:)/.test(url) || url.startsWith('#')) continue;
       const target = path.resolve(root, path.dirname(file), url.split('?')[0]);
       assert.ok(fs.existsSync(target), `${file}: ${url}`);
     }
+  }
+});
+
+test('cardiology page and doctor profile preserve the supplied cardiology facts', () => {
+  const html = fs.readFileSync(path.join(root, 'services/cardiology.html'), 'utf8');
+  const data = fs.readFileSync(path.join(root, 'doctors-data.js'), 'utf8');
+  for (const value of ['8 700 ₽', '2 400 ₽', 'PROздоровье', 'ЭКГ', 'ЭХОКГ', 'суточный мониторинг ЭКГ', 'консультация кардиолога']) {
+    assert.match(html, new RegExp(value));
+  }
+  for (const value of ['2005', '2006', '2013', '2017', '20 лет', 'Ежедневно, по предварительной записи']) {
+    assert.match(data, new RegExp(value));
   }
 });
