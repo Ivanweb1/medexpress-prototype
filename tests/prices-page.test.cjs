@@ -46,7 +46,7 @@ test('every page uses either the current header and footer or the shared current
     const staticChrome = html.includes('class="site-header"') && html.includes('class="site-footer"');
     const renderedChrome = html.includes('data-site-header') && html.includes('data-site-footer') && html.includes('home-design.css');
     assert.ok(staticChrome || renderedChrome, file);
-    assert.match(html, /home-design\.css\?v=20260901-chrome-unified/, file);
+    assert.match(html, /home-design\.css\?v=20260901-floating-record-fix/, file);
     assert.doesNotMatch(html, /index\.html#prices|href="#prices"/);
   }
   const source = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
@@ -66,7 +66,8 @@ test('document pages use the exact homepage chrome classes', () => {
   }
   const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
   assert.match(css, /\.site-header \.navigation\{margin-left:0\}/);
-  assert.match(css, /\.floating-record\{min-height:0;height:auto;border:0\}/);
+  assert.match(css, /\.floating-record\{border:0\}/);
+  assert.doesNotMatch(css, /\.floating-record\{min-height:0;height:auto;border:0\}/);
 });
 
 test('all local links and assets on the price page resolve', () => {
@@ -82,4 +83,13 @@ test('all local links and assets on the price page resolve', () => {
       if (fragment) assert.ok(fs.readFileSync(target, 'utf8').includes('id="' + fragment + '"'), url);
     }
   }
+});
+
+test('long price headings stay inside the mobile grid', () => {
+  const html = fs.readFileSync(path.join(root, 'prices.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'prices-design.css'), 'utf8');
+  assert.match(html, /prices-design\.css\?v=20260901-mobile-overflow-fix/);
+  assert.match(css, /\.price-row__content\{min-width:0\}/);
+  assert.match(css, /\.price-row__content h3\{[^}]*overflow-wrap:anywhere/);
+  assert.match(css, /@media\(max-width:620px\)[\s\S]*\.price-row__content h3\{[^}]*font-size:clamp\(22px,6\.3vw,26px\)/);
 });
