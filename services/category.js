@@ -4,6 +4,7 @@
   if (!Array.isArray(catalog) || !list) return;
 
   const descriptions = {
+    'medical-analyses': 'Комплексные лабораторные профили для взрослых.',
     consultations: 'Приёмы специалистов и диагностические процедуры врачебного профиля.',
     'heart-vessels-joints': 'Ультразвуковая диагностика сердца, сосудов и суставов для взрослых.',
     'general-ultrasound': 'Исследования внутренних органов и мягких тканей.',
@@ -28,17 +29,24 @@
     const article = document.createElement('article');
     article.className = 'directory-service';
     article.style.setProperty('--item-order', index);
+    if (service.code) {
+      const code = document.createElement('span');
+      code.className = 'directory-service__code';
+      code.textContent = `Код ${service.code}`;
+      article.append(code);
+    }
     const heading = document.createElement('h3');
     heading.textContent = service.name;
     const meta = document.createElement('div');
     meta.className = 'directory-service__meta';
-    meta.innerHTML = `<strong>${rubles(service.price)}</strong><span><i aria-hidden="true"></i>${service.duration} мин.</span>`;
+    const timing = service.term || (service.duration ? `${service.duration} мин.` : '');
+    meta.innerHTML = `<strong>${rubles(service.price)}</strong>${timing ? `<span><i aria-hidden="true"></i>${timing}</span>` : ''}`;
     article.append(heading, meta);
     if (service.details) {
       const details = document.createElement('details');
       details.className = 'directory-service__details';
       const summary = document.createElement('summary');
-      summary.textContent = service.name.includes('ЭХОКГ') || service.name.includes('Трансвагинальное') ? 'Как подготовиться' : 'Что входит';
+      summary.textContent = service.name.includes('ЭХОКГ') || service.name.includes('Трансвагинальное') ? 'Как подготовиться' : service.name.includes('Smart-диагностика') ? 'О профиле' : 'Что входит';
       const body = document.createElement('div');
       service.details.forEach(text => {
         const paragraph = document.createElement('p');

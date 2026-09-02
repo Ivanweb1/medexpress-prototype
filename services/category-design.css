@@ -13,6 +13,7 @@
 .category-list-heading p{margin:4px 0 0;color:var(--muted);font-size:13px;line-height:1.65}
 .category-list{align-items:stretch}
 .category-list .directory-service{min-height:176px}
+.directory-service__code{display:block;margin-bottom:10px;color:var(--blue-dark);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .category-more{padding:100px 0;background:white}
 .category-more__heading{display:block;margin-bottom:34px}
 .category-more h2{max-width:760px;margin-top:12px;font-size:clamp(32px,3.8vw,54px)}

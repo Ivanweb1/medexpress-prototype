@@ -10,16 +10,16 @@ const context = { window: {} };
 vm.runInNewContext(source, context);
 const catalog = context.window.ME_SERVICE_CATALOG;
 
-test('full service directory has nine supplied categories', () => {
-  assert.equal(catalog.length, 9);
+test('full service directory has ten supplied categories', () => {
+  assert.equal(catalog.length, 10);
   assert.deepEqual(
     Array.from(catalog, category => category.title),
-    ['Консультации врачей', 'УЗИ сердца, сосудов, суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника']
+    ['Медицинские анализы', 'Консультации врачей', 'УЗИ сердца, сосудов, суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника']
   );
-  assert.equal(catalog.reduce((total, category) => total + category.items.length, 0), 102);
+  assert.equal(catalog.reduce((total, category) => total + category.items.length, 0), 111);
 });
 
-test('every service has a valid title, price and duration', () => {
+test('every service has a valid title, price and applicable timing', () => {
   const ids = catalog.map(category => category.id);
   assert.equal(new Set(ids).size, ids.length);
   for (const category of catalog) {
@@ -27,9 +27,20 @@ test('every service has a valid title, price and duration', () => {
     for (const service of category.items) {
       assert.ok(service.name.trim().length > 2, category.title);
       assert.ok(Number.isInteger(service.price) && service.price > 0, service.name);
-      assert.ok(Number.isInteger(service.duration) && service.duration > 0, service.name);
+      if (category.id !== 'medical-analyses') assert.ok(Number.isInteger(service.duration) && service.duration > 0, service.name);
     }
   }
+});
+
+test('laboratory profiles use the approved higher prices and only complete codes', () => {
+  const analyses = catalog.find(category => category.id === 'medical-analyses');
+  assert.equal(analyses.items.length, 9);
+  const prices = Object.fromEntries(Array.from(analyses.items, service => [service.name, service.price]));
+  assert.equal(prices['PROздоровье: Базовый'], 2075);
+  assert.equal(prices['PROздоровье: Стандарт'], 3940);
+  assert.equal(prices['PROздоровье: Максимум'], 5035);
+  assert.equal(prices['Энергия и иммунитет: углублённый скрининг в крови'], 5125);
+  assert.equal(analyses.items.find(service => service.name.includes('Оптимум')).code, null);
 });
 
 test('catalog keeps neutral massage wording and preparation notes', () => {

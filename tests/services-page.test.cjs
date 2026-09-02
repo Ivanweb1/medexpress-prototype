@@ -18,7 +18,7 @@ test('each direction card opens a detail page without repeated booking buttons',
     assert.match(card, /<a href="services\/[^"]+">/);
     assert.doesNotMatch(card, /Записаться/);
   }
-  assert.equal([...html.matchAll(/href="services\/category\.html\?category=/g)].length, 9);
+  assert.equal([...html.matchAll(/href="services\/category\.html\?category=/g)].length, 10);
   assert.equal([...html.matchAll(/class="floating-record"/g)].length, 1);
 });
 
