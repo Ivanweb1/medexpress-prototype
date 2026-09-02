@@ -6,9 +6,9 @@ const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'services.html'), 'utf8');
 const cards = [...html.matchAll(/<article\b[^>]*data-service-card[^>]*>([\s\S]*?)<\/article>/g)].map(match => match[1]);
 
-test('catalog preserves four primary directions and seven ultrasound sections', () => {
-  assert.equal(cards.length, 11);
-  const names = ['Медицинские анализы', 'УЗИ', 'Консультации врачей', 'Массаж позвоночника', 'УЗИ сердца, сосудов и суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям'];
+test('catalog preserves four primary directions without duplicated ultrasound cards', () => {
+  assert.equal(cards.length, 4);
+  const names = ['Медицинские анализы', 'УЗИ', 'Консультации врачей', 'Массаж позвоночника'];
   assert.deepEqual(cards.map(card => card.match(/<h3>(.*?)<\/h3>/)[1]), names);
 });
 
@@ -17,7 +17,7 @@ test('every service has booking and detail buttons', () => {
     assert.match(card, /class="btn" href="https:\/\/m\.vk\.ru\/app53642491_-203789798\?ref=group_menu"/);
     assert.match(card, /class="btn btn--outline" href="services\/[^\"]+">Подробнее<\/a>/);
   }
-  assert.equal(new Set([...html.matchAll(/href="(services\/[^\"]+)"/g)].map(match => match[1])).size, 10);
+  assert.equal(new Set([...html.matchAll(/href="(services\/[^\"]+)"/g)].map(match => match[1])).size, 4);
 });
 
 test('local assets, pages, and jump-link targets exist', () => {
