@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="home-design.css?v=20260901-floating-record-fix">
-  <link rel="stylesheet" href="services-design.css?v=20260831-services">
+  <link rel="stylesheet" href="services-design.css?v=20260902-full-catalog">
 </head>
 <body class="services-page">
   <header class="site-header" id="top">
@@ -70,9 +70,28 @@
         </div>
       </div>
     </section>
+
+    <section class="section service-directory" id="full-catalog" aria-labelledby="service-directory-heading" data-service-directory>
+      <div class="shell">
+        <div class="section-title service-directory__heading">
+          <div><span class="eyebrow">Полный перечень</span><h2 id="service-directory-heading">Услуги и стоимость</h2></div>
+          <div><p>Выберите раздел, чтобы посмотреть входящие в него услуги, цены и длительность записи.</p><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="service-directory__layout">
+          <nav class="service-directory__categories" aria-label="Категории услуг" role="tablist" data-service-categories></nav>
+          <div class="service-directory__content">
+            <div class="service-directory__meta"><div><span class="eyebrow">Выбранный раздел</span><h3 data-service-title></h3></div><span class="service-directory__count" data-service-count></span></div>
+            <div class="service-directory__list" id="service-directory-list" role="tabpanel" aria-live="polite" data-service-items></div>
+          </div>
+        </div>
+        <noscript><p class="service-directory__noscript">Для просмотра интерактивного каталога включите JavaScript или откройте <a href="prices.html">полный прейскурант</a>.</p></noscript>
+      </div>
+    </section>
   </main>
   <footer class="site-footer"><div class="shell footer-grid"><div><a class="brand brand--footer" href="index.html"><img src="assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a><p>Профессиональная медицинская помощь для жителей Аргаяшского района.</p></div><nav><strong>Разделы</strong><a href="services.html">Услуги</a><a href="doctors.html">Врачи</a><a href="about.html">О клинике</a><a href="prices.html">Цены</a><a href="contacts.html">Контакты</a></nav><nav><strong>Пациентам</strong><a href="documents.html">Документы</a><a href="prices.html">Прейскурант</a><a href="documents/document.html?name=Лицензия">Лицензия</a></nav><div><strong>Связаться</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно с 8:00</span></div></div><div class="shell footer-bottom"><span>© Мед-ЭКСПРЕСС</span><a href="documents/document.html?name=Политика%20конфиденциальности">Политика конфиденциальности</a><span>Информация на сайте не является публичной офертой</span></div></footer>
   <a class="floating-record" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener"><span>Записаться</span><b aria-hidden="true">→</b></a>
+  <script src="services-catalog-data.js?v=20260902"></script>
+  <script src="services-catalog.js?v=20260902"></script>
   <script src="script.js?v=20260831-brand-blue"></script>
 </body>
 </html>
