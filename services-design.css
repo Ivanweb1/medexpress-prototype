@@ -94,16 +94,18 @@
 .service-hub__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .service-hub-card{min-width:0;border:1px solid var(--line);border-radius:24px;background:white;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
 .service-hub-card:hover{border-color:rgba(52,176,255,.7);box-shadow:0 20px 48px rgba(28,91,110,.12);transform:translateY(-3px)}
-.service-hub-card>a{display:grid;grid-template-columns:48px minmax(0,1fr) 54px;align-items:center;gap:20px;min-height:176px;padding:28px 28px 28px 24px}
-.service-hub-card__number{align-self:start;color:var(--blue-dark);font-size:11px;font-weight:800;letter-spacing:.14em}
+.service-hub-card>a{display:grid;grid-template-columns:68px minmax(0,1fr) 54px;align-items:center;gap:22px;min-height:176px;padding:28px}
+.service-hub-card__icon{display:grid;place-items:center;width:68px;height:68px;border-radius:20px;background:var(--pale);color:var(--blue-dark);transition:background .2s,color .2s,transform .2s}
+.service-hub-card__icon svg{width:35px;height:35px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .service-hub-card h3{max-width:460px;font-size:clamp(21px,2vw,28px)}
 .service-hub-card p{max-width:470px;margin:13px 0 0;color:var(--muted);font-size:14px;line-height:1.65}
 .service-hub-card__arrow{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:var(--pale);color:var(--blue-dark);font-size:22px;transition:background .2s,color .2s,transform .2s}
 .service-hub-card:hover .service-hub-card__arrow{background:var(--blue);color:white;transform:translateX(3px)}
+.service-hub-card:hover .service-hub-card__icon{background:var(--blue);color:white;transform:rotate(-3deg)}
 .service-hub-card--lab{background:linear-gradient(135deg,#fff 42%,var(--pale))}
 .service-hub-card--massage{background:var(--ink);border-color:var(--ink);color:white}
 .service-hub-card--massage p{color:#bdd1d6}
-.service-hub-card--massage .service-hub-card__number{color:var(--blue)}
+.service-hub-card--massage .service-hub-card__icon{background:rgba(255,255,255,.1);color:var(--blue)}
 .service-hub-card--massage .service-hub-card__arrow{background:rgba(255,255,255,.1);color:white}
 @media(max-width:800px){
   .service-hub .catalog-section-heading{grid-template-columns:1fr;gap:16px}
@@ -112,7 +114,9 @@
 }
 @media(max-width:520px){
   .service-hub{padding-bottom:78px}
-  .service-hub-card>a{grid-template-columns:34px minmax(0,1fr) 42px;gap:12px;min-height:154px;padding:22px 18px}
+  .service-hub-card>a{grid-template-columns:52px minmax(0,1fr) 42px;gap:14px;min-height:154px;padding:22px 18px}
+  .service-hub-card__icon{width:52px;height:52px;border-radius:16px}
+  .service-hub-card__icon svg{width:28px;height:28px}
   .service-hub-card__arrow{width:42px;height:42px}
   .service-hub-card h3{font-size:21px;overflow-wrap:anywhere}
 }

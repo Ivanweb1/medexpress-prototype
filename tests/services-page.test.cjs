@@ -10,6 +10,7 @@ test('catalog presents ten directions as navigation cards', () => {
   assert.equal(cards.length, 10);
   const names = ['Медицинские анализы', 'Консультации врачей', 'УЗИ сердца, сосудов и суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника'];
   assert.deepEqual(cards.map(card => card.match(/<h3>(.*?)<\/h3>/)[1]), names);
+  assert.equal(cards.filter(card => /class="service-hub-card__icon"/.test(card)).length, 10);
 });
 
 test('each direction card opens a detail page without repeated booking buttons', () => {
@@ -17,7 +18,7 @@ test('each direction card opens a detail page without repeated booking buttons',
     assert.match(card, /<a href="services\/[^"]+">/);
     assert.doesNotMatch(card, /Записаться/);
   }
-  assert.equal([...html.matchAll(/href="services\/category\.html\?category=/g)].length, 12);
+  assert.equal([...html.matchAll(/href="services\/category\.html\?category=/g)].length, 9);
   assert.equal([...html.matchAll(/class="floating-record"/g)].length, 1);
 });
 
