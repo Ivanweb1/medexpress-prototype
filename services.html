@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="home-design.css?v=20260901-floating-record-fix">
-  <link rel="stylesheet" href="services-design.css?v=20260902-catalog-tabs">
+  <link rel="stylesheet" href="services-design.css?v=20260902-category-hub">
 </head>
 <body class="services-page">
   <header class="site-header" id="top">
@@ -29,53 +29,28 @@
         <div class="catalog-intro__copy"><p>Медицинские анализы, ультразвуковая диагностика, консультации врачей и массаж — рядом с домом, в Аргаяше.</p><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться на приём <span aria-hidden="true">→</span></a></div>
       </div>
       <nav class="catalog-navigation" aria-label="Быстрый переход к направлению">
-        <a href="#analyses">Анализы</a><a href="#full-catalog">УЗИ</a><a href="#consultations">Консультации врачей</a><a href="#massage">Массаж</a>
+        <a href="#service-categories">Все направления</a><a href="services/category.html?category=consultations">Консультации врачей</a><a href="services/category.html?category=general-ultrasound">УЗИ</a><a href="services/category.html?category=spine-massage">Массаж</a>
       </nav>
     </section>
 
-    <section class="catalog-main shell" aria-labelledby="directions-title">
-      <div class="catalog-section-heading"><span class="eyebrow">С чего начнём</span><h2 id="directions-title">Основные направления</h2></div>
-      <div class="catalog-main-grid">
-        <article class="catalog-card catalog-card--lab" id="analyses" data-service-card>
-          <div class="catalog-card__visual"><img src="assets/citilab-transparent.png" alt="СИТИЛАБ" width="1354" height="559" loading="lazy"></div>
-          <div class="catalog-card__body"><h3>Медицинские анализы</h3><p>Лабораторные исследования в партнёрстве с СИТИЛАБ.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=Медицинские%20анализы">Подробнее</a></div></div>
-        </article>
-        <article class="catalog-card catalog-card--uzi" id="ultrasound-overview" data-service-card>
-          <div class="catalog-card__visual"><span class="catalog-main-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 4 6 3-4 8-6-3zM10 5l1-2M10 15l2 2c3 3 7 1 7-2V9M3 16a8 8 0 0 0 8 5M5 15a5 5 0 0 0 5 3"/></svg></span></div>
-          <div class="catalog-card__body"><h3>УЗИ</h3><p>Все направления ультразвуковой диагностики.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/general-ultrasound.html">Подробнее</a></div></div>
-        </article>
-        <article class="catalog-card catalog-card--consult" id="consultations" data-service-card>
-          <div class="catalog-card__visual"><span class="catalog-main-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v5a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 12v3a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10" r="2"/></svg></span></div>
-          <div class="catalog-card__body"><h3>Консультации врачей</h3><p>Кардиолог, невролог, эндокринолог и гинеколог.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/service.html?name=Консультации%20врачей">Подробнее</a></div></div>
-        </article>
-        <article class="catalog-card catalog-card--spine" id="massage" data-service-card>
-          <div class="catalog-card__visual"><span class="catalog-main-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c-4 4 4 6 0 10s0 6 0 8M7 4l8 2M8 9l8 1M7 14l8 2M8 19l8 1"/></svg></span></div>
-          <div class="catalog-card__body"><h3>Массаж позвоночника</h3><p>Аппаратный массаж, тепло и инфракрасное воздействие.</p><div class="catalog-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="btn btn--outline" href="services/spine-massage.html">Подробнее</a></div></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section service-directory" id="full-catalog" aria-labelledby="service-directory-heading" data-service-directory>
-      <div class="shell">
-        <div class="section-title service-directory__heading">
-          <div><span class="eyebrow">Полный перечень</span><h2 id="service-directory-heading">Услуги и стоимость</h2></div>
-          <div><p>Выберите раздел, чтобы посмотреть входящие в него услуги, цены и длительность записи.</p><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться <span aria-hidden="true">→</span></a></div>
-        </div>
-        <div class="service-directory__layout">
-          <nav class="service-directory__categories" aria-label="Категории услуг" role="tablist" data-service-categories></nav>
-          <div class="service-directory__content">
-            <div class="service-directory__meta"><div><span class="eyebrow">Выбранный раздел</span><h3 data-service-title></h3></div><span class="service-directory__count" data-service-count></span></div>
-            <div class="service-directory__list" id="service-directory-list" role="tabpanel" aria-live="polite" data-service-items></div>
-          </div>
-        </div>
-        <noscript><p class="service-directory__noscript">Для просмотра интерактивного каталога включите JavaScript или откройте <a href="prices.html">полный прейскурант</a>.</p></noscript>
+    <section class="service-hub shell" id="service-categories" aria-labelledby="directions-title">
+      <div class="catalog-section-heading"><span class="eyebrow">Выберите направление</span><h2 id="directions-title">Все услуги центра</h2><p>На странице направления можно посмотреть полный перечень, стоимость и длительность процедур.</p></div>
+      <div class="service-hub__grid">
+        <article class="service-hub-card service-hub-card--lab" data-service-card><a href="services/service.html?name=Медицинские%20анализы"><span class="service-hub-card__number">01</span><div><h3>Медицинские анализы</h3><p>Лабораторные исследования в партнёрстве с СИТИЛАБ.</p></div><span class="service-hub-card__arrow" aria-hidden="true">→</span></a></article>
+        <article class="service-hub-card" data-service-card><a href="services/category.html?category=consultations"><span class="service-hub-card__number">02</span><div><h3>Консультации врачей</h3><p>Кардиолог, невролог, эндокринолог и гинеколог.</p></div><span class="service-hub-card__arrow" aria-hidden="true">→</span></a></article>
+        <article class="service-hub-card" data-service-card><a href="services/category.html?category=heart-vessels-joints"><span class="service-hub-card__number">03</span><div><h3>УЗИ сердца, сосудов и суставов</h3><p>Исследования сердца, сосудов, суставов и допплерография.</p></div><span class="service-hub-card__arrow" aria-hidden="true">→</span></a></article>
+        <article class="service-hub-card" data-service-card><a href="services/category.html?category=general-ultrasound"><span class="service-hub-card__number">04</span><div><h3>Общее УЗИ</h3><p>Ультразвуковые исследования внутренних органов.</p></div><span class="service-hub-card__arrow" aria-hidden="true">→</span></a></article>
+        <article class="service-hub-card" data-service-card><a href="services/category.html?category=women-ultrasound"><span class="service-hub-card__number">05</span><div><h3>УЗИ для женщин</h3><p>Исследования женского здоровья и памятки по подготовке.</p></div><span class="service-hub-card__arrow" aria-hidden="true">→</span></a></article>
+        <article class="service-hub-card" data-service-card><a href="services/category.html?category=women-complexes"><span class="service-hub-card__number">06</span><div><h3>Комплексные УЗИ для женщин</h3><p>Несколько исследований за один визит.</p></div><span class="service-hub-card__arrow" aria-hidden="true">→</span></a></article>
+        <article class="service-hub-card" data-service-card><a href="services/category.html?category=pregnancy"><span class="service-hub-card__number">07</span><div><h3>УЗИ при беременности</h3><p>Скрининги и дополнительные исследования.</p></div><span class="service-hub-card__arrow" aria-hidden="true">→</span></a></article>
+        <article class="service-hub-card" data-service-card><a href="services/category.html?category=men-complexes"><span class="service-hub-card__number">08</span><div><h3>Комплексные УЗИ для мужчин</h3><p>Комплексная диагностика мужского здоровья.</p></div><span class="service-hub-card__arrow" aria-hidden="true">→</span></a></article>
+        <article class="service-hub-card" data-service-card><a href="services/category.html?category=children-ultrasound"><span class="service-hub-card__number">09</span><div><h3>УЗИ детям</h3><p>Ультразвуковая диагностика для детей.</p></div><span class="service-hub-card__arrow" aria-hidden="true">→</span></a></article>
+        <article class="service-hub-card service-hub-card--massage" data-service-card><a href="services/category.html?category=spine-massage"><span class="service-hub-card__number">10</span><div><h3>Массаж позвоночника</h3><p>Две программы аппаратного физиотерапевтического массажа.</p></div><span class="service-hub-card__arrow" aria-hidden="true">→</span></a></article>
       </div>
     </section>
   </main>
   <footer class="site-footer"><div class="shell footer-grid"><div><a class="brand brand--footer" href="index.html"><img src="assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a><p>Профессиональная медицинская помощь для жителей Аргаяшского района.</p></div><nav><strong>Разделы</strong><a href="services.html">Услуги</a><a href="doctors.html">Врачи</a><a href="about.html">О клинике</a><a href="prices.html">Цены</a><a href="contacts.html">Контакты</a></nav><nav><strong>Пациентам</strong><a href="documents.html">Документы</a><a href="prices.html">Прейскурант</a><a href="documents/document.html?name=Лицензия">Лицензия</a></nav><div><strong>Связаться</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно с 8:00</span></div></div><div class="shell footer-bottom"><span>© Мед-ЭКСПРЕСС</span><a href="documents/document.html?name=Политика%20конфиденциальности">Политика конфиденциальности</a><span>Информация на сайте не является публичной офертой</span></div></footer>
   <a class="floating-record" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener"><span>Записаться</span><b aria-hidden="true">→</b></a>
-  <script src="services-catalog-data.js?v=20260902"></script>
-  <script src="services-catalog.js?v=20260902"></script>
   <script src="script.js?v=20260831-brand-blue"></script>
 </body>
 </html>

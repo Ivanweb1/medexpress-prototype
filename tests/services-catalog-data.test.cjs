@@ -41,11 +41,24 @@ test('catalog keeps neutral massage wording and preparation notes', () => {
   assert.ok(catalog.find(category => category.id === 'women-ultrasound').items[0].details.length >= 3);
 });
 
-test('services page loads the data and accessible directory renderer', () => {
-  const html = fs.readFileSync(path.join(root, 'services.html'), 'utf8');
-  assert.match(html, /data-service-directory/);
-  assert.match(html, /role="tablist"/);
-  assert.match(html, /role="tabpanel"/);
+test('category page loads shared data and renders one selected direction', () => {
+  const html = fs.readFileSync(path.join(root, 'services', 'category.html'), 'utf8');
+  assert.match(html, /data-category-items/);
+  assert.match(html, /data-category-title/);
   assert.match(html, /services-catalog-data\.js/);
-  assert.match(html, /services-catalog\.js/);
+  assert.match(html, /category\.js/);
+  assert.doesNotMatch(html, /data-service-categories|role="tablist"/);
+});
+
+test('every catalog category has a card link and category assets resolve', () => {
+  const hub = fs.readFileSync(path.join(root, 'services.html'), 'utf8');
+  const linkedIds = [...hub.matchAll(/services\/category\.html\?category=([a-z-]+)/g)].map(match => match[1]);
+  assert.deepEqual([...new Set(linkedIds)].sort(), Array.from(catalog, category => category.id).sort());
+
+  const file = path.join(root, 'services', 'category.html');
+  const html = fs.readFileSync(file, 'utf8');
+  for (const [, url] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+    if (/^(https?:|tel:|mailto:)/.test(url) || url.startsWith('#')) continue;
+    assert.ok(fs.existsSync(path.resolve(path.dirname(file), url.split(/[?#]/)[0])), url);
+  }
 });

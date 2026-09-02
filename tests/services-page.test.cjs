@@ -6,18 +6,19 @@ const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'services.html'), 'utf8');
 const cards = [...html.matchAll(/<article\b[^>]*data-service-card[^>]*>([\s\S]*?)<\/article>/g)].map(match => match[1]);
 
-test('catalog preserves four primary directions without duplicated ultrasound cards', () => {
-  assert.equal(cards.length, 4);
-  const names = ['Медицинские анализы', 'УЗИ', 'Консультации врачей', 'Массаж позвоночника'];
+test('catalog presents ten directions as navigation cards', () => {
+  assert.equal(cards.length, 10);
+  const names = ['Медицинские анализы', 'Консультации врачей', 'УЗИ сердца, сосудов и суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника'];
   assert.deepEqual(cards.map(card => card.match(/<h3>(.*?)<\/h3>/)[1]), names);
 });
 
-test('every service has booking and detail buttons', () => {
+test('each direction card opens a detail page without repeated booking buttons', () => {
   for (const card of cards) {
-    assert.match(card, /class="btn" href="https:\/\/m\.vk\.ru\/app53642491_-203789798\?ref=group_menu"/);
-    assert.match(card, /class="btn btn--outline" href="services\/[^\"]+">Подробнее<\/a>/);
+    assert.match(card, /<a href="services\/[^"]+">/);
+    assert.doesNotMatch(card, /Записаться/);
   }
-  assert.equal(new Set([...html.matchAll(/href="(services\/[^\"]+)"/g)].map(match => match[1])).size, 4);
+  assert.equal([...html.matchAll(/href="services\/category\.html\?category=/g)].length, 12);
+  assert.equal([...html.matchAll(/class="floating-record"/g)].length, 1);
 });
 
 test('local assets, pages, and jump-link targets exist', () => {
@@ -39,7 +40,7 @@ test('page has shared branding, active navigation, and no prototype placeholders
   assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
   assert.match(html, /href="services.html" aria-current="page"/);
   assert.match(html, /href="home-design.css\?/);
-  assert.match(html, /src="assets\/citilab-transparent.png"/);
+  assert.match(html, /Медицинские анализы/);
   assert.doesNotMatch(html, /class="number"|Изображение направления|Изображение услуги/);
   for (const [, heading] of html.matchAll(/<h[123][^>]*>([\s\S]*?)<\/h[123]>/g)) {
     assert.ok(!heading.replace(/<[^>]+>/g, '').trim().endsWith('.'));
