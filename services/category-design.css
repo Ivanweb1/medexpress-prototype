@@ -12,6 +12,19 @@
 .category-list-heading strong{padding:8px 13px;border-radius:999px;background:var(--pale);color:var(--blue-dark);font-size:12px;white-space:nowrap}
 .category-list-heading p{margin:4px 0 0;color:var(--muted);font-size:13px;line-height:1.65}
 .category-list{align-items:stretch}
+.lab-tools[hidden],[data-lab-empty][hidden]{display:none}
+.lab-tools{margin-bottom:30px;padding:26px;border:1px solid var(--line);border-radius:24px;background:white}
+.lab-tools__note{max-width:1000px;margin:0 0 24px;color:var(--muted);font-size:15px;line-height:1.65}
+.lab-tools__fields{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;align-items:end;gap:18px}
+.lab-tools label{display:grid;gap:10px;font-size:16px;font-weight:700;min-width:0}
+.lab-tools input,.lab-tools select{box-sizing:border-box;width:100%;min-width:0;min-height:54px;padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:#f6f9fa;color:var(--ink);font:inherit;font-weight:500}
+.lab-reset{min-height:54px;padding:13px 22px;border:0;border-radius:12px;background:var(--blue);color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+.lab-tools :is(input,select,button):focus-visible{outline:3px solid var(--blue-dark);outline-offset:3px}
+.lab-tools__results{margin:20px 0 0;color:var(--blue-dark);font-size:15px;font-weight:700}
+.directory-service__group{margin-bottom:12px;color:var(--muted);font-size:13px;line-height:1.5}
+.directory-service__price-note{margin:14px 0 0;font-size:15px;line-height:1.5;color:var(--ink)}
+.category-list .directory-service__details>summary{font-size:15px;min-height:44px;display:flex;align-items:center}
+@media(max-width:800px){.lab-tools__fields{grid-template-columns:1fr}.lab-tools{padding:20px}.lab-reset{justify-self:start}}
 .category-list .directory-service{min-height:176px}
 .directory-service__code{display:block;margin-bottom:10px;color:var(--blue-dark);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .category-more{padding:100px 0;background:white}

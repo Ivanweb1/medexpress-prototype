@@ -53,7 +53,7 @@ test('generic profile renderer shows only supplied doctor information', () => {
     assert.match(mount.innerHTML, new RegExp(doctor.name.split(' ')[0]));
     const [givenName, patronymic, surname] = doctor.name.split(' ');
     assert.ok(mount.innerHTML.includes(`<h1><em>${givenName} ${patronymic}</em><br>${surname}</h1>`));
-    assert.ok(mount.innerHTML.includes(doctor.services[0]));
+    for (const service of doctor.services) assert.ok(mount.innerHTML.includes(service), `${key}: ${service}`);
     if (doctor.schedule) assert.ok(mount.innerHTML.includes(doctor.schedule));
     else assert.doesNotMatch(mount.innerHTML, /Расписание/);
     if (doctor.qualifications?.length) assert.match(mount.innerHTML, /Квалификация/);
@@ -93,4 +93,24 @@ test('every generic doctor link in the catalog resolves to profile data', () => 
   assert.equal(links.length, 9);
   assert.equal(new Set(links).size, 9);
   for (const name of links) assert.ok(doctors[name], name);
+});
+
+test('MIS screenshots add confirmed services without assigning unchecked procedures', () => {
+  const services = name => Array.from(doctors[name].services);
+  const myzhevskikh = services('Екатерина Мыжевских');
+  for (const title of ['УЗИ детям', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'Комплексные УЗИ для мужчин', 'УЗИ при беременности на раннем сроке — до 10 недель']) assert.ok(myzhevskikh.includes(title));
+  assert.doesNotMatch(myzhevskikh.join(' '), /НКТГ|НГГ|Третий УЗ-скрининг/);
+  const pavlichuk = services('Ирина Павличук').join(' ');
+  assert.match(pavlichuk, /Цервикометрия.*лонного сочленения.*26–28.*31–34/);
+  assert.doesNotMatch(pavlichuk, /НКТГ|НГГ|УЗИ детям|Комплексные УЗИ для мужчин/);
+  const fedorkina = services('Елена Федоркина').join(' ');
+  assert.match(fedorkina, /Комплексные УЗИ для женщин.*Комплексные УЗИ для мужчин/);
+  assert.doesNotMatch(fedorkina, /УЗИ сердца|суставов|при беременности|УЗИ детям/);
+  const makovetskaya = services('Мария Маковецкая').join(' ');
+  assert.match(makovetskaya, /31–34.*двойню/);
+  assert.match(makovetskaya, /Цервикометрия.*лонного сочленения.*НГГ.*НКТГ/);
+  assert.match(services('Елена Денисова').join(' '), /Скрининг ВПЧ.*Бакпосев.*мазка на микрофлору/);
+  for (const doctor of Object.values(doctors)) assert.equal(new Set(doctor.services).size, doctor.services.length);
+  const orekhova = fs.readFileSync(path.join(root, 'doctors', 'ekaterina-orekhova.html'), 'utf8');
+  assert.match(orekhova, /<li><span>Комплексные УЗИ для женщин<\/span><\/li>/);
 });

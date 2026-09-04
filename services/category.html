@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../home-design.css?v=20260901-floating-record-fix">
   <link rel="stylesheet" href="../services-design.css?v=20260902-category-hub">
-  <link rel="stylesheet" href="category-design.css?v=20260902-lab-profiles">
+  <link rel="stylesheet" href="category-design.css?v=20260904-citilab">
 </head>
 <body class="services-page category-page">
   <header class="site-header" id="top">
@@ -36,7 +36,17 @@
     <section class="category-list-section" aria-labelledby="category-list-title">
       <div class="shell">
         <div class="category-list-heading"><div><span class="eyebrow">Перечень услуг</span><h2 id="category-list-title">Стоимость и время</h2></div><div><strong data-category-count></strong><p>Для записи воспользуйтесь закреплённой кнопкой справа или позвоните администратору.</p></div></div>
-        <div class="service-directory__list category-list" data-category-items></div>
+        <div class="lab-tools" data-lab-tools hidden>
+          <p class="lab-tools__note">Прайс СИТИЛАБ от 1 сентября 2026 года. Условия оплаты забора материала указаны у исследований, где они приведены в прайсе. Остальные условия и сроки готовности уточняйте у администратора.</p>
+          <div class="lab-tools__fields">
+            <label for="lab-search">Найти анализ<input id="lab-search" type="search" placeholder="Название или код анализа" autocomplete="off" aria-controls="category-items"></label>
+            <label for="lab-group">Раздел<select id="lab-group" aria-controls="category-items"><option value="">Все анализы и профили</option></select></label>
+            <button type="button" class="lab-reset" data-lab-reset>Сбросить</button>
+          </div>
+          <p class="lab-tools__results" data-lab-results role="status" aria-live="polite"></p>
+        </div>
+        <div id="category-items" class="service-directory__list category-list" data-category-items></div>
+        <p data-lab-empty hidden>Ничего не найдено. Попробуйте другое название или сбросьте фильтры.</p>
         <noscript><p class="service-directory__noscript">Для просмотра перечня включите JavaScript или откройте <a href="../prices.html">прейскурант</a>.</p></noscript>
       </div>
     </section>
@@ -48,7 +58,8 @@
   <footer class="site-footer"><div class="shell footer-grid"><div><a class="brand brand--footer" href="../index.html"><img src="../assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a><p>Профессиональная медицинская помощь для жителей Аргаяшского района.</p></div><nav><strong>Разделы</strong><a href="../services.html">Услуги</a><a href="../doctors.html">Врачи</a><a href="../about.html">О клинике</a><a href="../prices.html">Цены</a><a href="../contacts.html">Контакты</a></nav><nav><strong>Пациентам</strong><a href="../documents.html">Документы</a><a href="../prices.html">Прейскурант</a><a href="../documents/document.html?name=Лицензия">Лицензия</a></nav><div><strong>Связаться</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно с 8:00</span></div></div><div class="shell footer-bottom"><span>© Мед-ЭКСПРЕСС</span><a href="../documents/document.html?name=Политика%20конфиденциальности">Политика конфиденциальности</a><span>Информация на сайте не является публичной офертой</span></div></footer>
   <a class="floating-record" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener"><span>Записаться</span><b aria-hidden="true">→</b></a>
   <script src="../services-catalog-data.js?v=20260902-lab-profiles"></script>
-  <script src="category.js?v=20260902-lab-profiles"></script>
+  <script src="../citilab-catalog-data.js?v=20260904-citilab"></script>
+  <script src="category.js?v=20260904-citilab"></script>
   <script src="../script.js?v=20260831-brand-blue"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   if (!Array.isArray(catalog) || !list) return;
 
   const descriptions = {
-    'medical-analyses': 'Комплексные лабораторные профили для взрослых.',
+    'medical-analyses': 'Лабораторные исследования СИТИЛАБ и комплексные профили: найдите нужный анализ по названию, коду или разделу.',
     consultations: 'Приёмы специалистов и диагностические процедуры врачебного профиля.',
     'heart-vessels-joints': 'Ультразвуковая диагностика сердца, сосудов и суставов для взрослых.',
     'general-ultrasound': 'Исследования внутренних органов и мягких тканей.',
@@ -25,10 +25,16 @@
   document.querySelector('[data-category-count]').textContent = `${category.items.length} ${plural(category.items.length)}`;
   document.title = `${category.title} — Мед-ЭКСПРЕСС`;
 
-  list.replaceChildren(...category.items.map((service, index) => {
+  const renderServices = services => list.replaceChildren(...services.map((service, index) => {
     const article = document.createElement('article');
     article.className = 'directory-service';
     article.style.setProperty('--item-order', index);
+    if (service.group) {
+      const group = document.createElement('span');
+      group.className = 'directory-service__group';
+      group.textContent = service.group;
+      article.append(group);
+    }
     if (service.code) {
       const code = document.createElement('span');
       code.className = 'directory-service__code';
@@ -42,11 +48,17 @@
     const timing = service.term || (service.duration ? `${service.duration} мин.` : '');
     meta.innerHTML = `<strong>${rubles(service.price)}</strong>${timing ? `<span><i aria-hidden="true"></i>${timing}</span>` : ''}`;
     article.append(heading, meta);
+    if (service.priceNote) {
+      const note = document.createElement('p');
+      note.className = 'directory-service__price-note';
+      note.textContent = service.priceNote;
+      article.append(note);
+    }
     if (service.details) {
       const details = document.createElement('details');
       details.className = 'directory-service__details';
       const summary = document.createElement('summary');
-      summary.textContent = service.name.includes('ЭХОКГ') || service.name.includes('Трансвагинальное') ? 'Как подготовиться' : service.name.includes('Smart-диагностика') ? 'О профиле' : 'Что входит';
+      summary.textContent = service.name.includes('ЭХОКГ') || service.name.includes('Трансвагинальное') ? 'Как подготовиться' : category.id === 'medical-analyses' ? 'Подробнее об исследовании' : 'Что входит';
       const body = document.createElement('div');
       service.details.forEach(text => {
         const paragraph = document.createElement('p');
@@ -58,6 +70,41 @@
     }
     return article;
   }));
+
+  renderServices(category.items);
+  if (category.id === 'medical-analyses') {
+    document.querySelector('#category-list-title').textContent = 'Анализы и цены';
+    document.querySelector('[data-lab-tools]').hidden = false;
+    const search = document.querySelector('#lab-search');
+    const group = document.querySelector('#lab-group');
+    const results = document.querySelector('[data-lab-results]');
+    const normalize = value => value.toLocaleLowerCase('ru').replace(/ё/g, 'е').replace(/[‐‑–—]/g, '-');
+    [...new Set(category.items.map(service => service.group))].forEach(name => {
+      const option = document.createElement('option');
+      option.value = name;
+      option.textContent = name;
+      group.append(option);
+    });
+    const filter = () => {
+      const words = normalize(search.value).trim().split(/\s+/).filter(Boolean);
+      const filtered = category.items.filter(service => {
+        const text = normalize([service.name, service.code || '', service.group, ...(service.details || [])].join(' '));
+        return (!group.value || service.group === group.value) && words.every(word => text.includes(word));
+      });
+      renderServices(filtered);
+      results.textContent = `Показано: ${filtered.length} из ${category.items.length}`;
+      document.querySelector('[data-lab-empty]').hidden = filtered.length !== 0;
+    };
+    search.addEventListener('input', filter);
+    group.addEventListener('change', filter);
+    document.querySelector('[data-lab-reset]').addEventListener('click', () => {
+      search.value = '';
+      group.value = '';
+      filter();
+      search.focus();
+    });
+    filter();
+  }
 
   const links = document.querySelector('[data-category-links]');
   links.replaceChildren(...catalog.filter(entry => entry.id !== category.id).slice(0, 5).map(entry => {

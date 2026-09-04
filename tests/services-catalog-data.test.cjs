@@ -8,6 +8,7 @@ const root = path.join(__dirname, '..');
 const source = fs.readFileSync(path.join(root, 'services-catalog-data.js'), 'utf8');
 const context = { window: {} };
 vm.runInNewContext(source, context);
+vm.runInNewContext(fs.readFileSync(path.join(root, 'citilab-catalog-data.js'), 'utf8'), context);
 const catalog = context.window.ME_SERVICE_CATALOG;
 
 test('full service directory has ten supplied categories', () => {
@@ -16,7 +17,7 @@ test('full service directory has ten supplied categories', () => {
     Array.from(catalog, category => category.title),
     ['Медицинские анализы', 'Консультации врачей', 'УЗИ сердца, сосудов, суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника']
   );
-  assert.equal(catalog.reduce((total, category) => total + category.items.length, 0), 111);
+  assert.equal(catalog.reduce((total, category) => total + category.items.length, 0), 338);
 });
 
 test('every service has a valid title, price and applicable timing', () => {
@@ -34,7 +35,7 @@ test('every service has a valid title, price and applicable timing', () => {
 
 test('laboratory profiles use the approved higher prices and only complete codes', () => {
   const analyses = catalog.find(category => category.id === 'medical-analyses');
-  assert.equal(analyses.items.length, 9);
+  assert.equal(analyses.items.length, 236);
   const prices = Object.fromEntries(Array.from(analyses.items, service => [service.name, service.price]));
   assert.equal(prices['PROздоровье: Базовый'], 2075);
   assert.equal(prices['PROздоровье: Стандарт'], 3940);
