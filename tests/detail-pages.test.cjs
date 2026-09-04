@@ -87,7 +87,7 @@ test('service page includes full study structure and supplied landscape photogra
 test('new sections include designed components and a refreshed stylesheet URL', () => {
   for (const file of pages) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
-    assert.match(html, /detail-design.css\?v=(?:20260831-layout-v2|20260901-doctors)/);
+    assert.match(html, /detail-design.css\?v=(?:20260831-layout-v2|20260901-doctors|20260904-compact-profiles)/);
     const cards = [...html.matchAll(/<article class="detail-draft-card"[^>]*>([\s\S]*?)<\/article>/g)];
     assert.ok(cards.length > 0);
     for (const [, card] of cards) {

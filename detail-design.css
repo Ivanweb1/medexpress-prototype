@@ -210,6 +210,11 @@
 .detail-timeline h3{font-size:23px}
 .detail-timeline p{margin:14px 0 0;color:var(--muted);font-size:15px;line-height:1.7}
 .detail-timeline .detail-draft-label{margin-bottom:14px}
+/* Doctor courses read across each row, with comfortable space for long titles. */
+:is(#doctor-training,#training-doctor) .detail-timeline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
+:is(#doctor-training,#training-doctor) .detail-timeline article{grid-template-columns:64px minmax(0,1fr);gap:22px;border-top:0}
+:is(#doctor-training,#training-doctor) .detail-timeline article:nth-child(n+3){border-top:1px solid var(--line)}
+:is(#doctor-training,#training-doctor) .detail-timeline:has(>article:only-child){grid-template-columns:1fr}
 .detail-procedure-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .detail-procedure-card{position:relative;min-width:0;display:flex;flex-direction:column;align-items:flex-start;padding:36px 32px;border:1px solid var(--line);border-radius:24px;background:white}
 .detail-procedure-card h3{font-size:27px;max-width:290px}
@@ -244,9 +249,18 @@
 .detail-list-panel li{position:relative;padding:20px 12px 20px 34px;border-bottom:1px solid var(--line);font-size:16px;line-height:1.55}
 .detail-list-panel li:last-child{border-bottom:0}
 .detail-list-panel li::before{content:"";position:absolute;left:4px;top:27px;width:10px;height:10px;border-radius:50%;background:var(--blue)}
-.detail-list-panel--services{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:36px;align-items:center;padding:22px 30px}
-.detail-list-panel--services>div{display:flex;flex-direction:column;gap:18px;align-items:stretch;text-align:center}
+.detail-list-panel--services{display:grid;grid-template-columns:1fr;gap:24px;padding:22px 30px}
+.detail-list-panel--services>ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
+.detail-list-panel--services>ul>li{border-bottom:0;border-top:1px solid var(--line)}
+.detail-list-panel--services>ul>li:nth-child(-n+2){border-top:0}
+.detail-list-panel--services>div{display:flex;flex-direction:row;gap:24px;align-items:center;justify-content:flex-end;border-top:1px solid var(--line);padding-top:24px;text-align:center}
+.detail-list-panel--services>div>.btn{min-width:230px}
 .detail-list-panel--services>div>a:not(.btn){font-size:14px;font-weight:800;color:var(--blue-dark)}
+:is(#doctor-external-profile,#reviews-doctor){padding-block:48px}
+:is(#doctor-external-profile,#reviews-doctor) .detail-editorial{grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:32px}
+:is(#doctor-external-profile,#reviews-doctor) h2{font-size:clamp(28px,3vw,42px);max-width:none}
+:is(#doctor-external-profile,#reviews-doctor) .detail-copy{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+:is(#doctor-external-profile,#reviews-doctor) .detail-lead{margin:0}
 @media(max-width:1000px){
   .detail-draft-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .detail-draft-grid>.detail-draft-card:last-child:nth-child(odd){grid-column:1/-1}
@@ -257,12 +271,19 @@
   .detail-price-item>.btn{grid-column:1/-1;justify-self:start;width:auto}
 }
 @media(max-width:750px){
+  :is(#doctor-training,#training-doctor) .detail-timeline{grid-template-columns:1fr}
+  :is(#doctor-training,#training-doctor) .detail-timeline article:nth-child(n+2){border-top:1px solid var(--line)}
+  .detail-list-panel--services>ul{grid-template-columns:1fr}
+  .detail-list-panel--services>ul>li:nth-child(2){border-top:1px solid var(--line)}
+  .detail-list-panel--services>div{flex-direction:column;gap:18px}
+  .detail-list-panel--services>div>.btn{width:100%;min-width:0}
+  :is(#doctor-external-profile,#reviews-doctor) .detail-editorial{grid-template-columns:1fr;gap:24px}
   .detail-procedure-grid{grid-template-columns:1fr}
   .detail-procedure-card{display:grid;grid-template-columns:56px minmax(0,1fr);gap:0 22px}
   .detail-procedure-card .detail-block-icon{grid-row:1/4;margin:0}
   .detail-procedure-card h3,.detail-procedure-card p,.detail-procedure-card .detail-draft-label{grid-column:2;max-width:none}
   .detail-list-panel--services{grid-template-columns:1fr}
-  .detail-list-panel--services>div{align-items:flex-start;text-align:left;padding:0 12px 16px}
+  .detail-list-panel--services>div{align-items:center;padding:24px 0 16px}
 }
 @media(max-width:620px){
   .detail-draft-card,.detail-review-draft,.detail-schedule-panel{padding:26px;border-radius:22px}
@@ -272,6 +293,7 @@
   .detail-block-icon{margin-bottom:24px}
   .detail-timeline{padding:0 24px;border-radius:22px}
   .detail-timeline article{grid-template-columns:1fr;gap:20px}
+  :is(#doctor-training,#training-doctor) .detail-timeline article{grid-template-columns:1fr;gap:20px}
   .detail-timeline-marker{flex-direction:row;align-items:center;gap:14px}
   .detail-timeline h3{font-size:22px}
   .detail-procedure-card{display:flex;padding:28px;border-radius:22px}
