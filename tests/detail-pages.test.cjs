@@ -112,7 +112,8 @@ test('Orekhova education, associations, award and review link reflect the suppli
   assert.match(html, /актуальное членство отдельно не подтверждено/);
   assert.match(html, /Лучший врач-исследователь/);
   assert.match(html, /Организация, присудившая награду, в источнике не названа/);
-  assert.match(html, /Рейтинг 4,8 из 5 · 33 отзыва/);
-  assert.match(html, /Показатели приведены по сохранённой версии/);
+  assert.match(html, /Рейтинг 4,8 · 33 отзыва на ПроДокторов\./);
+  assert.match(html, />Читать отзывы <span/);
+  assert.doesNotMatch(html, /Показатели приведены по сохранённой версии/);
   assert.match(html, /href="https:\/\/prodoctorov.ru\/chelyabinsk\/vrach\/122637-orehova\/" target="_blank" rel="noopener"/);
 });
