@@ -27,6 +27,12 @@
     doctor.workExperience ? '<p>' + escape(doctor.workExperience) + '.</p>' : '',
     doctor.schedule ? '<p>' + escape(doctor.schedule) + '.</p>' : ''
   ].join('');
+  const training = doctor.training?.map(([year, title, copy]) => '<article><div class="detail-timeline-marker"><span class="detail-block-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v15M6 8h2M6 12h2M16 8h2M16 12h2"/></svg></span><span class="detail-timeline-date">' + escape(year) + '</span></div><div><h3>' + escape(title) + '</h3><p>' + escape(copy) + '</p></div></article>').join('') || '';
+  const trainingSection = training ? '<section class="shell detail-section" id="doctor-training"><div class="detail-section-heading"><div><span class="eyebrow">Развитие компетенций</span><h2>Дополнительное обучение</h2></div></div><div class="detail-timeline">' + training + '</div></section>' : '';
+  const reviews = doctor.prodoctorovReviews;
+  const reviewWord = count => count % 10 === 1 && count % 100 !== 11 ? 'отзыв' : count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20) ? 'отзыва' : 'отзывов';
+  const reviewSummary = reviews ? '<p class="detail-lead">Рейтинг ' + escape(reviews.rating) + ' · ' + escape(reviews.count) + ' ' + reviewWord(reviews.count) + ' на ПроДокторов.</p>' : '';
+  const externalProfileSection = /^https:\/\/prodoctorov\.ru\//.test(doctor.prodoctorovUrl || '') ? '<section class="detail-section detail-pale" id="doctor-external-profile"><div class="shell detail-editorial"><div><span class="eyebrow">Подробнее о специалисте</span><h2>' + (reviews ? 'Отзывы на ПроДокторов' : 'Профиль на ПроДокторов') + '</h2></div><div class="detail-copy">' + reviewSummary + '<a class="btn" href="' + escape(doctor.prodoctorovUrl) + '" target="_blank" rel="noopener">' + (reviews ? 'Читать отзывы' : 'Открыть профиль') + ' <span aria-hidden="true">↗</span></a></div></div></section>' : '';
   const concerns = doctor.concerns?.length ? `
     <section class="detail-section detail-pale">
       <div class="shell detail-editorial"><div><span class="eyebrow">Когда обратиться</span><h2>С какими вопросами<br>принимает врач</h2></div><div class="detail-list-panel"><ul>${list(doctor.concerns)}</ul></div></div>
@@ -45,8 +51,10 @@
     <section class="detail-section detail-cream"><div class="shell detail-editorial"><div><span class="eyebrow">О враче</span><h2>Опыт и<br><em>направления работы</em></h2></div><div class="detail-copy"><p class="detail-lead">${escape(doctor.specialty)}</p>${aboutFacts}</div></div></section>
     ${qualificationsSection}
     ${educationSection}
+    ${trainingSection}
     ${concerns}
     <section class="shell detail-section" id="doctor-services"><div class="detail-section-heading"><div><span class="eyebrow">Направления работы</span><h2>Услуги врача</h2></div><p>Стоимость конкретной услуги уточняйте при записи.</p></div><div class="detail-list-panel detail-list-panel--services"><ul>${services}</ul><div><a class="btn" href="${booking}" target="_blank" rel="noopener">Записаться</a><a href="tel:+79617958759">+7 (961) 795-87-59</a></div></div></section>
     ${scheduleSection}
+    ${externalProfileSection}
     <section class="detail-booking"><div class="shell detail-booking__grid"><div><span class="eyebrow">Мед-ЭКСПРЕСС · Аргаяш</span><h2>Запишитесь<br>к специалисту</h2><p>с. Аргаяш, ул. Ленина, 50</p></div><div class="detail-booking__actions"><a class="btn" href="${booking}" target="_blank" rel="noopener">Записаться к врачу <span aria-hidden="true">→</span></a><a class="detail-phone" href="tel:+79617958759">+7 (961) 795-87-59</a>${bookingSchedule}</div></div></section>`;
 })();
