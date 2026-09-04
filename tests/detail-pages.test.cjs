@@ -65,7 +65,7 @@ test('doctor page contains only the supplied professional information', () => {
   assert.match(html, /Кандидат медицинских наук/);
   assert.match(html, /<h1><em>Екатерина Владимировна<\/em><br>Орехова<\/h1>/);
   assert.match(html, /По субботам, по предварительной записи/);
-  assert.doesNotMatch(html, /id="education"|id="doctor-reviews"|id="visit"|Отзывы|На согласовании|data-pending-content/);
+  assert.doesNotMatch(html, /id="visit"|На согласовании|data-pending-content/);
   assert.doesNotMatch(html, /class="detail-jumps"|← Все врачи центра/);
 });
 
@@ -97,7 +97,22 @@ test('new sections include designed components and a refreshed stylesheet URL', 
   const service = fs.readFileSync(path.join(root, pages[1]), 'utf8');
   assert.equal([...service.matchAll(/class="detail-procedure-card"/g)].length, 3);
   const doctor = fs.readFileSync(path.join(root, pages[0]), 'utf8');
-  assert.equal([...doctor.matchAll(/class="detail-timeline-marker"/g)].length, 0);
+  assert.equal([...doctor.matchAll(/class="detail-timeline-marker"/g)].length, 10);
   assert.match(doctor, /detail-schedule-panel/);
   assert.match(service, /class="detail-price-heading"/);
+});
+
+test('Orekhova education, associations, award and review link reflect the supplied archive', () => {
+  const html = fs.readFileSync(path.join(root, pages[0]), 'utf8');
+  for (const id of ['education-doctor', 'training-doctor', 'associations-doctor', 'award-doctor', 'reviews-doctor']) assert.ok(html.includes(`id="${id}"`));
+  for (const year of [1994, 1995, 2006, 2013, 2014, 2016, 2018, 2019, 2020, 2012]) assert.ok(html.includes(`class="detail-timeline-date">${year}</span>`));
+  assert.match(html, /Уральская государственная медицинская академия дополнительного образования/);
+  assert.match(html, /Ассоциация специалистов медицины плода/);
+  assert.match(html, /ISUOG/);
+  assert.match(html, /актуальное членство отдельно не подтверждено/);
+  assert.match(html, /Лучший врач-исследователь/);
+  assert.match(html, /Организация, присудившая награду, в источнике не названа/);
+  assert.match(html, /Рейтинг 4,8 из 5 · 33 отзыва/);
+  assert.match(html, /Показатели приведены по сохранённой версии/);
+  assert.match(html, /href="https:\/\/prodoctorov.ru\/chelyabinsk\/vrach\/122637-orehova\/" target="_blank" rel="noopener"/);
 });
