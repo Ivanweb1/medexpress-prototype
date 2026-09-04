@@ -117,3 +117,12 @@ test('Orekhova education, associations, award and review link reflect the suppli
   assert.doesNotMatch(html, /Показатели приведены по сохранённой версии/);
   assert.match(html, /href="https:\/\/prodoctorov.ru\/chelyabinsk\/vrach\/122637-orehova\/" target="_blank" rel="noopener"/);
 });
+
+test('Orekhova education and training use decorative site-style icons', () => {
+  const html = fs.readFileSync(path.join(root, pages[0]), 'utf8');
+  for (const [id, count] of [['education-doctor', 3], ['training-doctor', 6]]) {
+    const section = html.split(`id="${id}"`)[1].split('</section>')[0];
+    assert.equal([...section.matchAll(/class="detail-block-icon" aria-hidden="true"/g)].length, count);
+    assert.equal([...section.matchAll(/<svg viewBox="0 0 24 24"/g)].length, count);
+  }
+});
