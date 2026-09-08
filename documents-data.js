@@ -42,6 +42,6 @@
     if (intro) intro.textContent = page.intro;
     mount.innerHTML = page.html;
   } else {
-    mount.innerHTML = '<div class="document-placeholder"><h2>Документ готовится к публикации</h2><p>Содержание этого документа пока не было предоставлено медицинским центром. Уточнить информацию можно у администратора.</p></div>';
+    mount.innerHTML = '<div class="document-placeholder"><h2>Информация по запросу</h2><p>Обратитесь к администратору медицинского центра.</p></div>';
   }
 })();
