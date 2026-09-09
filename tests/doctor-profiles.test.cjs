@@ -22,7 +22,7 @@ test('all nine generic profiles contain approved names and services', () => {
   assert.equal(doctors['Елена Федоркина'].schedule, undefined);
 });
 
-test('Myzhevskikh training and external profile use supplied facts and do not alter other profiles', () => {
+test('Myzhevskikh training uses supplied facts and does not alter other profiles', () => {
   const doctor = doctors['Екатерина Мыжевских'];
   assert.equal(doctor.education[0][0], '1997');
   assert.equal(doctor.education[0][1], 'Челябинская государственная медицинская академия');
@@ -35,16 +35,40 @@ test('Myzhevskikh training and external profile use supplied facts and do not al
       document: { querySelector: () => mount, title: '' }, URLSearchParams
     });
     assert.equal(mount.innerHTML.includes('id="doctor-training"'), Boolean(profile.training?.length));
-    assert.equal(mount.innerHTML.includes('id="doctor-external-profile"'), Boolean(profile.prodoctorovUrl));
     if (profile.training) {
       const section = mount.innerHTML.split('id="doctor-training"')[1].split('</section>')[0];
       assert.equal([...section.matchAll(/class="detail-block-icon" aria-hidden="true"/g)].length, profile.training.length);
       for (const row of profile.training) for (const value of row) assert.ok(section.includes(value));
-      if (profile.prodoctorovUrl) assert.ok(mount.innerHTML.includes(`href="${profile.prodoctorovUrl}" target="_blank" rel="noopener"`));
-      if (!profile.prodoctorovReviews) assert.doesNotMatch(mount.innerHTML, /Рейтинг/);
       assert.doesNotMatch(mount.innerHTML, /33 отзыва|ISUOG|Лучший врач-исследователь/);
     }
+    assert.equal(mount.innerHTML.includes('id="doctor-reviews"'), Boolean(profile.reviewsUrl));
+    if (profile.reviewsUrl) {
+      assert.ok(mount.innerHTML.includes(`href="${profile.reviewsUrl}" target="_blank" rel="noopener"`));
+      assert.match(mount.innerHTML, /Читать отзывы на ПроДокторов/);
+    }
+    assert.doesNotMatch(mount.innerHTML, /Рейтинг|doctor-external-profile|Открыть профиль/);
   }
+});
+
+test('Pavlichuk profile shows supplied education and ultrasound training', () => {
+  const doctor = doctors['Ирина Павличук'];
+  assert.deepEqual(Array.from(doctor.education, row => Array.from(row)), [
+    ['1992', 'Челябинский государственный медицинский институт', 'Лечебное дело · базовое образование'],
+    ['1993', 'Акушерство и гинекология', 'Интернатура']
+  ]);
+  assert.deepEqual(Array.from(doctor.training, row => Array.from(row)), [
+    ['2007', 'Ультразвуковая диагностика', 'Профессиональная переподготовка'],
+    ['2025', 'Ультразвуковая диагностика', 'Повышение квалификации']
+  ]);
+
+  const mount = { innerHTML: '' };
+  vm.runInNewContext(profileSource, {
+    window: { ME_DOCTORS: doctors, location: { search: '?name=' + encodeURIComponent('Ирина Павличук') } },
+    document: { querySelector: () => mount, title: '' }, URLSearchParams
+  });
+  assert.match(mount.innerHTML, /<h2>Образование<\/h2>/);
+  assert.match(mount.innerHTML, /id="doctor-training"/);
+  for (const year of ['1992', '1993', '2007', '2025']) assert.match(mount.innerHTML, new RegExp(`>${year}<`));
 });
 
 test('key professional facts are preserved from supplied doctor information', () => {
@@ -86,8 +110,9 @@ test('generic profile renderer shows only supplied doctor information', () => {
     if (doctor.education?.length) assert.match(mount.innerHTML, /<h2>Образование<\/h2>/);
     else assert.doesNotMatch(mount.innerHTML, /<h2>Образование<\/h2>/);
     assert.match(mount.innerHTML, /Услуги врача/);
+    assert.equal(mount.innerHTML.includes('id="doctor-reviews"'), Boolean(doctor.reviewsUrl));
     assert.doesNotMatch(mount.innerHTML, /На согласовании|Информация уточняется|Стаж уточняется|data-pending-content/);
-    assert.doesNotMatch(mount.innerHTML, /undefined|null/);
+    assert.doesNotMatch(mount.innerHTML, /Рейтинг|undefined|null/);
   }
 });
 
@@ -112,38 +137,30 @@ test('generic profile template loads shared design, data and renderer', () => {
   assert.match(html, /\.\.\/doctor-profile.js/);
 });
 
-test('six supplied profiles preserve education, courses, ratings and doctor-specific links', () => {
+test('six supplied profiles preserve education, courses and review links', () => {
   const expected = [
-    ['Мария Маковецкая', 2, 1, null, null, null],
-    ['Ирина Бойко', 2, 3, null, null, null],
-    ['Юлия Пинаева', 2, 1, '4,0', 4, '752854-pinaeva'],
-    ['Елена Федоркина', 4, 4, null, null, null],
-    ['Разина Якупова', 4, 1, null, null, '957163-yakupova'],
-    ['Лилия Назмутдинова', 2, 0, null, null, '1184548-nazmutdinova']
+    ['Мария Маковецкая', 2, 1, null],
+    ['Ирина Бойко', 2, 3, null],
+    ['Юлия Пинаева', 2, 1, '752854-pinaeva'],
+    ['Елена Федоркина', 4, 4, null],
+    ['Разина Якупова', 4, 1, '957163-yakupova'],
+    ['Лилия Назмутдинова', 2, 0, '1184548-nazmutdinova']
   ];
-  for (const [key, educationCount, trainingCount, rating, count, slug] of expected) {
+  for (const [key, educationCount, trainingCount, slug] of expected) {
     const doctor = doctors[key];
     assert.equal(doctor.education.length, educationCount);
     assert.equal(doctor.training?.length || 0, trainingCount);
-    if (slug) assert.ok(doctor.prodoctorovUrl.endsWith(`/${slug}/`));
-    else assert.equal(doctor.prodoctorovUrl, undefined);
+    if (slug) assert.ok(doctor.reviewsUrl.endsWith(`/${slug}/`));
+    else assert.equal(doctor.reviewsUrl, undefined);
     const mount = { innerHTML: '' };
     vm.runInNewContext(profileSource, {
       window: { ME_DOCTORS: doctors, location: { search: '?name=' + encodeURIComponent(key) } },
       document: { querySelector: () => mount, title: '' }, URLSearchParams
     });
     for (const row of doctor.education) for (const value of row) assert.ok(mount.innerHTML.includes(value));
-    if (rating) {
-      assert.equal(doctor.prodoctorovReviews.rating, rating);
-      assert.equal(doctor.prodoctorovReviews.count, count);
-      assert.ok(mount.innerHTML.includes(`Рейтинг ${rating} · ${count}`));
-      assert.match(mount.innerHTML, />Читать отзывы <span/);
-    } else {
-      assert.equal(doctor.prodoctorovReviews, undefined);
-      assert.doesNotMatch(mount.innerHTML, /Рейтинг/);
-      if (slug) assert.match(mount.innerHTML, />Открыть профиль <span/);
-      else assert.doesNotMatch(mount.innerHTML, /doctor-external-profile|ПроДокторов|Читать отзывы|Открыть профиль/);
-    }
+    assert.equal(mount.innerHTML.includes('id="doctor-reviews"'), Boolean(slug));
+    if (slug) assert.match(mount.innerHTML, /Читать отзывы на ПроДокторов/);
+    assert.doesNotMatch(mount.innerHTML, /doctor-external-profile|Рейтинг|Открыть профиль/);
   }
 });
 

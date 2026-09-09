@@ -18,7 +18,7 @@ window.ME_DOCTORS = {
       ['2008', 'ЭХО-КГ', 'Повышение квалификации'],
       ['2009', 'Фиброгастроскопия', 'Повышение квалификации']
     ],
-    prodoctorovUrl: 'https://prodoctorov.ru/chelyabinsk/vrach/122616-myzhevskih/',
+    reviewsUrl: 'https://prodoctorov.ru/chelyabinsk/vrach/122616-myzhevskih/',
     services: [
       'УЗИ органов брюшной полости, почек и забрюшинного пространства',
       'УЗИ молочных желёз и щитовидной железы',
@@ -42,6 +42,14 @@ window.ME_DOCTORS = {
     photo: 'doctor-pavlichuk.png',
     schedule: 'По вторникам и пятницам, по предварительной записи',
     qualifications: ['Высшая квалификационная категория'],
+    education: [
+      ['1992', 'Челябинский государственный медицинский институт', 'Лечебное дело · базовое образование'],
+      ['1993', 'Акушерство и гинекология', 'Интернатура']
+    ],
+    training: [
+      ['2007', 'Ультразвуковая диагностика', 'Профессиональная переподготовка'],
+      ['2025', 'Ультразвуковая диагностика', 'Повышение квалификации']
+    ],
     services: [
       'УЗИ органов брюшной полости, почек и забрюшинного пространства',
       'УЗИ мочевого пузыря',
@@ -87,8 +95,8 @@ window.ME_DOCTORS = {
     specialty: 'Врач-кардиолог высшей категории, врач функциональной диагностики',
     experience: '20 лет',
     photo: 'doctor-yakupova.png',
-    prodoctorovUrl: 'https://prodoctorov.ru/kyshtym/vrach/957163-yakupova/',
     training: [['2020', 'Функциональная диагностика', 'Повышение квалификации']],
+    reviewsUrl: 'https://prodoctorov.ru/kyshtym/vrach/957163-yakupova/',
     schedule: 'Ежедневно, по предварительной записи',
     qualifications: ['Высшая квалификационная категория', 'Врач функциональной диагностики'],
     education: [
@@ -122,12 +130,12 @@ window.ME_DOCTORS = {
     specialty: 'Врач-невролог',
     experience: '6 лет',
     photo: 'doctor-nazmutdinova.png',
-    prodoctorovUrl: 'https://prodoctorov.ru/verhneuralsk/vrach/1184548-nazmutdinova/',
     schedule: 'По субботам, по предварительной записи',
     education: [
       ['2020', 'Южно-Уральский государственный медицинский университет', 'Специальность «Лечебное дело»'],
       ['2022', 'Ординатура', 'Специальность «Неврология»']
     ],
+    reviewsUrl: 'https://prodoctorov.ru/verhneuralsk/vrach/1184548-nazmutdinova/',
     concerns: [
       'Головные боли и головокружение',
       'Потеря сознания',
@@ -176,13 +184,12 @@ window.ME_DOCTORS = {
     specialty: 'Врач-эндокринолог высшей категории',
     experience: '12 лет',
     photo: 'doctor-pinaeva.png',
-    prodoctorovUrl: 'https://prodoctorov.ru/chelyabinsk/vrach/752854-pinaeva/',
-    prodoctorovReviews: { rating: '4,0', count: 4 },
     education: [
       ['2014', 'Южно-Уральский государственный медицинский университет', 'Лечебное дело · базовое образование'],
       ['2015', 'Южно-Уральский государственный медицинский университет', 'Эндокринология · интернатура']
     ],
     training: [['2019', 'Эндокринология', 'Южно-Уральский государственный медицинский университет · повышение квалификации']],
+    reviewsUrl: 'https://prodoctorov.ru/chelyabinsk/vrach/752854-pinaeva/',
     schedule: 'Два раза в месяц, по предварительной записи',
     qualifications: ['Высшая квалификационная категория'],
     workExperience: 'Работает в стационарном отделении областной клинической больницы',

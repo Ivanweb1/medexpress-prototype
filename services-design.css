@@ -136,14 +136,15 @@
 .services-page .service-directory__meta h3{margin-top:8px;font-size:clamp(25px,2.3vw,36px);overflow-wrap:anywhere}
 .service-directory__count{flex:0 0 auto;padding:8px 13px;border-radius:999px;background:var(--pale);color:var(--blue-dark);font-size:12px;font-weight:800}
 .service-directory__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;min-width:0}
-.directory-service{display:flex;flex-direction:column;min-width:0;padding:22px;border:1px solid var(--line);border-radius:20px;background:white;box-shadow:0 12px 34px rgba(5,45,65,.055);animation:directory-in .32s ease both;animation-delay:calc(min(var(--item-order),6) * 30ms)}
+.directory-service{display:flex;flex-direction:column;align-self:start;min-width:0;padding:22px;border:1px solid var(--line);border-radius:20px;background:white;box-shadow:0 12px 34px rgba(5,45,65,.055);animation:directory-in .32s ease both;animation-delay:calc(min(var(--item-order),6) * 30ms)}
 .services-page .directory-service h3{font-size:16px;line-height:1.42;letter-spacing:-.015em;overflow-wrap:anywhere}
 .directory-service__meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:auto;padding-top:22px}
 .directory-service__meta strong{color:var(--blue-dark);font-size:17px}
 .directory-service__meta span{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:13px;white-space:nowrap}
 .directory-service__meta i{position:relative;width:15px;height:15px;border:2px solid #c8d2d7;border-radius:50%}
 .directory-service__meta i:before{content:"";position:absolute;left:5px;top:2px;width:2px;height:5px;background:#c8d2d7;transform-origin:bottom;transform:rotate(-25deg);border-radius:2px}
-.directory-service__details{margin:18px -22px -22px;padding:0 22px;border-top:1px solid var(--line);background:var(--cream);border-radius:0 0 20px 20px}
+.directory-service__information{margin:18px -22px -22px;background:var(--cream);border-radius:0 0 20px 20px;overflow:hidden}
+.directory-service__details{margin:0;padding:0 22px;border-top:1px solid var(--line);background:var(--cream)}
 .directory-service__details summary{position:relative;padding:16px 28px 16px 0;color:var(--blue-dark);font-size:13px;font-weight:800;cursor:pointer;list-style:none}
 .directory-service__details summary::-webkit-details-marker{display:none}
 .directory-service__details summary:after{content:"+";position:absolute;right:0;top:13px;font-size:20px;font-weight:500}
@@ -169,7 +170,8 @@
   .service-directory__count{margin-top:2px}
   .service-directory__list{grid-template-columns:1fr}
   .directory-service{padding:19px}
-  .directory-service__details{margin:16px -19px -19px;padding:0 19px}
+  .directory-service__information{margin:16px -19px -19px}
+  .directory-service__details{padding:0 19px}
 }
 @media(prefers-reduced-motion:reduce){
   .service-directory__categories button{transition:none}

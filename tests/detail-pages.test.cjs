@@ -98,31 +98,36 @@ test('new sections include designed components and a refreshed stylesheet URL', 
   const service = fs.readFileSync(path.join(root, pages[1]), 'utf8');
   assert.equal([...service.matchAll(/class="detail-procedure-card"/g)].length, 0);
   const doctor = fs.readFileSync(path.join(root, pages[0]), 'utf8');
-  assert.equal([...doctor.matchAll(/class="detail-timeline-marker"/g)].length, 10);
+  assert.equal([...doctor.matchAll(/class="detail-timeline-marker"/g)].length, 8);
   assert.match(doctor, /detail-schedule-panel/);
   assert.match(service, /class="detail-price-heading"/);
 });
 
-test('Orekhova education, associations, award and review link use public-facing copy', () => {
+test('Orekhova education, associations and award use public-facing copy', () => {
   const html = fs.readFileSync(path.join(root, pages[0]), 'utf8');
-  for (const id of ['education-doctor', 'training-doctor', 'associations-doctor', 'award-doctor', 'reviews-doctor']) assert.ok(html.includes(`id="${id}"`));
-  for (const year of [1994, 1995, 2006, 2013, 2014, 2016, 2018, 2019, 2020, 2012]) assert.ok(html.includes(`class="detail-timeline-date">${year}</span>`));
+  for (const id of ['education-doctor', 'training-doctor', 'associations-doctor', 'award-doctor']) assert.ok(html.includes(`id="${id}"`));
+  assert.ok(html.includes('id="doctor-reviews"'));
+  for (const year of [1994, 1995, 2006, 2023, 2024, 2025, 2012]) assert.ok(html.includes(`class="detail-timeline-date">${year}</span>`));
+  for (const year of [2013, 2014, 2016, 2018, 2019, 2020]) assert.ok(!html.includes(`class="detail-timeline-date">${year}</span>`));
   assert.match(html, /Уральская государственная медицинская академия дополнительного образования/);
   assert.match(html, /Ассоциация специалистов медицины плода/);
   assert.match(html, /ISUOG/);
   assert.match(html, /Участие в профессиональных медицинских сообществах/);
   assert.doesNotMatch(html, /сохранённой странице|актуальное членство отдельно не подтверждено/);
-  assert.match(html, /Лучший врач-исследователь/);
+  assert.match(html, /Лучший врач года/);
+  assert.match(html, /Победитель в номинации «Лучший врач-исследователь»/);
+  assert.match(html, /Министерство здравоохранения Челябинской области/);
+  assert.match(html, /Отличник здравоохранения/);
   assert.doesNotMatch(html, /указана в профиле|в источнике не названа/);
-  assert.match(html, /Рейтинг 4,8 · 33 отзыва на ПроДокторов\./);
-  assert.match(html, />Читать отзывы <span/);
-  assert.doesNotMatch(html, /Показатели приведены по сохранённой версии/);
+  assert.match(html, /Читать отзывы на ПроДокторов/);
   assert.match(html, /href="https:\/\/prodoctorov.ru\/chelyabinsk\/vrach\/122637-orehova\/" target="_blank" rel="noopener"/);
+  assert.doesNotMatch(html, /Рейтинг 4,8|Открыть профиль/);
+  assert.doesNotMatch(html, /Показатели приведены по сохранённой версии/);
 });
 
 test('Orekhova education and training use decorative site-style icons', () => {
   const html = fs.readFileSync(path.join(root, pages[0]), 'utf8');
-  for (const [id, count] of [['education-doctor', 3], ['training-doctor', 6]]) {
+  for (const [id, count] of [['education-doctor', 3], ['training-doctor', 3]]) {
     const section = html.split(`id="${id}"`)[1].split('</section>')[0];
     assert.equal([...section.matchAll(/class="detail-block-icon" aria-hidden="true"/g)].length, count);
     assert.equal([...section.matchAll(/<svg viewBox="0 0 24 24"/g)].length, count);

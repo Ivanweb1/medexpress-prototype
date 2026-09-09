@@ -6,18 +6,44 @@ const vm = require('node:vm');
 
 const root = path.join(__dirname, '..');
 const source = fs.readFileSync(path.join(root, 'services-catalog-data.js'), 'utf8');
+const guidesSource = fs.readFileSync(path.join(root, 'ultrasound-guides-data.js'), 'utf8');
 const context = { window: {} };
+vm.runInNewContext(guidesSource, context);
 vm.runInNewContext(source, context);
 vm.runInNewContext(fs.readFileSync(path.join(root, 'citilab-catalog-data.js'), 'utf8'), context);
 const catalog = context.window.ME_SERVICE_CATALOG;
 
-test('full service directory has ten supplied categories', () => {
-  assert.equal(catalog.length, 10);
+test('full service directory separates consultations, gynecology and functional diagnostics', () => {
+  assert.equal(catalog.length, 12);
   assert.deepEqual(
     Array.from(catalog, category => category.title),
-    ['Медицинские анализы', 'Консультации врачей', 'УЗИ сердца, сосудов, суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника']
+    ['Медицинские анализы', 'Консультации врачей', 'Гинекологические услуги', 'ЭКГ и суточный мониторинг', 'УЗИ сердца, сосудов, суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника']
   );
   assert.equal(catalog.reduce((total, category) => total + category.items.length, 0), 338);
+});
+
+test('consultations contain only doctor appointments', () => {
+  const consultations = catalog.find(category => category.id === 'consultations');
+  const gynecology = catalog.find(category => category.id === 'gynecology-services');
+  const diagnostics = catalog.find(category => category.id === 'functional-diagnostics');
+  assert.equal(consultations.items.length, 11);
+  assert.ok(consultations.items.every(service => /Приём|консультация/i.test(service.name)));
+  assert.equal(gynecology.items.length, 13);
+  assert.match(gynecology.items.map(service => service.name).join(' '), /Кольпоскопия.*ВМС/);
+  assert.equal(diagnostics.items.length, 4);
+  assert.ok(diagnostics.items.every(service => /ЭКГ/i.test(service.name)));
+});
+
+test('ultrasound services include preparation and procedure guides from the supplied document', () => {
+  const guides = context.window.ME_ULTRASOUND_GUIDES;
+  assert.equal(Object.keys(guides).length, 30);
+  for (const guide of Object.values(guides)) {
+    assert.ok(guide.preparation.length > 0, guide.title);
+    assert.ok(guide.procedure.length > 0, guide.title);
+  }
+  const guidedServices = catalog.flatMap(category => category.items).filter(service => service.preparation && service.procedure);
+  assert.equal(guidedServices.length, 31);
+  assert.ok(guidedServices.every(service => service.preparation.length && service.procedure.length));
 });
 
 test('every service has a valid title, price and applicable timing', () => {
@@ -58,6 +84,7 @@ test('category page loads shared data and renders one selected direction', () =>
   assert.match(html, /data-category-items/);
   assert.match(html, /data-category-title/);
   assert.match(html, /services-catalog-data\.js/);
+  assert.match(html, /ultrasound-guides-data\.js/);
   assert.match(html, /category\.js/);
   assert.doesNotMatch(html, /data-service-categories|role="tablist"/);
 });

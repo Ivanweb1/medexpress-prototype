@@ -6,11 +6,11 @@ const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'services.html'), 'utf8');
 const cards = [...html.matchAll(/<article\b[^>]*data-service-card[^>]*>([\s\S]*?)<\/article>/g)].map(match => match[1]);
 
-test('catalog presents ten directions as navigation cards', () => {
-  assert.equal(cards.length, 10);
-  const names = ['Медицинские анализы', 'Консультации врачей', 'УЗИ сердца, сосудов и суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника'];
+test('catalog presents twelve directions as navigation cards', () => {
+  assert.equal(cards.length, 12);
+  const names = ['Медицинские анализы', 'Консультации врачей', 'Гинекологические услуги', 'ЭКГ и суточный мониторинг', 'УЗИ сердца, сосудов и суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника'];
   assert.deepEqual(cards.map(card => card.match(/<h3>(.*?)<\/h3>/)[1]), names);
-  assert.equal(cards.filter(card => /class="service-hub-card__icon"/.test(card)).length, 10);
+  assert.equal(cards.filter(card => /class="service-hub-card__icon"/.test(card)).length, 12);
 });
 
 test('each direction card opens a detail page without repeated booking buttons', () => {
@@ -18,7 +18,7 @@ test('each direction card opens a detail page without repeated booking buttons',
     assert.match(card, /<a href="services\/[^"]+">/);
     assert.doesNotMatch(card, /Записаться/);
   }
-  assert.equal([...html.matchAll(/href="services\/category\.html\?category=/g)].length, 10);
+  assert.equal([...html.matchAll(/href="services\/category\.html\?category=/g)].length, 12);
   assert.equal([...html.matchAll(/class="floating-record"/g)].length, 1);
 });
 
@@ -49,4 +49,11 @@ test('page has shared branding, active navigation, and no prototype placeholders
   for (const [, attributes] of html.matchAll(/<a\b([^>]*target="_blank"[^>]*)>/g)) {
     assert.match(attributes, /rel="[^"]*noopener/);
   }
+});
+
+test('category renderer provides preparation and procedure disclosures', () => {
+  const renderer = fs.readFileSync(path.join(root, 'services', 'category.js'), 'utf8');
+  assert.match(renderer, /\['Подготовка', service\.preparation\]/);
+  assert.match(renderer, /\['Как проходит исследование', service\.procedure\]/);
+  assert.match(renderer, /directory-service__information/);
 });

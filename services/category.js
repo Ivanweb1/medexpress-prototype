@@ -5,7 +5,9 @@
 
   const descriptions = {
     'medical-analyses': 'Лабораторные исследования СИТИЛАБ и комплексные профили: найдите нужный анализ по названию, коду или разделу.',
-    consultations: 'Приёмы специалистов и диагностические процедуры врачебного профиля.',
+    consultations: 'Первичные и повторные приёмы специалистов медицинского центра.',
+    'gynecology-services': 'Диагностические и лечебные услуги по направлению гинекологии.',
+    'functional-diagnostics': 'ЭКГ, холтеровское мониторирование и мониторирование артериального давления.',
     'heart-vessels-joints': 'Ультразвуковая диагностика сердца, сосудов и суставов для взрослых.',
     'general-ultrasound': 'Исследования внутренних органов и мягких тканей.',
     'women-ultrasound': 'Ультразвуковые исследования женского здоровья.',
@@ -54,19 +56,29 @@
       note.textContent = service.priceNote;
       article.append(note);
     }
-    if (service.details) {
-      const details = document.createElement('details');
-      details.className = 'directory-service__details';
-      const summary = document.createElement('summary');
-      summary.textContent = service.name.includes('ЭХОКГ') || service.name.includes('Трансвагинальное') ? 'Как подготовиться' : category.id === 'medical-analyses' ? 'Подробнее об исследовании' : 'Что входит';
-      const body = document.createElement('div');
-      service.details.forEach(text => {
-        const paragraph = document.createElement('p');
-        paragraph.textContent = text;
-        body.append(paragraph);
+    const disclosures = [
+      ...(service.preparation?.length ? [['Подготовка', service.preparation]] : []),
+      ...(service.procedure?.length ? [['Как проходит исследование', service.procedure]] : []),
+      ...(service.details?.length ? [[category.id === 'medical-analyses' ? 'Подробнее об исследовании' : 'Дополнительная информация', service.details]] : [])
+    ];
+    if (disclosures.length) {
+      const information = document.createElement('div');
+      information.className = 'directory-service__information';
+      disclosures.forEach(([label, paragraphs]) => {
+        const details = document.createElement('details');
+        details.className = 'directory-service__details';
+        const summary = document.createElement('summary');
+        summary.textContent = label;
+        const body = document.createElement('div');
+        paragraphs.forEach(text => {
+          const paragraph = document.createElement('p');
+          paragraph.textContent = text;
+          body.append(paragraph);
+        });
+        details.append(summary, body);
+        information.append(details);
       });
-      details.append(summary, body);
-      article.append(details);
+      article.append(information);
     }
     return article;
   }));
