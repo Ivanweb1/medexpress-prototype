@@ -57,3 +57,10 @@ test('category renderer provides preparation and procedure disclosures', () => {
   assert.match(renderer, /\['Как проходит исследование', service\.procedure\]/);
   assert.match(renderer, /directory-service__information/);
 });
+
+test('homepage consultation and massage links open populated catalog categories', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  assert.equal([...html.matchAll(/href="services\/category\.html\?category=consultations"/g)].length, 2);
+  assert.equal([...html.matchAll(/href="services\/category\.html\?category=spine-massage"/g)].length, 2);
+  assert.doesNotMatch(html, /services\/service\.html\?name=Консультации/);
+});

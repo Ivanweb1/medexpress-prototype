@@ -98,7 +98,7 @@ test('new sections include designed components and a refreshed stylesheet URL', 
   const service = fs.readFileSync(path.join(root, pages[1]), 'utf8');
   assert.equal([...service.matchAll(/class="detail-procedure-card"/g)].length, 0);
   const doctor = fs.readFileSync(path.join(root, pages[0]), 'utf8');
-  assert.equal([...doctor.matchAll(/class="detail-timeline-marker"/g)].length, 8);
+  assert.equal([...doctor.matchAll(/class="detail-timeline-marker"/g)].length, 9);
   assert.match(doctor, /detail-schedule-panel/);
   assert.match(service, /class="detail-price-heading"/);
 });
@@ -107,9 +107,11 @@ test('Orekhova education, associations and award use public-facing copy', () => 
   const html = fs.readFileSync(path.join(root, pages[0]), 'utf8');
   for (const id of ['education-doctor', 'training-doctor', 'associations-doctor', 'award-doctor']) assert.ok(html.includes(`id="${id}"`));
   assert.ok(html.includes('id="doctor-reviews"'));
-  for (const year of [1994, 1995, 2006, 2023, 2024, 2025, 2012]) assert.ok(html.includes(`class="detail-timeline-date">${year}</span>`));
+  for (const year of [1992, 1993, 2007, 2023, 2024, 2025, 2012]) assert.ok(html.includes(`class="detail-timeline-date">${year}</span>`));
+  for (const year of [1994, 1995, 2006]) assert.ok(!html.includes(`class="detail-timeline-date">${year}</span>`));
   for (const year of [2013, 2014, 2016, 2018, 2019, 2020]) assert.ok(!html.includes(`class="detail-timeline-date">${year}</span>`));
-  assert.match(html, /Уральская государственная медицинская академия дополнительного образования/);
+  assert.match(html, /Челябинский государственный медицинский институт/);
+  assert.equal([...html.matchAll(/<span class="detail-timeline-date">2025<\/span>[\s\S]*?<h3>Ультразвуковая диагностика<\/h3>/g)].length, 1);
   assert.match(html, /Ассоциация специалистов медицины плода/);
   assert.match(html, /ISUOG/);
   assert.match(html, /Участие в профессиональных медицинских сообществах/);
@@ -127,7 +129,7 @@ test('Orekhova education, associations and award use public-facing copy', () => 
 
 test('Orekhova education and training use decorative site-style icons', () => {
   const html = fs.readFileSync(path.join(root, pages[0]), 'utf8');
-  for (const [id, count] of [['education-doctor', 3], ['training-doctor', 3]]) {
+  for (const [id, count] of [['education-doctor', 3], ['training-doctor', 4]]) {
     const section = html.split(`id="${id}"`)[1].split('</section>')[0];
     assert.equal([...section.matchAll(/class="detail-block-icon" aria-hidden="true"/g)].length, count);
     assert.equal([...section.matchAll(/<svg viewBox="0 0 24 24"/g)].length, count);
