@@ -140,6 +140,8 @@
 .services-page .directory-service h3{font-size:16px;line-height:1.42;letter-spacing:-.015em;overflow-wrap:anywhere}
 .directory-service__meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:auto;padding-top:22px}
 .directory-service__meta strong{color:var(--blue-dark);font-size:17px}
+.directory-service__price{display:flex;align-items:center;flex-wrap:wrap;gap:8px 11px}
+.directory-service__price small{display:inline-flex;padding:5px 9px;border-radius:999px;background:#e8f7ef;color:#21704b;font-size:11px;font-weight:800;line-height:1.2}
 .directory-service__meta span{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:13px;white-space:nowrap}
 .directory-service__meta i{position:relative;width:15px;height:15px;border:2px solid #c8d2d7;border-radius:50%}
 .directory-service__meta i:before{content:"";position:absolute;left:5px;top:2px;width:2px;height:5px;background:#c8d2d7;transform-origin:bottom;transform:rotate(-25deg);border-radius:2px}

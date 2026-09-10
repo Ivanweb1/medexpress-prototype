@@ -28,6 +28,7 @@ test('consultations contain only doctor appointments', () => {
   const diagnostics = catalog.find(category => category.id === 'functional-diagnostics');
   assert.equal(consultations.items.length, 11);
   assert.ok(consultations.items.every(service => /Приём|консультация/i.test(service.name)));
+  assert.ok(consultations.items.every(service => !service.details?.length));
   assert.equal(gynecology.items.length, 13);
   assert.match(gynecology.items.map(service => service.name).join(' '), /Кольпоскопия.*ВМС/);
   assert.equal(diagnostics.items.length, 4);
@@ -68,6 +69,19 @@ test('laboratory profiles use the approved higher prices and only complete codes
   assert.equal(prices['PROздоровье: Максимум'], 5035);
   assert.equal(prices['Энергия и иммунитет: углублённый скрининг в крови'], 5125);
   assert.equal(analyses.items.find(service => service.name.includes('Оптимум')).code, null);
+});
+
+test('four highlighted laboratory profiles show full composition, purpose and savings', () => {
+  const analyses = catalog.find(category => category.id === 'medical-analyses');
+  const profiles = Object.fromEntries(Array.from(analyses.items.filter(service => /^99-00-73[1-4]$/.test(service.code)), service => [service.code, service]));
+  assert.deepEqual(Object.keys(profiles).sort(), ['99-00-731', '99-00-732', '99-00-733', '99-00-734']);
+  assert.deepEqual([profiles['99-00-733'].details.length - 2, profiles['99-00-734'].details.length - 2, profiles['99-00-732'].details.length - 2, profiles['99-00-731'].details.length - 2], [5, 16, 19, 13]);
+  assert.deepEqual([profiles['99-00-733'].saving, profiles['99-00-734'].saving, profiles['99-00-732'].saving], ['Экономия 270 ₽', 'Экономия 330 ₽', 'Экономия 455 ₽']);
+  assert.equal(profiles['99-00-731'].saving, 'Выгоднее, чем по отдельности');
+  for (const profile of Object.values(profiles)) {
+    assert.match(profile.details[0], /оцен|комплекс|здоров|усталост/i);
+    assert.match(profile.details[1], /В состав входят/);
+  }
 });
 
 test('catalog keeps neutral massage wording and preparation notes', () => {

@@ -56,6 +56,8 @@ test('category renderer provides preparation and procedure disclosures', () => {
   assert.match(renderer, /\['Подготовка', service\.preparation\]/);
   assert.match(renderer, /\['Как проходит исследование', service\.procedure\]/);
   assert.match(renderer, /directory-service__information/);
+  assert.match(renderer, /directory-service__price/);
+  assert.match(renderer, /service\.saving/);
 });
 
 test('homepage consultation and massage links open populated catalog categories', () => {

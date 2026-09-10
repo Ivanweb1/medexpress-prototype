@@ -48,7 +48,7 @@
     const meta = document.createElement('div');
     meta.className = 'directory-service__meta';
     const timing = service.term || (service.duration ? `${service.duration} мин.` : '');
-    meta.innerHTML = `<strong>${rubles(service.price)}</strong>${timing ? `<span><i aria-hidden="true"></i>${timing}</span>` : ''}`;
+    meta.innerHTML = `<div class="directory-service__price"><strong>${rubles(service.price)}</strong>${service.saving ? `<small>${service.saving}</small>` : ''}</div>${timing ? `<span><i aria-hidden="true"></i>${timing}</span>` : ''}`;
     article.append(heading, meta);
     if (service.priceNote) {
       const note = document.createElement('p');
