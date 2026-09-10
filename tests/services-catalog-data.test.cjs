@@ -76,8 +76,8 @@ test('four highlighted laboratory profiles show full composition, purpose and sa
   const profiles = Object.fromEntries(Array.from(analyses.items.filter(service => /^99-00-73[1-4]$/.test(service.code)), service => [service.code, service]));
   assert.deepEqual(Object.keys(profiles).sort(), ['99-00-731', '99-00-732', '99-00-733', '99-00-734']);
   assert.deepEqual([profiles['99-00-733'].details.length - 2, profiles['99-00-734'].details.length - 2, profiles['99-00-732'].details.length - 2, profiles['99-00-731'].details.length - 2], [5, 16, 19, 13]);
-  assert.deepEqual([profiles['99-00-733'].saving, profiles['99-00-734'].saving, profiles['99-00-732'].saving], ['Экономия 270 ₽', 'Экономия 330 ₽', 'Экономия 455 ₽']);
-  assert.equal(profiles['99-00-731'].saving, 'Выгоднее, чем по отдельности');
+  assert.deepEqual([profiles['99-00-733'].saving, profiles['99-00-734'].saving, profiles['99-00-732'].saving, profiles['99-00-731'].saving], ['Экономия 270 ₽', 'Экономия 330 ₽', 'Экономия 455 ₽', 'Экономия 510 ₽']);
+  assert.equal(analyses.items.find(service => service.name === 'Отличное самочувствие').saving, 'Экономия 695 ₽');
   for (const profile of Object.values(profiles)) {
     assert.match(profile.details[0], /оцен|комплекс|здоров|усталост/i);
     assert.match(profile.details[1], /В состав входят/);
