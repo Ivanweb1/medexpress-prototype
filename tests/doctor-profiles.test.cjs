@@ -26,7 +26,8 @@ test('Myzhevskikh training uses supplied facts and does not alter other profiles
   const doctor = doctors['Екатерина Мыжевских'];
   assert.equal(doctor.education[0][0], '1997');
   assert.equal(doctor.education[0][1], 'Челябинская государственная медицинская академия');
-  assert.deepEqual(Array.from(doctor.training, row => row[0]), ['1999', '2005', '2008', '2008', '2009']);
+  assert.deepEqual(Array.from(doctor.training, row => row[0]), ['1999', '2005', '2008', '2008', '2009', '2024']);
+  assert.deepEqual(Array.from(doctor.training.at(-1)), ['2024', 'Ультразвуковая диагностика', 'Повышение квалификации']);
   assert.doesNotMatch(doctor.services.join(' '), /Озонотерапия|Фиброгастроскопия/);
   for (const [key, profile] of Object.entries(doctors)) {
     const mount = { innerHTML: '' };
