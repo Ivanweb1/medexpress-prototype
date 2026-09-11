@@ -9,7 +9,7 @@ test('homepage alone uses the light sea-blue theme', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
   assert.match(html, /<body class="home-page">/);
-  assert.match(html, /home-design\.css\?v=20260911-home-light/);
+  assert.match(html, /home-design\.css\?v=20260911-home-light-headings-sample/);
   for (const selector of [
     '.home-page .header-note',
     '.home-page .featured-service--massage .featured-service__visual',
@@ -18,6 +18,8 @@ test('homepage alone uses the light sea-blue theme', () => {
     '.home-page .site-footer'
   ]) assert.ok(css.includes(selector), selector);
   assert.match(css, /--home-sea:#dff3f7/);
+  assert.match(css, /--home-heading-soft:#2f6f80/);
+  assert.match(css, /\.home-page #services \.section-title h2,\.home-page \.doctors-section \.section-title h2\{color:var\(--home-heading-soft\)\}/);
   assert.match(css, /\.home-page \.diagnostic-section\{background:linear-gradient/);
   assert.match(css, /\.home-page \.site-footer\{background:linear-gradient/);
 });
