@@ -18,6 +18,37 @@ if ((headerMount || footerMount) && !document.querySelector('.floating-record'))
   document.body.insertAdjacentHTML('beforeend', `<a class="floating-record" href="${recordUrl}" target="_blank" rel="noopener"><span>Записаться</span><b aria-hidden="true">→</b></a>`);
 }
 
+const preserveBrandNameCase = () => {
+  const brandName = 'Мед-ЭКСПРЕСС';
+  const alternateBrandName = 'Мед‑ЭКСПРЕСС';
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  let node;
+
+  while ((node = walker.nextNode())) {
+    const parent = node.parentElement;
+    if ((node.nodeValue.includes(brandName) || node.nodeValue.includes(alternateBrandName)) && parent && !parent.closest('script, style, textarea, .brand-name')) textNodes.push(node);
+  }
+
+  textNodes.forEach((textNode) => {
+    const fragment = document.createDocumentFragment();
+    const normalizedText = textNode.nodeValue.replaceAll(alternateBrandName, brandName);
+    normalizedText.split(brandName).forEach((part, index) => {
+      if (index) {
+        const mark = document.createElement('span');
+        mark.className = 'brand-name';
+        mark.style.textTransform = 'none';
+        mark.textContent = brandName;
+        fragment.append(mark);
+      }
+      if (part) fragment.append(document.createTextNode(part));
+    });
+    textNode.replaceWith(fragment);
+  });
+};
+
+preserveBrandNameCase();
+
 const menuButton = document.querySelector('.menu-button');
 const navigation = document.querySelector('.navigation');
 

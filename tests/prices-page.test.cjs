@@ -47,12 +47,15 @@ test('every page uses either the current header and footer or the shared current
     const renderedChrome = html.includes('data-site-header') && html.includes('data-site-footer') && html.includes('home-design.css');
     assert.ok(staticChrome || renderedChrome, file);
     assert.match(html, /home-design\.css\?v=202609(?:01-floating-record-fix|11-location-note)/, file);
+    assert.match(html, /script\.js\?v=20260911-brand-name-case/, file);
     assert.doesNotMatch(html, /index\.html#prices|href="#prices"/);
   }
   const source = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
   assert.match(source, /class="site-header"/);
   assert.match(source, /class="site-footer"/);
   assert.match(source, /prices\.html/);
+  assert.match(source, /preserveBrandNameCase/);
+  assert.match(source, /mark\.style\.textTransform = 'none'/);
   assert.doesNotMatch(source, /class="header"|class="footer"|index\.html#prices/);
 });
 
