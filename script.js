@@ -83,7 +83,7 @@ const styleCitilabName = () => {
         mark.className = 'citilab-wordmark';
         mark.setAttribute('role', 'img');
         mark.setAttribute('aria-label', 'СИТИЛАБ');
-        mark.innerHTML = '<span class="citilab-wordmark__city" aria-hidden="true">СИТИ</span><span class="citilab-wordmark__lab" aria-hidden="true">лаб</span>';
+        mark.innerHTML = '<span class="citilab-wordmark__city" aria-hidden="true">СИТИ</span><span class="citilab-wordmark__lab" aria-hidden="true">ЛАБ</span>';
         fragment.append(mark);
       } else if (part) {
         fragment.append(document.createTextNode(part));

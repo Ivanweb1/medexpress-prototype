@@ -37,7 +37,8 @@ test('visible CITILAB mentions use the shared two-colour wordmark', () => {
   const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
   assert.match(source, /const styleCitilabName/);
   assert.match(source, /citilab-wordmark__city[^>]*>СИТИ/);
-  assert.match(source, /citilab-wordmark__lab[^>]*>лаб/);
+  assert.match(source, /citilab-wordmark__lab[^>]*>ЛАБ/);
+  assert.doesNotMatch(source, /citilab-wordmark__lab[^>]*>лаб/);
   assert.match(source, /mark\.setAttribute\('role', 'img'\)/);
   assert.match(source, /mark\.setAttribute\('aria-label', 'СИТИЛАБ'\)/);
   assert.match(css, /\.citilab-wordmark__city\{color:#00a7d6\}/);
@@ -45,6 +46,6 @@ test('visible CITILAB mentions use the shared two-colour wordmark', () => {
   for (const file of ['index.html', 'about.html', 'services.html', 'prices.html', 'services/category.html']) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
     assert.match(html, /home-design\.css\?v=20260911-footer-navigation/, file);
-    assert.match(html, /script\.js\?v=20260911-footer-navigation/, file);
+    assert.match(html, /script\.js\?v=20260911-citilab-uppercase/, file);
   }
 });
