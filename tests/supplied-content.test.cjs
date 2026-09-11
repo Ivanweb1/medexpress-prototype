@@ -15,6 +15,10 @@ test('massage page contains the supplied programmes, apparatus description and c
   assert.doesNotMatch(html, /Серагем|Ceragem/i);
   assert.doesNotMatch(html, /\+79000930686|\+7 \(900\) 093-06-86/);
   assert.equal([...html.matchAll(/tel:\+79617958759/g)].length, 5);
+  assert.equal([...html.matchAll(/class="directory-service"/g)].length, 6);
+  assert.equal([...html.matchAll(/<summary>Дополнительная информация<\/summary>/g)].length, 6);
+  assert.match(html, /class="service-directory__list massage-tariff-list"/);
+  assert.doesNotMatch(html, /class="massage-course-grid"/);
 });
 
 test('document pages publish the current licence and supplied requisites', () => {
