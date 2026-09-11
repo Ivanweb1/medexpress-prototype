@@ -10,23 +10,39 @@ document.querySelectorAll('[data-clinic-gallery]').forEach((gallery) => {
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const limit = () => Math.max(0, track.scrollWidth - track.clientWidth);
-  const stride = () => slides[0].getBoundingClientRect().width
-    + (Number.parseFloat(getComputedStyle(track).gap) || 0);
+  const metrics = () => {
+    const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
+    let cursor = 0;
+    return slides.map((slide) => {
+      const width = slide.getBoundingClientRect().width;
+      const metric = { left: cursor, right: cursor + width };
+      cursor += width + gap;
+      return metric;
+    });
+  };
   const update = () => {
     const position = Math.max(0, Math.min(track.scrollLeft, limit()));
-    const step = stride();
-    if (!step) return;
-    const first = Math.min(slides.length, Math.round(position / step) + 1);
-    const visible = Math.max(1, Math.round(track.clientWidth / step));
-    const last = Math.min(slides.length, first + visible - 1);
+    const slideMetrics = metrics();
+    const firstIndex = Math.max(0, slideMetrics.findIndex((metric) => metric.right > position + 2));
+    let lastIndex = firstIndex;
+    const viewportEnd = position + track.clientWidth - 2;
+    while (lastIndex + 1 < slideMetrics.length && slideMetrics[lastIndex + 1].left < viewportEnd) lastIndex += 1;
+    const first = firstIndex + 1;
+    const last = lastIndex + 1;
     const label = (last > first ? first + '–' + last : first) + ' / ' + slides.length;
     previous.disabled = position <= 2;
     next.disabled = position >= limit() - 2;
     if (counter.textContent !== label) counter.textContent = label;
   };
   const move = (direction) => {
+    const position = Math.max(0, Math.min(track.scrollLeft, limit()));
+    const slideMetrics = metrics();
+    const targetIndex = direction > 0
+      ? slideMetrics.findIndex((metric) => metric.left > position + 2)
+      : slideMetrics.reduce((result, metric, index) => metric.left < position - 2 ? index : result, 0);
+    const target = targetIndex < 0 ? limit() : slideMetrics[targetIndex].left;
     track.scrollTo({
-      left: Math.max(0, Math.min(limit(), track.scrollLeft + stride() * direction)),
+      left: Math.max(0, Math.min(limit(), target)),
       behavior: reducedMotion.matches ? 'auto' : 'smooth',
     });
   };

@@ -90,8 +90,9 @@ test('all local about-page resources and page links exist', () => {
     assert.ok(fs.existsSync(path.join(root, file)), file);
   }
   assert.equal((html.match(/data-gallery-slide/g) || []).length, 17);
-  assert.equal((html.match(/clinic-gallery-slide--landscape/g) || []).length, 9);
-  assert.equal((html.match(/clinic-gallery-slide--portrait/g) || []).length, 5);
+  const galleryClasses = [...html.matchAll(/<figure class="([^"]+)"[^>]*data-gallery-slide/g)].map(match => match[1].split(/\s+/));
+  assert.equal(galleryClasses.filter(classes => classes.includes('clinic-gallery-slide--landscape')).length, 9);
+  assert.equal(galleryClasses.filter(classes => classes.includes('clinic-gallery-slide--portrait')).length, 5);
   for (const image of [
     'center-procedure-room-wide.jpg', 'center-reception-wide.jpg', 'center-procedure-door-portrait.jpg',
     'center-child-area-wide.jpg', 'center-changing-area-portrait.jpg', 'center-gynecology-room-wide.jpg',
@@ -119,13 +120,15 @@ test('intro gallery uses the three supplied photos and advances every three seco
   assert.match(css, /\.clinic-intro__photo img\.is-active\{opacity:1/);
 });
 
-test('room photos share one visible height regardless of source orientation', () => {
+test('room photos share one visible height and preserve their natural orientation', () => {
   const root = path.join(__dirname, '..');
   const html = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'about-design.css'), 'utf8');
-  assert.match(html, /about-design\.css\?v=20260911-equal-gallery-height/);
-  assert.match(css, /\.clinic-media-slider--rooms \.clinic-gallery-track img\{aspect-ratio:3\/2;object-fit:cover;object-position:center\}/);
-  assert.doesNotMatch(css, /\.clinic-media-slider--rooms \.clinic-gallery-track img\{aspect-ratio:auto;object-fit:contain\}/);
+  assert.match(html, /about-design\.css\?v=20260911-natural-gallery-ratios/);
+  assert.match(css, /\.clinic-media-slider--rooms \.clinic-gallery-slide--landscape\{flex-basis:clamp\(345px,46\.5vw,630px\)\}/);
+  assert.match(css, /\.clinic-media-slider--rooms \.clinic-gallery-slide--portrait\{flex-basis:clamp\(173px,23\.25vw,315px\)\}/);
+  assert.match(css, /\.clinic-media-slider--rooms \.clinic-gallery-track img\{width:100%;height:clamp\(230px,31vw,420px\);aspect-ratio:auto;object-fit:contain/);
+  assert.doesNotMatch(css, /\.clinic-media-slider--rooms \.clinic-gallery-track img\{[^}]*object-fit:cover/);
 });
 
 test('room gallery uses the corrected captions', () => {
