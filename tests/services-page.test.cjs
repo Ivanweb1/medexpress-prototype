@@ -18,7 +18,8 @@ test('each direction card opens a detail page without repeated booking buttons',
     assert.match(card, /<a href="services\/[^"]+">/);
     assert.doesNotMatch(card, /Записаться/);
   }
-  assert.equal([...html.matchAll(/href="services\/category\.html\?category=/g)].length, 12);
+  assert.equal([...html.matchAll(/href="services\/category\.html\?category=/g)].length, 11);
+  assert.match(html, /href="services\/spine-massage\.html"/);
   assert.equal([...html.matchAll(/class="floating-record"/g)].length, 1);
 });
 
@@ -54,6 +55,8 @@ test('page has shared branding, active navigation, and no prototype placeholders
 
 test('category renderer provides preparation and procedure disclosures', () => {
   const renderer = fs.readFileSync(path.join(root, 'services', 'category.js'), 'utf8');
+  assert.match(renderer, /requestedCategory === 'spine-massage'/);
+  assert.match(renderer, /location\.replace\('spine-massage\.html'\)/);
   assert.match(renderer, /\['Подготовка', service\.preparation\]/);
   assert.match(renderer, /\['Как проходит исследование', service\.procedure\]/);
   assert.match(renderer, /directory-service__information/);
@@ -61,9 +64,10 @@ test('category renderer provides preparation and procedure disclosures', () => {
   assert.match(renderer, /service\.saving/);
 });
 
-test('homepage consultation and massage links open populated catalog categories', () => {
+test('homepage consultation links open the catalog and massage links open the full page', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   assert.equal([...html.matchAll(/href="services\/category\.html\?category=consultations"/g)].length, 2);
-  assert.equal([...html.matchAll(/href="services\/category\.html\?category=spine-massage"/g)].length, 2);
+  assert.equal([...html.matchAll(/href="services\/spine-massage\.html"/g)].length, 2);
+  assert.doesNotMatch(html, /services\/category\.html\?category=spine-massage/);
   assert.doesNotMatch(html, /services\/service\.html\?name=Консультации/);
 });

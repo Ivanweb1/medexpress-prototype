@@ -1,4 +1,10 @@
 (function () {
+  const requestedCategory = new URLSearchParams(location.search).get('category');
+  if (requestedCategory === 'spine-massage') {
+    location.replace('spine-massage.html');
+    return;
+  }
+
   const catalog = window.ME_SERVICE_CATALOG;
   const list = document.querySelector('[data-category-items]');
   if (!Array.isArray(catalog) || !list) return;
@@ -17,7 +23,7 @@
     'children-ultrasound': 'Ультразвуковые исследования для детей.',
     'spine-massage': 'Программы аппаратного физиотерапевтического массажа позвоночника.'
   };
-  const id = new URLSearchParams(location.search).get('category');
+  const id = requestedCategory;
   const category = catalog.find(entry => entry.id === id) || catalog[0];
   const isAnalyses = category.id === 'medical-analyses';
   const hidesDuration = ['consultations', 'gynecology-services'].includes(category.id);

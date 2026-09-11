@@ -130,7 +130,9 @@ test('analyses page uses its direct phone instead of online booking', () => {
 test('every catalog category has a card link and category assets resolve', () => {
   const hub = fs.readFileSync(path.join(root, 'services.html'), 'utf8');
   const linkedIds = [...hub.matchAll(/services\/category\.html\?category=([a-z-]+)/g)].map(match => match[1]);
-  assert.deepEqual([...new Set(linkedIds)].sort(), Array.from(catalog, category => category.id).sort());
+  const catalogOnlyIds = Array.from(catalog, category => category.id).filter(id => id !== 'spine-massage');
+  assert.deepEqual([...new Set(linkedIds)].sort(), catalogOnlyIds.sort());
+  assert.match(hub, /href="services\/spine-massage\.html"/);
 
   const file = path.join(root, 'services', 'category.html');
   const html = fs.readFileSync(file, 'utf8');
