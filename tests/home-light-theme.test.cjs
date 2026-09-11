@@ -54,8 +54,10 @@ test('inner pages use the shared light theme and slate heading colour', () => {
 });
 
 test('visible CITILAB mentions use the shared two-colour wordmark', () => {
+  const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const source = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
+  assert.match(homepage, /class="hero-facts"[\s\S]*citilab-wordmark__city[^>]*>СИТИ<\/span><span class="citilab-wordmark__lab"[^>]*>ЛАБ<\/span>/);
   assert.match(source, /const styleCitilabName/);
   assert.match(source, /citilab-wordmark__city[^>]*>СИТИ/);
   assert.match(source, /citilab-wordmark__lab[^>]*>ЛАБ/);
