@@ -48,6 +48,7 @@
     floatingRecord.removeAttribute('target');
     floatingRecord.removeAttribute('rel');
     floatingRecord.querySelector('span').textContent = 'Анализы';
+    document.querySelector('[data-analyses-contact]').hidden = false;
   }
 
   const renderServices = services => list.replaceChildren(...services.map((service, index) => {

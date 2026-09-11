@@ -13,7 +13,15 @@
 .category-list-heading p{margin:4px 0 0;color:var(--muted);font-size:13px;line-height:1.65}
 .category-analyses-phone{display:inline-block;margin-top:4px;color:var(--blue-dark);font-size:18px;font-weight:800;white-space:nowrap}
 .category-analyses-phone:hover{text-decoration:underline;text-underline-offset:4px}
-@media(min-width:721px){.category-page--analyses .floating-record{display:none}}
+.analyses-contact-card[hidden]{display:none}
+.analyses-contact-card{position:fixed;z-index:35;top:152px;right:24px;width:min(320px,calc(100vw - 48px));padding:22px 24px;border:1px solid rgba(23,103,132,.2);border-radius:20px;background:rgba(246,249,250,.96);box-shadow:0 18px 48px rgba(5,45,65,.14);backdrop-filter:blur(14px);animation:analyses-card-in .45s cubic-bezier(.2,.7,.2,1) both}
+.analyses-contact-card::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;border-radius:20px 0 0 20px;background:var(--blue)}
+.analyses-contact-card span{display:block;margin-bottom:6px;color:var(--muted);font-size:14px;line-height:1.45}
+.analyses-contact-card a{display:inline-block;color:var(--blue-dark);font-size:22px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+.analyses-contact-card a:hover{text-decoration:underline;text-underline-offset:5px}
+.analyses-contact-card a:focus-visible{outline:3px solid var(--blue-dark);outline-offset:5px;border-radius:4px}
+.category-page--analyses .floating-record{display:none}
+@keyframes analyses-card-in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
 .category-list{align-items:stretch}
 .lab-tools[hidden],[data-lab-empty][hidden]{display:none}
 .lab-tools{margin-bottom:30px;padding:26px;border:1px solid var(--line);border-radius:24px;background:white}
@@ -28,6 +36,7 @@
 .directory-service__price-note{margin:14px 0 0;font-size:15px;line-height:1.5;color:var(--ink)}
 .category-list .directory-service__details>summary{font-size:15px;min-height:44px;display:flex;align-items:center}
 @media(max-width:800px){.lab-tools__fields{grid-template-columns:1fr}.lab-tools{padding:20px}.lab-reset{justify-self:start}}
+@media(max-width:1100px) and (min-width:721px){.analyses-contact-card{top:auto;bottom:24px}}
 .category-list .directory-service{min-height:176px}
 .directory-service__code{display:block;margin-bottom:10px;color:var(--blue-dark);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .category-more{padding:100px 0;background:white}
@@ -52,3 +61,11 @@
   .category-more__links{grid-template-columns:1fr}
   .category-more__links a:nth-child(odd){border-right:0}
 }
+@media(max-width:720px){
+  .category-page--analyses{padding-bottom:112px}
+  .analyses-contact-card{top:auto;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;width:auto;padding:16px 20px;border-radius:17px}
+  .analyses-contact-card::before{border-radius:17px 0 0 17px}
+  .analyses-contact-card span{margin-bottom:2px;font-size:12px}
+  .analyses-contact-card a{font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){.analyses-contact-card{animation:none}}

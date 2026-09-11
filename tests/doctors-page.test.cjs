@@ -71,6 +71,20 @@ test('homepage doctor slider uses every available portrait', () => {
   for (const file of ['doctor-pavlichuk.png', 'doctor-yakupova.png', 'doctor-fedorkina.png', 'doctor-pinaeva.png', 'doctor-boyko.png', 'doctor-makovetskaya.png']) assert.match(home, new RegExp(file));
 });
 
+test('homepage hero uses the supplied clinic photo gallery', () => {
+  const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const script = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
+  assert.match(home, /data-hero-gallery/);
+  assert.equal([...home.matchAll(/data-hero-slide/g)].length, 3);
+  for (const file of ['hero-clinic-consultation.jpg', 'hero-clinic-ultrasound.jpg', 'hero-clinic-team.jpg']) {
+    assert.match(home, new RegExp(file));
+    assert.ok(fs.existsSync(path.join(root, 'assets', file)), file);
+  }
+  assert.equal([...home.matchAll(/data-hero-dots[\s\S]*?<button/g)].length, 1);
+  assert.match(script, /const heroGallery = document\.querySelector\('\[data-hero-gallery\]'\)/);
+  assert.match(script, /setInterval\(\(\) => showHeroSlide\(activeHeroSlide \+ 1\), 3000\)/);
+});
+
 test('each specialty filters cards and updates accessible pressed state and count', () => {
   const { cards, buttons, count } = setup();
   const expected = { all: 10, uzi: 5, gynecology: 2, cardiology: 1, neurology: 1, endocrinology: 1 };

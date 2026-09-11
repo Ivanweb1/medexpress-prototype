@@ -56,7 +56,7 @@ test('cardiology page and doctor profile preserve the supplied cardiology facts'
   for (const value of ['8 700 ₽', '2 400 ₽', 'PROздоровье', 'ЭКГ', 'ЭХОКГ', 'суточный мониторинг ЭКГ', 'консультация кардиолога']) {
     assert.match(html, new RegExp(value));
   }
-  for (const value of ['2005', '2006', '2013', '2017', '20 лет', 'Ежедневно, по предварительной записи']) {
+  for (const value of ['2005', '2006', '2013', '2017', '20 лет', 'По понедельникам и четвергам, по предварительной записи']) {
     assert.match(data, new RegExp(value));
   }
 });

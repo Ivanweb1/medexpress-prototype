@@ -19,7 +19,7 @@ test('all nine generic profiles contain approved names and services', () => {
     assert.ok(doctor.bookingName);
     assert.ok(doctor.services.length);
   }
-  assert.equal(doctors['Разина Якупова'].schedule, 'Ежедневно, по предварительной записи');
+  assert.equal(doctors['Разина Якупова'].schedule, 'По понедельникам и четвергам, по предварительной записи');
   assert.equal(doctors['Елена Федоркина'].schedule, undefined);
 });
 
@@ -114,6 +114,10 @@ test('key professional facts are preserved from supplied doctor information', ()
   assert.equal(doctors['Ирина Бойко'].photo, 'doctor-boyko.png');
   assert.equal(doctors['Мария Маковецкая'].experience, '13 лет');
   assert.equal(doctors['Мария Маковецкая'].photo, 'doctor-makovetskaya.png');
+});
+
+test('cardiologist schedule uses the supplied appointment days', () => {
+  assert.equal(doctors['Разина Якупова'].schedule, 'По понедельникам и четвергам, по предварительной записи');
 });
 
 test('generic profile renderer shows only supplied doctor information', () => {

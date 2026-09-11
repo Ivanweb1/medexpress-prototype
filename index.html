@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="home-design.css?v=20260911-location-note">
+  <link rel="stylesheet" href="home-design.css?v=20260911-hero-gallery">
 </head>
 <body>
   <header class="site-header" id="top">
@@ -23,7 +23,15 @@
   <main>
     <section class="hero shell">
       <div class="hero-copy reveal"><span class="eyebrow">Медицинский центр в Аргаяше</span><h1>Здоровье рядом<br><em>Забота по-настоящему</em></h1><p>Точная диагностика, медицинские анализы и консультации специалистов — без поездок в город.</p><div class="hero-actions"><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться на приём <span>→</span></a><a class="text-link" href="#services">Выбрать услугу</a></div><div class="hero-facts"><div><strong>СИТИЛАБ</strong><span>медицинские анализы</span></div><div><strong>Все виды УЗИ</strong><span>экспертная диагностика</span></div><div><strong>Врачи из Челябинска</strong><span>приём в Аргаяше</span></div></div></div>
-      <div class="hero-visual reveal reveal--2"><img src="assets/hero-ultrasound.png" alt="Врач Мед-ЭКСПРЕСС работает на аппарате УЗИ"><div class="hero-card"><span>Запись без ожидания</span><strong>Онлайн или по телефону</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a></div></div>
+      <div class="hero-visual reveal reveal--2" data-hero-gallery role="region" aria-roledescription="карусель" aria-label="Медицинский центр Мед-ЭКСПРЕСС">
+        <div class="hero-slides">
+          <img class="is-active" data-hero-slide src="assets/hero-clinic-consultation.jpg" alt="Врач Мед-ЭКСПРЕСС консультирует пациентку" width="2048" height="1365" fetchpriority="high">
+          <img data-hero-slide src="assets/hero-clinic-ultrasound.jpg" alt="Врач Мед-ЭКСПРЕСС проводит ультразвуковое исследование" width="2048" height="1365" loading="lazy" decoding="async">
+          <img class="hero-slide--team" data-hero-slide src="assets/hero-clinic-team.jpg" alt="Команда медицинского центра Мед-ЭКСПРЕСС" width="2048" height="1365" loading="lazy" decoding="async">
+        </div>
+        <div class="hero-gallery-dots" data-hero-dots aria-label="Выбрать фотографию"><button class="is-active" type="button" aria-label="Фото 1" aria-current="true"></button><button type="button" aria-label="Фото 2" aria-current="false"></button><button type="button" aria-label="Фото 3" aria-current="false"></button></div>
+        <div class="hero-card"><span>Запись без ожидания</span><strong>Онлайн или по телефону</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a></div>
+      </div>
     </section>
     <section class="partner-band"><div class="shell partner-grid"><div class="partner-logo"><img src="assets/citilab-transparent.png" alt="СИТИЛАБ"></div><div class="partner-copy"><h2>Медицинские анализы в партнёрстве с СИТИЛАБ</h2></div><div class="partner-action"><p>Высокая точность исследований и быстрые результаты. Сдать анализы можно прямо в Аргаяше.</p><div><a class="btn" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener">Записаться</a><a class="text-link" href="services/category.html?category=medical-analyses">Подробнее об анализах</a></div></div></div></section>
     <section class="section shell" id="services">
@@ -55,6 +63,6 @@
   </main>
   <footer class="site-footer"><div class="shell footer-grid"><div><a class="brand brand--footer" href="index.html"><img src="assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a><p>Профессиональная медицинская помощь для жителей Аргаяшского района.</p></div><nav><strong>Разделы</strong><a href="services.html">Услуги</a><a href="doctors.html">Врачи</a><a href="about.html">О клинике</a><a href="prices.html">Цены</a><a href="contacts.html">Контакты</a></nav><nav><strong>Пациентам</strong><a href="documents.html">Документы</a><a href="prices.html">Прейскурант</a><a href="documents/document.html?name=Лицензия">Лицензия</a></nav><div><strong>Связаться</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно с 8:00</span></div></div><div class="shell footer-bottom"><span>© Мед-ЭКСПРЕСС</span><a href="documents/document.html?name=Политика%20конфиденциальности">Политика конфиденциальности</a><span>Информация на сайте не является публичной офертой</span></div></footer>
   <a class="floating-record" href="https://m.vk.ru/app53642491_-203789798?ref=group_menu" target="_blank" rel="noopener"><span>Записаться</span><b>→</b></a>
-  <script src="script.js?v=20260911-brand-name-case"></script>
+  <script src="script.js?v=20260911-hero-gallery"></script>
 </body>
 </html>
