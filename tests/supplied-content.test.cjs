@@ -27,6 +27,18 @@ test('document pages publish the current licence and supplied requisites', () =>
   assert.ok(fs.existsSync(path.join(root, 'assets/documents/license-medexpress.pdf')));
 });
 
+test('controlling authorities page publishes supplied contacts and official links', () => {
+  const data = fs.readFileSync(path.join(root, 'documents-data.js'), 'utf8');
+  for (const text of [
+    'Министерство здравоохранения Челябинской области',
+    'Управление Росздравнадзора по Челябинской области',
+    'Управление Роспотребнадзора по Челябинской области',
+    '+7 (351) 240-22-22', '+7 (351) 263-21-22', '+7 (351) 261-54-65',
+    'http://www.zdrav74.ru/', 'https://sfr.gov.ru/branches/chelyabinsk/', 'http://foms74.ru/'
+  ]) assert.ok(data.includes(text), text);
+  assert.match(data, /'Контролирующие органы':\s*\{/);
+});
+
 test('all local links and assets on the massage and document detail pages resolve', () => {
   for (const file of ['services/spine-massage.html', 'services/cardiology.html', 'documents/document.html']) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
