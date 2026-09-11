@@ -153,6 +153,9 @@
 .site-footer .footer-grid,.site-footer .footer-bottom{margin-left:auto;margin-right:auto}
 .floating-record{border:0}
 .location-note{display:block;margin-top:5px;color:#8ea5ad;font-size:.88em;font-weight:500}
+.citilab-wordmark{display:inline;white-space:nowrap;font-weight:800;letter-spacing:-.035em;text-transform:none}
+.citilab-wordmark__city{color:#00a7d6}
+.citilab-wordmark__lab{color:#e84b67}
 .hero-gallery-dots{top:auto;bottom:24px}
 @media(max-width:720px){.hero-gallery-dots{left:50%;bottom:142px;transform:translateX(-50%)}}
 

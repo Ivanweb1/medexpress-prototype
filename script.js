@@ -49,6 +49,37 @@ const preserveBrandNameCase = () => {
 
 preserveBrandNameCase();
 
+const styleCitilabName = () => {
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  let node;
+
+  while ((node = walker.nextNode())) {
+    const parent = node.parentElement;
+    if (/СИТИЛАБ|Ситилаб/u.test(node.nodeValue) && parent && !parent.closest('script, style, textarea, .citilab-wordmark')) textNodes.push(node);
+  }
+
+  textNodes.forEach((textNode) => {
+    const fragment = document.createDocumentFragment();
+    const parts = textNode.nodeValue.split(/(СИТИЛАБ|Ситилаб)/u);
+    parts.forEach((part) => {
+      if (/^(СИТИЛАБ|Ситилаб)$/u.test(part)) {
+        const mark = document.createElement('span');
+        mark.className = 'citilab-wordmark';
+        mark.setAttribute('role', 'img');
+        mark.setAttribute('aria-label', 'СИТИЛАБ');
+        mark.innerHTML = '<span class="citilab-wordmark__city" aria-hidden="true">СИТИ</span><span class="citilab-wordmark__lab" aria-hidden="true">лаб</span>';
+        fragment.append(mark);
+      } else if (part) {
+        fragment.append(document.createTextNode(part));
+      }
+    });
+    textNode.replaceWith(fragment);
+  });
+};
+
+styleCitilabName();
+
 const menuButton = document.querySelector('.menu-button');
 const navigation = document.querySelector('.navigation');
 

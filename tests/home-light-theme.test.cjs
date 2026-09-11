@@ -9,7 +9,7 @@ test('homepage alone uses the light sea-blue theme', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
   assert.match(html, /<body class="home-page">/);
-  assert.match(html, /home-design\.css\?v=20260911-home-light-headings-sample/);
+  assert.match(html, /home-design\.css\?v=20260911-citilab-wordmark/);
   for (const selector of [
     '.home-page .header-note',
     '.home-page .featured-service--massage .featured-service__visual',
@@ -30,4 +30,21 @@ test('light theme selectors are scoped and do not recolor inner pages', () => {
   const rules = lightTheme.match(/(?:^|\})\s*([^@{}][^{]*)\{/g) || [];
   assert.ok(rules.length >= 20);
   for (const rule of rules) assert.match(rule, /\.home-page/);
+});
+
+test('visible CITILAB mentions use the shared two-colour wordmark', () => {
+  const source = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
+  assert.match(source, /const styleCitilabName/);
+  assert.match(source, /citilab-wordmark__city[^>]*>СИТИ/);
+  assert.match(source, /citilab-wordmark__lab[^>]*>лаб/);
+  assert.match(source, /mark\.setAttribute\('role', 'img'\)/);
+  assert.match(source, /mark\.setAttribute\('aria-label', 'СИТИЛАБ'\)/);
+  assert.match(css, /\.citilab-wordmark__city\{color:#00a7d6\}/);
+  assert.match(css, /\.citilab-wordmark__lab\{color:#e84b67\}/);
+  for (const file of ['index.html', 'about.html', 'services.html', 'prices.html', 'services/category.html']) {
+    const html = fs.readFileSync(path.join(root, file), 'utf8');
+    assert.match(html, /home-design\.css\?v=20260911-citilab-wordmark/, file);
+    assert.match(html, /script\.js\?v=20260911-citilab-wordmark/, file);
+  }
 });
