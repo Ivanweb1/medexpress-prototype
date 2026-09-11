@@ -164,7 +164,7 @@
 
 /* Homepage light theme: airy clinical whites with calm sea-blue surfaces. */
 .home-page{--home-sea:#dff3f7;--home-sea-strong:#cbeaf1;--home-sea-deep:#176784;--home-heading-soft:#2f6f80;--home-heading-dark:#3b4b64;background:linear-gradient(180deg,#fbfefe 0,#f7fbfc 100%)}
-.home-page .hero h1,.home-page .partner-copy h2,.home-page .about-copy h2,.home-page .diagnostic-grid h2,.home-page #prices .section-title h2,.home-page .reviews-top h2,.home-page .contact-copy h2{color:var(--home-heading-dark)}
+.home-page main :is(h1,h2,h3,h4){color:var(--home-heading-dark)}
 .home-page .header-note{background:var(--home-sea);color:var(--ink);border-bottom:1px solid rgba(23,103,132,.12)}
 .home-page .site-header{background:rgba(255,255,255,.96)}
 .home-page .partner-band{background:linear-gradient(110deg,#edf9fb 0,var(--home-sea) 100%)}

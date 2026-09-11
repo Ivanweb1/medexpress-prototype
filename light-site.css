@@ -1,0 +1,42 @@
+:root{--site-heading:#3b4b64;--site-sea:#dff3f7;--site-sea-strong:#cbeaf1;--site-sea-soft:#eef9fb}
+body:not(.home-page){background:linear-gradient(180deg,#fbfefe 0,#f6fbfc 100%)}
+body:not(.home-page) main :is(h1,h2,h3,h4){color:var(--site-heading)}
+
+/* Shared chrome follows the lighter homepage treatment. */
+body:not(.home-page) .header-note{background:var(--site-sea);color:var(--site-heading);border-bottom:1px solid rgba(23,103,132,.12)}
+body:not(.home-page) .site-header{background:rgba(255,255,255,.97)}
+body:not(.home-page) .site-footer{background:linear-gradient(135deg,#d8eff4 0,#c4e5ec 100%);color:var(--site-heading);border-top:1px solid rgba(23,103,132,.14)}
+body:not(.home-page) .brand--footer small,
+body:not(.home-page) .footer-grid p,
+body:not(.home-page) .footer-grid>div:last-child span{color:#536f77}
+body:not(.home-page) .footer-grid nav strong,
+body:not(.home-page) .footer-grid>div:last-child strong{color:var(--blue-dark)}
+body:not(.home-page) .footer-bottom{border-top-color:rgba(18,57,67,.14);color:#59757d}
+
+/* Previously dark content surfaces become calm sea-blue panels. */
+body:not(.home-page) :is(.clinic-equipment,.catalog-help,.service-hub-card--massage,.catalog-card--spine .catalog-card__visual,.service-tile--dark,.detail-preparation__main,.cardio-signal--urgent,.cardio-package__card,.detail-procedure-card:first-child,.detail-price-heading,.massage-safety,.document-aside){background:linear-gradient(145deg,var(--site-sea-soft),var(--site-sea-strong));color:var(--site-heading);border-color:rgba(23,103,132,.14)}
+body:not(.home-page) .clinic-equipment .clinic-lead{color:#526d78!important}
+body:not(.home-page) :is(.catalog-help,.service-hub-card--massage,.service-tile--dark,.detail-preparation__main,.cardio-package__card,.detail-procedure-card:first-child,.massage-safety,.document-aside) p{color:#526d78}
+body:not(.home-page) :is(.service-hub-card--massage,.service-tile--dark) h3,
+body:not(.home-page) :is(.detail-preparation__main,.cardio-package__card,.detail-procedure-card:first-child,.massage-safety,.document-aside) :is(h2,h3,strong){color:var(--site-heading)}
+body:not(.home-page) .cardio-package__price strong{color:var(--site-heading)}
+body:not(.home-page) .service-hub-card--massage .service-hub-card__arrow{background:rgba(255,255,255,.78);color:var(--blue-dark)}
+body:not(.home-page) .clinic-media-slider--equipment .clinic-gallery-arrows button{border-color:rgba(23,103,132,.32);color:var(--blue-dark)}
+
+/* Price and document headers stay structured without heavy dark bands. */
+body:not(.home-page) .price-table-card>header{background:var(--site-sea);color:var(--site-heading)}
+body:not(.home-page) .price-table-card>header :is(a,small){color:#526d78}
+body:not(.home-page) .documents-page .document-list a:hover{background:var(--blue);color:white}
+body:not(.home-page) .document-license-status{background:var(--blue);color:white}
+body:not(.home-page) .document-license-status small{color:rgba(255,255,255,.82)}
+
+/* Bright blue is reserved for a small number of decisive calls to action. */
+body:not(.home-page) .detail-booking,
+body:not(.home-page) .price-table-card--accent>header{background:var(--blue);color:white}
+body:not(.home-page) .detail-booking :is(h2,p,.detail-phone),
+body:not(.home-page) .price-table-card--accent>header :is(h3,a,small){color:white}
+body:not(.home-page) :is(.service-tile--blue,.service-tile--image) :is(h2,h3,h4){color:white}
+
+@media(max-width:720px){
+  body:not(.home-page) .site-footer{background:linear-gradient(160deg,#d8eff4,#c4e5ec)}
+}
