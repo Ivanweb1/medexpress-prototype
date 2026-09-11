@@ -19,7 +19,7 @@ test('full service directory separates consultations, gynecology and functional 
     Array.from(catalog, category => category.title),
     ['Медицинские анализы', 'Консультации врачей', 'Гинекологические услуги', 'ЭКГ и суточный мониторинг', 'УЗИ сердца, сосудов, суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника']
   );
-  assert.equal(catalog.reduce((total, category) => total + category.items.length, 0), 339);
+  assert.equal(catalog.reduce((total, category) => total + category.items.length, 0), 343);
 });
 
 test('consultations contain only doctor appointments', () => {
@@ -91,8 +91,9 @@ test('four highlighted laboratory profiles show full composition, purpose and sa
 test('catalog keeps neutral massage wording and preparation notes', () => {
   assert.doesNotMatch(source, /Серагем|лучше обычного массажа|5 мощных/i);
   const massage = catalog.find(category => category.id === 'spine-massage');
-  assert.deepEqual(Array.from(massage.items, service => service.price), [1000, 500]);
-  assert.deepEqual(Array.from(massage.items, service => service.duration), [55, 30]);
+  assert.deepEqual(Array.from(massage.items, service => service.price), [1000, 500, 4500, 8500, 2200, 4500]);
+  assert.deepEqual(Array.from(massage.items, service => service.duration), [55, 30, 55, 55, 30, 30]);
+  assert.deepEqual(Array.from(massage.items, service => service.saving), [undefined, undefined, 'Экономия 500 ₽', 'Экономия 1 500 ₽', 'Экономия 300 ₽', 'Экономия 500 ₽']);
   assert.ok(catalog.find(category => category.id === 'heart-vessels-joints').items[0].details.length >= 4);
   assert.ok(catalog.find(category => category.id === 'women-ultrasound').items[0].details.length >= 3);
 });

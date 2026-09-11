@@ -34,6 +34,7 @@ test('ten doctors preserved with Orekhova first and ten real portraits', () => {
   for (const article of articles) {
     assert.match(article, />Записаться<\/a>/);
     assert.match(article, />О враче<\/a>/);
+    assert.ok(article.indexOf('>О враче</a>') < article.indexOf('>Записаться</a>'));
   }
 });
 

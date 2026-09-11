@@ -7,7 +7,7 @@ const root = path.join(__dirname, '..');
 
 test('massage page contains the supplied programmes, apparatus description and contact', () => {
   const html = fs.readFileSync(path.join(root, 'services/spine-massage.html'), 'utf8');
-  for (const value of ['Аппарат для физиотерапевтического массажа', 'Сканирование позвоночника', 'Инфракрасное воздействие', '18 минут', '500 ₽', '36,5 минут', '1 000 ₽', '+7 (961) 795-87-59']) {
+  for (const value of ['Аппарат для физиотерапевтического массажа', 'Сканирование позвоночника', 'Инфракрасное воздействие', '18 минут', '500 ₽', '36,5 минут', '1 000 ₽', '4 500 ₽', '8 500 ₽', '2 200 ₽', 'Экономия 500 ₽', 'Экономия 1 500 ₽', 'Экономия 300 ₽', '+7 (961) 795-87-59']) {
     assert.match(html, new RegExp(value.replace(/[+()]/g, '\\$&')));
   }
   assert.match(html, /src="\.\.\/assets\/massage-bed.png"/);

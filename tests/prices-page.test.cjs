@@ -20,6 +20,10 @@ test('price page uses the approved site chrome and supplied starting prices', ()
   for (const value of ['от 160 ₽', 'от 900 ₽', 'от 1 500 ₽', 'от 500 ₽']) assert.match(html, new RegExp(value));
   assert.match(html, /Программа 36,5 минут<\/span><strong>1 000 ₽/);
   assert.match(html, /Программа 18 минут<\/span><strong>500 ₽/);
+  assert.match(html, /36,5 минуты · курс из 5 сеансов <em>Экономия 500 ₽<\/em><\/span><strong>4 500 ₽/);
+  assert.match(html, /36,5 минуты · курс из 10 сеансов <em>Экономия 1 500 ₽<\/em><\/span><strong>8 500 ₽/);
+  assert.match(html, /18 минут · курс из 5 сеансов <em>Экономия 300 ₽<\/em><\/span><strong>2 200 ₽/);
+  assert.match(html, /18 минут · курс из 10 сеансов <em>Экономия 500 ₽<\/em><\/span><strong>4 500 ₽/);
   assert.match(html, /Мужское здоровье №2/);
   assert.match(html, /6 200 ₽/);
   assert.match(html, /экономия 900 ₽/);
@@ -91,7 +95,7 @@ test('all local links and assets on the price page resolve', () => {
 test('long price headings stay inside the mobile grid', () => {
   const html = fs.readFileSync(path.join(root, 'prices.html'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'prices-design.css'), 'utf8');
-  assert.match(html, /prices-design\.css\?v=20260901-mobile-overflow-fix/);
+  assert.match(html, /prices-design\.css\?v=20260911-massage-courses/);
   assert.match(css, /\.price-row__content\{min-width:0\}/);
   assert.match(css, /\.price-row__content h3\{[^}]*overflow-wrap:anywhere/);
   assert.match(css, /@media\(max-width:620px\)[\s\S]*\.price-row__content h3\{[^}]*font-size:clamp\(22px,6\.3vw,26px\)/);
