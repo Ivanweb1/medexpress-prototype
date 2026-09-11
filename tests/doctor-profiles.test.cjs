@@ -120,6 +120,28 @@ test('cardiologist schedule uses the supplied appointment days', () => {
   assert.equal(doctors['Разина Якупова'].schedule, 'По понедельникам и четвергам, по предварительной записи');
 });
 
+test('cardiologist profile shows supplied training and consultation topics', () => {
+  const doctor = doctors['Разина Якупова'];
+  assert.deepEqual(Array.from(doctor.training, row => Array.from(row)), [
+    ['2022', 'Ультразвуковая диагностика', 'Повышение квалификации'],
+    ['2025', 'Терапия', 'Повышение квалификации'],
+    ['2025', 'Функциональная диагностика', 'Повышение квалификации'],
+    ['2025', 'Кардиология', 'Повышение квалификации']
+  ]);
+  assert.deepEqual(Array.from(doctor.concerns), [
+    'Ишемическая болезнь сердца (ИБС)',
+    'Артериальная гипертензия',
+    'Сердечная недостаточность',
+    'Аритмии',
+    'Пороки сердца',
+    'Кардиомиопатии',
+    'Миокардиты, перикардиты, эндокардиты',
+    'Атеросклероз',
+    'Последствия перенесённого инфаркта миокарда',
+    'Сосудистые патологии'
+  ]);
+});
+
 test('generic profile renderer shows only supplied doctor information', () => {
   for (const [key, doctor] of Object.entries(doctors)) {
     const mount = { innerHTML: '' };
@@ -180,7 +202,7 @@ test('six supplied profiles preserve education, courses and review links', () =>
     ['Ирина Бойко', 2, 4, null],
     ['Юлия Пинаева', 2, 2, '752854-pinaeva'],
     ['Елена Федоркина', 4, 4, null],
-    ['Разина Якупова', 4, 1, '957163-yakupova'],
+    ['Разина Якупова', 4, 4, '957163-yakupova'],
     ['Лилия Назмутдинова', 2, 0, '1184548-nazmutdinova']
   ];
   for (const [key, educationCount, trainingCount, slug] of expected) {

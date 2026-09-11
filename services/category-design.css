@@ -14,7 +14,7 @@
 .category-analyses-phone{display:inline-block;margin-top:4px;color:var(--blue-dark);font-size:18px;font-weight:800;white-space:nowrap}
 .category-analyses-phone:hover{text-decoration:underline;text-underline-offset:4px}
 .analyses-contact-card[hidden]{display:none}
-.analyses-contact-card{position:fixed;z-index:35;top:152px;right:24px;width:min(320px,calc(100vw - 48px));padding:22px 24px;border:1px solid rgba(23,103,132,.2);border-radius:20px;background:rgba(246,249,250,.96);box-shadow:0 18px 48px rgba(5,45,65,.14);backdrop-filter:blur(14px);animation:analyses-card-in .45s cubic-bezier(.2,.7,.2,1) both}
+.analyses-contact-card{position:fixed;z-index:35;right:24px;bottom:24px;width:min(320px,calc(100vw - 48px));padding:22px 24px;border:1px solid rgba(23,103,132,.2);border-radius:20px;background:rgba(246,249,250,.96);box-shadow:0 18px 48px rgba(5,45,65,.14);backdrop-filter:blur(14px);animation:analyses-card-in .45s cubic-bezier(.2,.7,.2,1) both}
 .analyses-contact-card::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;border-radius:20px 0 0 20px;background:var(--blue)}
 .analyses-contact-card span{display:block;margin-bottom:6px;color:var(--muted);font-size:14px;line-height:1.45}
 .analyses-contact-card a{display:inline-block;color:var(--blue-dark);font-size:22px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
@@ -36,7 +36,6 @@
 .directory-service__price-note{margin:14px 0 0;font-size:15px;line-height:1.5;color:var(--ink)}
 .category-list .directory-service__details>summary{font-size:15px;min-height:44px;display:flex;align-items:center}
 @media(max-width:800px){.lab-tools__fields{grid-template-columns:1fr}.lab-tools{padding:20px}.lab-reset{justify-self:start}}
-@media(max-width:1100px) and (min-width:721px){.analyses-contact-card{top:auto;bottom:24px}}
 .category-list .directory-service{min-height:176px}
 .directory-service__code{display:block;margin-bottom:10px;color:var(--blue-dark);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .category-more{padding:100px 0;background:white}

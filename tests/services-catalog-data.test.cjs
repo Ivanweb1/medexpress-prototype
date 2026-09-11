@@ -122,6 +122,7 @@ test('analyses page uses its direct phone instead of online booking', () => {
   assert.match(html, /href="tel:\+79000930686">\+7 \(900\) 093-06-86/);
   assert.match(renderer, /querySelector\('\[data-analyses-contact\]'\)\.hidden = false/);
   assert.match(styles, /\.analyses-contact-card\{position:fixed/);
+  assert.match(styles, /\.analyses-contact-card\{[^}]*right:24px;bottom:24px/);
   assert.match(styles, /\.category-page--analyses \.floating-record\{display:none\}/);
 });
 

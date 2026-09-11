@@ -76,6 +76,7 @@ test('homepage hero uses the supplied clinic photo gallery', () => {
   const script = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
   assert.match(home, /data-hero-gallery/);
   assert.equal([...home.matchAll(/data-hero-slide/g)].length, 3);
+  assert.match(home, /<img class="is-active" data-hero-slide src="assets\/hero-clinic-ultrasound\.jpg"/);
   for (const file of ['hero-clinic-consultation.jpg', 'hero-clinic-ultrasound.jpg', 'hero-clinic-team.jpg']) {
     assert.match(home, new RegExp(file));
     assert.ok(fs.existsSync(path.join(root, 'assets', file)), file);
@@ -83,6 +84,9 @@ test('homepage hero uses the supplied clinic photo gallery', () => {
   assert.equal([...home.matchAll(/data-hero-dots[\s\S]*?<button/g)].length, 1);
   assert.match(script, /const heroGallery = document\.querySelector\('\[data-hero-gallery\]'\)/);
   assert.match(script, /setInterval\(\(\) => showHeroSlide\(activeHeroSlide \+ 1\), 3000\)/);
+  const styles = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
+  assert.match(styles, /\.hero-gallery-dots\{top:auto;bottom:24px\}/);
+  assert.match(styles, /\.hero-gallery-dots\{left:50%;bottom:142px/);
 });
 
 test('each specialty filters cards and updates accessible pressed state and count', () => {
