@@ -114,6 +114,7 @@ test('Orekhova education, associations and award use public-facing copy', () => 
   assert.equal([...html.matchAll(/<span class="detail-timeline-date">2025<\/span>[\s\S]*?<h3>Ультразвуковая диагностика<\/h3>/g)].length, 1);
   assert.match(html, /Ассоциация специалистов медицины плода/);
   assert.match(html, /ISUOG/);
+  assert.match(html, /РАСУДМ — Российская ассоциация специалистов ультразвуковой диагностики в медицине/);
   assert.match(html, /Участие в профессиональных медицинских сообществах/);
   assert.doesNotMatch(html, /сохранённой странице|актуальное членство отдельно не подтверждено/);
   assert.match(html, /Лучший врач года/);

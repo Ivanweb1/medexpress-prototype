@@ -27,6 +27,7 @@ test('Myzhevskikh training uses supplied facts and does not alter other profiles
   const doctor = doctors['Екатерина Мыжевских'];
   assert.equal(doctor.education[0][0], '1997');
   assert.equal(doctor.education[0][1], 'Челябинская государственная медицинская академия');
+  assert.deepEqual(Array.from(doctor.education[1]), ['1998', 'Хирургия', 'Интернатура']);
   assert.deepEqual(Array.from(doctor.training, row => row[0]), ['2008', '2008', '2024']);
   assert.deepEqual(Array.from(doctor.training.at(-1)), ['2024', 'Ультразвуковая диагностика', 'Повышение квалификации']);
   assert.doesNotMatch(JSON.stringify(doctor), /Озонотерапия|Фиброгастроскопия/);
@@ -71,6 +72,29 @@ test('Pavlichuk profile shows supplied education and ultrasound training', () =>
   assert.match(mount.innerHTML, /<h2>Образование<\/h2>/);
   assert.match(mount.innerHTML, /id="doctor-training"/);
   for (const year of ['1992', '1993', '2007', '2025']) assert.match(mount.innerHTML, new RegExp(`>${year}<`));
+});
+
+test('Denisova profile shows supplied education and latest gynecology training', () => {
+  const doctor = doctors['Елена Денисова'];
+  assert.deepEqual(Array.from(doctor.education, row => Array.from(row)), [
+    ['1982', 'Челябинский медицинский институт', 'Лечебное дело · базовое образование'],
+    ['1983', 'Акушерство и гинекология', 'Интернатура']
+  ]);
+  assert.deepEqual(Array.from(doctor.training, row => Array.from(row)), [
+    ['2022', 'Акушерство и гинекология', 'Повышение квалификации']
+  ]);
+});
+
+test('latest supplied training is shown for Makovetskaya, Pinaeva and Boyko', () => {
+  assert.deepEqual(Array.from(doctors['Мария Маковецкая'].training.at(-1)), [
+    '2026', 'Ультразвуковая диагностика', 'Повышение квалификации'
+  ]);
+  assert.deepEqual(Array.from(doctors['Юлия Пинаева'].training.at(-1)), [
+    '2024', 'Эндокринология', 'Повышение квалификации'
+  ]);
+  assert.deepEqual(Array.from(doctors['Ирина Бойко'].training.at(-1)), [
+    '2025', 'Акушерство и гинекология', 'Повышение квалификации'
+  ]);
 });
 
 test('key professional facts are preserved from supplied doctor information', () => {
@@ -148,9 +172,9 @@ test('generic profile template loads shared design, data and renderer', () => {
 
 test('six supplied profiles preserve education, courses and review links', () => {
   const expected = [
-    ['Мария Маковецкая', 2, 1, null],
-    ['Ирина Бойко', 2, 3, null],
-    ['Юлия Пинаева', 2, 1, '752854-pinaeva'],
+    ['Мария Маковецкая', 2, 2, null],
+    ['Ирина Бойко', 2, 4, null],
+    ['Юлия Пинаева', 2, 2, '752854-pinaeva'],
     ['Елена Федоркина', 4, 4, null],
     ['Разина Якупова', 4, 1, '957163-yakupova'],
     ['Лилия Назмутдинова', 2, 0, '1184548-nazmutdinova']

@@ -60,13 +60,13 @@ test('doctor names use two lines and Orekhova is identified as the founder', () 
   }
   assert.match(cards[0], /Основатель Мед-ЭКСПРЕСС · врач УЗД/);
   const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  assert.match(home, /doctor-orekhova\.png[\s\S]*?Основатель Мед-ЭКСПРЕСС · врач УЗД/);
+  assert.match(home, /doctor-orekhova\.jpg[\s\S]*?Основатель Мед-ЭКСПРЕСС · врач УЗД/);
 });
 
 test('homepage doctor slider uses every available portrait', () => {
   const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   assert.equal([...home.matchAll(/<article class="doctor">/g)].length, 10);
-  assert.equal([...home.matchAll(/src="assets\/doctor-[^"]+\.png"/g)].length, 10);
+  assert.equal([...home.matchAll(/src="assets\/doctor-[^"]+\.(?:png|jpg)"/g)].length, 10);
   assert.equal([...home.matchAll(/class="doctor-photo doctor-photo--placeholder"/g)].length, 0);
   for (const file of ['doctor-pavlichuk.png', 'doctor-yakupova.png', 'doctor-fedorkina.png', 'doctor-pinaeva.png', 'doctor-boyko.png', 'doctor-makovetskaya.png']) assert.match(home, new RegExp(file));
 });
