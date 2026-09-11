@@ -50,8 +50,8 @@ test('every page uses either the current header and footer or the shared current
     const staticChrome = html.includes('class="site-header"') && html.includes('class="site-footer"');
     const renderedChrome = html.includes('data-site-header') && html.includes('data-site-footer') && html.includes('home-design.css');
     assert.ok(staticChrome || renderedChrome, file);
-    assert.match(html, /home-design\.css\?v=202609(?:01-floating-record-fix|11-location-note|11-hero-gallery(?:-bottom)?|11-home-light(?:-headings-sample)?|11-citilab-wordmark)/, file);
-    assert.match(html, /script\.js\?v=20260911-(?:brand-name-case|hero-gallery|citilab-wordmark)/, file);
+    assert.match(html, /home-design\.css\?v=20260911-footer-navigation/, file);
+    assert.match(html, /script\.js\?v=20260911-footer-navigation/, file);
     assert.doesNotMatch(html, /index\.html#prices|href="#prices"/);
   }
   const source = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
@@ -62,6 +62,17 @@ test('every page uses either the current header and footer or the shared current
   assert.match(source, /styleCitilabName/);
   assert.match(source, /mark\.style\.textTransform = 'none'/);
   assert.doesNotMatch(source, /class="header"|class="footer"|index\.html#prices/);
+});
+
+test('shared footer contains the medical warning and complete navigation', () => {
+  const source = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
+  assert.match(source, /ИМЕЮТСЯ ПРОТИВОПОКАЗАНИЯ\. НЕОБХОДИМА КОНСУЛЬТАЦИЯ СПЕЦИАЛИСТА/);
+  assert.match(source, /const footerSectionLinks/);
+  assert.match(source, />Главная<\/a>.*>Услуги<\/a>.*>Врачи<\/a>.*>О клинике<\/a>.*>Цены<\/a>.*>Контакты<\/a>/);
+  assert.match(source, /const footerPatientLinks/);
+  assert.match(source, />Документы<\/a>.*>Прейскурант<\/a>.*>Лицензия<\/a>.*>Контролирующие органы<\/a>.*>Политика конфиденциальности<\/a>/);
+  assert.match(css, /\.footer-medical-warning\{[^}]*font-size:10px/);
 });
 
 test('document pages use the exact homepage chrome classes', () => {

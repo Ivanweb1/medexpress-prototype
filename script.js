@@ -5,13 +5,28 @@ const recordUrl = 'https://m.vk.ru/app53642491_-203789798?ref=group_menu';
 const currentPath = window.location.pathname.replace(/\\/g, '/');
 const currentSection = currentPath.includes('/services/') ? 'services' : currentPath.includes('/doctors/') ? 'doctors' : currentPath.split('/').pop()?.replace('.html', '') || 'index';
 const navItem = (file, label, section) => `<a href="${pageDepth}${file}"${currentSection === section ? ' aria-current="page"' : ''}>${label}</a>`;
+const footerSectionLinks = `<strong>Разделы</strong><a href="${pageDepth}index.html">Главная</a><a href="${pageDepth}services.html">Услуги</a><a href="${pageDepth}doctors.html">Врачи</a><a href="${pageDepth}about.html">О клинике</a><a href="${pageDepth}prices.html">Цены</a><a href="${pageDepth}contacts.html">Контакты</a>`;
+const footerPatientLinks = `<strong>Пациентам</strong><a href="${pageDepth}documents.html">Документы</a><a href="${pageDepth}prices.html">Прейскурант</a><a href="${pageDepth}documents/document.html?name=Лицензия">Лицензия</a><a href="${pageDepth}documents/document.html?name=Контролирующие%20органы">Контролирующие органы</a><a href="${pageDepth}documents/document.html?name=Политика%20конфиденциальности">Политика конфиденциальности</a>`;
 
 if (headerMount) {
   headerMount.outerHTML = `<header class="site-header" id="top"><div class="header-note"><div class="shell"><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно 8:00–16:00 · вс 9:00–13:00</span></div></div><div class="shell header-main"><a class="brand" href="${pageDepth}index.html" aria-label="Мед-ЭКСПРЕСС, главная"><img src="${pageDepth}assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a><button class="menu-button" type="button" aria-expanded="false">Меню</button><nav class="navigation" aria-label="Основная навигация">${navItem('services.html', 'Услуги', 'services')}${navItem('doctors.html', 'Врачи', 'doctors')}${navItem('about.html', 'О клинике', 'about')}${navItem('prices.html', 'Цены', 'prices')}${navItem('contacts.html', 'Контакты', 'contacts')}</nav><div class="header-actions"><a class="phone" href="tel:+79617958759">+7 (961) 795-87-59</a><a class="btn btn--small" href="${recordUrl}" target="_blank" rel="noopener">Записаться</a></div></div></header>`;
 }
 
 if (footerMount) {
-  footerMount.outerHTML = `<footer class="site-footer"><div class="shell footer-grid"><div><a class="brand brand--footer" href="${pageDepth}index.html"><img src="${pageDepth}assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a><p>Профессиональная медицинская помощь для жителей Аргаяшского района.</p></div><nav><strong>Разделы</strong><a href="${pageDepth}services.html">Услуги</a><a href="${pageDepth}doctors.html">Врачи</a><a href="${pageDepth}about.html">О клинике</a><a href="${pageDepth}prices.html">Цены</a><a href="${pageDepth}contacts.html">Контакты</a></nav><nav><strong>Пациентам</strong><a href="${pageDepth}documents.html">Документы</a><a href="${pageDepth}prices.html">Прейскурант</a><a href="${pageDepth}documents/document.html?name=Лицензия">Лицензия</a></nav><div><strong>Связаться</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно с 8:00</span></div></div><div class="shell footer-bottom"><span>© Мед-ЭКСПРЕСС</span><a href="${pageDepth}documents/document.html?name=Политика%20конфиденциальности">Политика конфиденциальности</a><span>Информация на сайте не является публичной офертой</span></div></footer>`;
+  footerMount.outerHTML = `<footer class="site-footer"><div class="shell footer-grid"><div><a class="brand brand--footer" href="${pageDepth}index.html"><img src="${pageDepth}assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a><p>Профессиональная медицинская помощь для жителей Аргаяшского района.</p></div><nav>${footerSectionLinks}</nav><nav>${footerPatientLinks}</nav><div><strong>Связаться</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно с 8:00</span></div></div><p class="shell footer-medical-warning">ИМЕЮТСЯ ПРОТИВОПОКАЗАНИЯ. НЕОБХОДИМА КОНСУЛЬТАЦИЯ СПЕЦИАЛИСТА</p><div class="shell footer-bottom"><span>© Мед-ЭКСПРЕСС</span><a href="${pageDepth}documents/document.html?name=Политика%20конфиденциальности">Политика конфиденциальности</a><span>Информация на сайте не является публичной офертой</span></div></footer>`;
+}
+
+const siteFooter = document.querySelector('.site-footer');
+if (siteFooter) {
+  const footerNavs = siteFooter.querySelectorAll('.footer-grid nav');
+  if (footerNavs[0]) footerNavs[0].innerHTML = footerSectionLinks;
+  if (footerNavs[1]) footerNavs[1].innerHTML = footerPatientLinks;
+  if (!siteFooter.querySelector('.footer-medical-warning')) {
+    const warning = document.createElement('p');
+    warning.className = 'shell footer-medical-warning';
+    warning.textContent = 'ИМЕЮТСЯ ПРОТИВОПОКАЗАНИЯ. НЕОБХОДИМА КОНСУЛЬТАЦИЯ СПЕЦИАЛИСТА';
+    siteFooter.querySelector('.footer-bottom')?.before(warning);
+  }
 }
 
 if ((headerMount || footerMount) && !document.querySelector('.floating-record')) {

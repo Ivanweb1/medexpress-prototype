@@ -151,6 +151,8 @@
 .site-header .menu-button{font:inherit}
 .site-header .header-actions .btn{height:auto}
 .site-footer .footer-grid,.site-footer .footer-bottom{margin-left:auto;margin-right:auto}
+.footer-medical-warning{margin:52px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);color:#9eb7bd;font-size:10px;font-weight:700;line-height:1.5;letter-spacing:.075em;text-align:center}
+.footer-medical-warning+.footer-bottom{margin-top:18px;padding-top:0;border-top:0}
 .floating-record{border:0}
 .location-note{display:block;margin-top:5px;color:#8ea5ad;font-size:.88em;font-weight:500}
 .citilab-wordmark{display:inline;white-space:nowrap;font-weight:800;letter-spacing:-.035em;text-transform:none}
@@ -188,4 +190,5 @@
 .home-page .site-footer{background:linear-gradient(135deg,#d8eff4 0,#c4e5ec 100%);color:var(--ink);border-top:1px solid rgba(23,103,132,.14)}
 .home-page .brand--footer small,.home-page .footer-grid p,.home-page .footer-grid>div:last-child span{color:#536f77}
 .home-page .footer-grid nav strong,.home-page .footer-grid>div:last-child strong{color:var(--blue-dark)}
+.home-page .footer-medical-warning{border-top-color:rgba(18,57,67,.14);color:#59757d}
 .home-page .footer-bottom{border-top-color:rgba(18,57,67,.14);color:#59757d}
