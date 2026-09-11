@@ -19,7 +19,7 @@ test('full service directory separates consultations, gynecology and functional 
     Array.from(catalog, category => category.title),
     ['Медицинские анализы', 'Консультации врачей', 'Гинекологические услуги', 'ЭКГ и суточный мониторинг', 'УЗИ сердца, сосудов, суставов', 'Общее УЗИ', 'УЗИ для женщин', 'Комплексные УЗИ для женщин', 'УЗИ при беременности', 'Комплексные УЗИ для мужчин', 'УЗИ детям', 'Массаж позвоночника']
   );
-  assert.equal(catalog.reduce((total, category) => total + category.items.length, 0), 338);
+  assert.equal(catalog.reduce((total, category) => total + category.items.length, 0), 339);
 });
 
 test('consultations contain only doctor appointments', () => {
@@ -29,8 +29,11 @@ test('consultations contain only doctor appointments', () => {
   assert.equal(consultations.items.length, 11);
   assert.ok(consultations.items.every(service => /Приём|консультация/i.test(service.name)));
   assert.ok(consultations.items.every(service => !service.details?.length));
-  assert.equal(gynecology.items.length, 13);
+  assert.ok(consultations.items.every(service => service.duration === undefined));
+  assert.equal(gynecology.items.length, 14);
+  assert.ok(gynecology.items.every(service => service.duration === undefined));
   assert.match(gynecology.items.map(service => service.name).join(' '), /Кольпоскопия.*ВМС/);
+  assert.equal(gynecology.items.find(service => service.name === 'Фемофлор II').price, 5500);
   assert.equal(diagnostics.items.length, 4);
   assert.ok(diagnostics.items.every(service => /ЭКГ/i.test(service.name)));
 });
@@ -55,7 +58,7 @@ test('every service has a valid title, price and applicable timing', () => {
     for (const service of category.items) {
       assert.ok(service.name.trim().length > 2, category.title);
       assert.ok(Number.isInteger(service.price) && service.price > 0, service.name);
-      if (category.id !== 'medical-analyses') assert.ok(Number.isInteger(service.duration) && service.duration > 0, service.name);
+      if (!['medical-analyses', 'consultations', 'gynecology-services'].includes(category.id)) assert.ok(Number.isInteger(service.duration) && service.duration > 0, service.name);
     }
   }
 });
@@ -78,6 +81,7 @@ test('four highlighted laboratory profiles show full composition, purpose and sa
   assert.deepEqual([profiles['99-00-733'].details.length - 2, profiles['99-00-734'].details.length - 2, profiles['99-00-732'].details.length - 2, profiles['99-00-731'].details.length - 2], [5, 16, 19, 13]);
   assert.deepEqual([profiles['99-00-733'].saving, profiles['99-00-734'].saving, profiles['99-00-732'].saving, profiles['99-00-731'].saving], ['Экономия 270 ₽', 'Экономия 330 ₽', 'Экономия 455 ₽', 'Экономия 510 ₽']);
   assert.equal(analyses.items.find(service => service.name === 'Отличное самочувствие').saving, 'Экономия 695 ₽');
+  assert.equal(analyses.items.find(service => service.name === 'Гормональный статус женский').saving, 'Экономия 660 ₽');
   for (const profile of Object.values(profiles)) {
     assert.match(profile.details[0], /оцен|комплекс|здоров|усталост/i);
     assert.match(profile.details[1], /В состав входят/);
@@ -100,7 +104,17 @@ test('category page loads shared data and renders one selected direction', () =>
   assert.match(html, /services-catalog-data\.js/);
   assert.match(html, /ultrasound-guides-data\.js/);
   assert.match(html, /category\.js/);
+  assert.match(html, /О клинике[\s\S]*Врачи[\s\S]*Услуги[\s\S]*Цены[\s\S]*Контакты/);
   assert.doesNotMatch(html, /data-service-categories|role="tablist"/);
+});
+
+test('analyses page uses its direct phone instead of online booking', () => {
+  const renderer = fs.readFileSync(path.join(root, 'services', 'category.js'), 'utf8');
+  assert.match(renderer, /\+7 \(900\) 093-06-86/);
+  assert.match(renderer, /tel:\+79000930686/);
+  assert.match(renderer, /Все вопросы по анализам и запись/);
+  assert.match(renderer, /Медицинские анализы в лаборатории СИТИЛАБ/);
+  assert.match(renderer, /removeAttribute\('target'\)/);
 });
 
 test('every catalog category has a card link and category assets resolve', () => {

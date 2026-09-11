@@ -38,6 +38,7 @@
   const scheduleSection = doctor.schedule ? `
     <section class="detail-section detail-cream"><div class="shell detail-editorial"><div><span class="eyebrow">Расписание</span><h2>Приём по<br><em>предварительной записи</em></h2></div><div class="detail-schedule-panel"><span class="detail-block-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 11h18"/></svg></span><p class="detail-lead">${escape(doctor.schedule)}</p><a class="btn" href="${booking}" target="_blank" rel="noopener">Выбрать время</a></div></div></section>` : '';
   const bookingSchedule = doctor.schedule ? '<span>' + escape(doctor.schedule) + '</span>' : '';
+  const bookingName = escape(doctor.bookingName || doctor.name);
 
   document.title = doctor.name + ' — Мед-ЭКСПРЕСС';
   mount.innerHTML = `
@@ -53,5 +54,5 @@
     <section class="shell detail-section" id="doctor-services"><div class="detail-section-heading"><div><span class="eyebrow">Направления работы</span><h2>Услуги врача</h2></div><p>Стоимость конкретной услуги уточняйте при записи.</p></div><div class="detail-list-panel detail-list-panel--services"><ul>${services}</ul><div><a class="btn" href="${booking}" target="_blank" rel="noopener">Записаться</a><a href="tel:+79617958759">+7 (961) 795-87-59</a></div></div></section>
     ${scheduleSection}
     ${reviewsSection}
-    <section class="detail-booking"><div class="shell detail-booking__grid"><div><span class="eyebrow">Мед-ЭКСПРЕСС · Аргаяш</span><h2>Запишитесь<br>к специалисту</h2><p>с. Аргаяш, ул. Ленина, 50</p></div><div class="detail-booking__actions"><a class="btn" href="${booking}" target="_blank" rel="noopener">Записаться к врачу <span aria-hidden="true">→</span></a><a class="detail-phone" href="tel:+79617958759">+7 (961) 795-87-59</a>${bookingSchedule}</div></div></section>`;
+    <section class="detail-booking"><div class="shell detail-booking__grid"><div><span class="eyebrow">Мед-ЭКСПРЕСС · Аргаяш</span><h2>Запишитесь<br>к ${bookingName}</h2><p>с. Аргаяш, ул. Ленина, 50</p></div><div class="detail-booking__actions"><a class="btn" href="${booking}" target="_blank" rel="noopener">Записаться к врачу <span aria-hidden="true">→</span></a><a class="detail-phone" href="tel:+79617958759">+7 (961) 795-87-59</a>${bookingSchedule}</div></div></section>`;
 })();

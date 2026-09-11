@@ -40,6 +40,7 @@ test('local assets, pages, and jump-link targets exist', () => {
 test('page has shared branding, active navigation, and no prototype placeholders', () => {
   assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
   assert.match(html, /href="services.html" aria-current="page"/);
+  assert.match(html, /О клинике[\s\S]*Врачи[\s\S]*Услуги[\s\S]*Цены[\s\S]*Контакты/);
   assert.match(html, /href="home-design.css\?/);
   assert.match(html, /Медицинские анализы/);
   assert.doesNotMatch(html, /class="number"|Изображение направления|Изображение услуги/);

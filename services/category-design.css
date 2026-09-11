@@ -11,6 +11,9 @@
 .category-list-heading>div:last-child{display:grid;grid-template-columns:auto 1fr;align-items:start;gap:10px 18px}
 .category-list-heading strong{padding:8px 13px;border-radius:999px;background:var(--pale);color:var(--blue-dark);font-size:12px;white-space:nowrap}
 .category-list-heading p{margin:4px 0 0;color:var(--muted);font-size:13px;line-height:1.65}
+.category-analyses-phone{display:inline-block;margin-top:4px;color:var(--blue-dark);font-size:18px;font-weight:800;white-space:nowrap}
+.category-analyses-phone:hover{text-decoration:underline;text-underline-offset:4px}
+@media(min-width:721px){.category-page--analyses .floating-record{display:none}}
 .category-list{align-items:stretch}
 .lab-tools[hidden],[data-lab-empty][hidden]{display:none}
 .lab-tools{margin-bottom:30px;padding:26px;border:1px solid var(--line);border-radius:24px;background:white}

@@ -16,6 +16,7 @@ test('all nine generic profiles contain approved names and services', () => {
     assert.match(doctor.name, /^[А-ЯЁ][а-яё-]+ [А-ЯЁ][а-яё-]+ [А-ЯЁ][а-яё-]+$/);
     assert.ok(doctor.role);
     assert.ok(doctor.specialty);
+    assert.ok(doctor.bookingName);
     assert.ok(doctor.services.length);
   }
   assert.equal(doctors['Разина Якупова'].schedule, 'Ежедневно, по предварительной записи');
@@ -26,9 +27,9 @@ test('Myzhevskikh training uses supplied facts and does not alter other profiles
   const doctor = doctors['Екатерина Мыжевских'];
   assert.equal(doctor.education[0][0], '1997');
   assert.equal(doctor.education[0][1], 'Челябинская государственная медицинская академия');
-  assert.deepEqual(Array.from(doctor.training, row => row[0]), ['1999', '2005', '2008', '2008', '2009', '2024']);
+  assert.deepEqual(Array.from(doctor.training, row => row[0]), ['2008', '2008', '2024']);
   assert.deepEqual(Array.from(doctor.training.at(-1)), ['2024', 'Ультразвуковая диагностика', 'Повышение квалификации']);
-  assert.doesNotMatch(doctor.services.join(' '), /Озонотерапия|Фиброгастроскопия/);
+  assert.doesNotMatch(JSON.stringify(doctor), /Озонотерапия|Фиброгастроскопия/);
   for (const [key, profile] of Object.entries(doctors)) {
     const mount = { innerHTML: '' };
     vm.runInNewContext(profileSource, {
@@ -111,10 +112,17 @@ test('generic profile renderer shows only supplied doctor information', () => {
     if (doctor.education?.length) assert.match(mount.innerHTML, /<h2>Образование<\/h2>/);
     else assert.doesNotMatch(mount.innerHTML, /<h2>Образование<\/h2>/);
     assert.match(mount.innerHTML, /Услуги врача/);
+    assert.ok(mount.innerHTML.includes(`Запишитесь<br>к ${doctor.bookingName}`));
     assert.equal(mount.innerHTML.includes('id="doctor-reviews"'), Boolean(doctor.reviewsUrl));
     assert.doesNotMatch(mount.innerHTML, /На согласовании|Информация уточняется|Стаж уточняется|data-pending-content/);
     assert.doesNotMatch(mount.innerHTML, /Рейтинг|undefined|null/);
   }
+});
+
+test('ultrasound is the primary specialty for ultrasound doctors', () => {
+  assert.match(doctors['Елена Федоркина'].role, /^Врач УЗД/);
+  assert.match(doctors['Елена Федоркина'].specialty, /^Врач ультразвуковой диагностики/);
+  assert.equal(doctors['Мария Маковецкая'].role, 'Врач УЗД');
 });
 
 test('education and symptom blocks appear only for doctors with supplied facts', () => {

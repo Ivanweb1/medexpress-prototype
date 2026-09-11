@@ -19,13 +19,36 @@
   };
   const id = new URLSearchParams(location.search).get('category');
   const category = catalog.find(entry => entry.id === id) || catalog[0];
+  const isAnalyses = category.id === 'medical-analyses';
+  const hidesDuration = ['consultations', 'gynecology-services'].includes(category.id);
+  const displayTitle = isAnalyses ? 'Медицинские анализы в лаборатории СИТИЛАБ' : category.title;
   const rubles = value => `${new Intl.NumberFormat('ru-RU').format(value)} ₽`;
   const plural = count => count % 10 === 1 && count % 100 !== 11 ? 'услуга' : count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20) ? 'услуги' : 'услуг';
 
-  document.querySelectorAll('[data-category-title]').forEach(node => { node.textContent = category.title; });
+  document.querySelectorAll('[data-category-title]').forEach(node => { node.textContent = displayTitle; });
   document.querySelector('[data-category-description]').textContent = descriptions[category.id];
   document.querySelector('[data-category-count]').textContent = `${category.items.length} ${plural(category.items.length)}`;
-  document.title = `${category.title} — Мед-ЭКСПРЕСС`;
+  document.title = `${displayTitle} — Мед-ЭКСПРЕСС`;
+
+  if (hidesDuration) document.querySelector('#category-list-title').textContent = 'Стоимость';
+
+  if (isAnalyses) {
+    document.body.classList.add('category-page--analyses');
+    const analysesPhone = '+7 (900) 093-06-86';
+    const analysesHref = 'tel:+79000930686';
+    const headingNote = document.querySelector('.category-list-heading p');
+    headingNote.innerHTML = `Все вопросы по анализам и запись: <a class="category-analyses-phone" href="${analysesHref}">${analysesPhone}</a>`;
+    const headerRecord = document.querySelector('.header-actions .btn');
+    headerRecord.href = analysesHref;
+    headerRecord.removeAttribute('target');
+    headerRecord.removeAttribute('rel');
+    headerRecord.textContent = analysesPhone;
+    const floatingRecord = document.querySelector('.floating-record');
+    floatingRecord.href = analysesHref;
+    floatingRecord.removeAttribute('target');
+    floatingRecord.removeAttribute('rel');
+    floatingRecord.querySelector('span').textContent = 'Анализы';
+  }
 
   const renderServices = services => list.replaceChildren(...services.map((service, index) => {
     const article = document.createElement('article');
@@ -84,7 +107,7 @@
   }));
 
   renderServices(category.items);
-  if (category.id === 'medical-analyses') {
+  if (isAnalyses) {
     document.querySelector('#category-list-title').textContent = 'Анализы и цены';
     document.querySelector('[data-lab-tools]').hidden = false;
     const search = document.querySelector('#lab-search');
