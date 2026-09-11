@@ -50,8 +50,8 @@ test('every page uses either the current header and footer or the shared current
     const staticChrome = html.includes('class="site-header"') && html.includes('class="site-footer"');
     const renderedChrome = html.includes('data-site-header') && html.includes('data-site-footer') && html.includes('home-design.css');
     assert.ok(staticChrome || renderedChrome, file);
-    assert.match(html, /home-design\.css\?v=20260911-footer-navigation/, file);
-    assert.match(html, /script\.js\?v=20260911-citilab-uppercase/, file);
+    assert.match(html, /home-design\.css\?v=20260911-footer-warning-inline/, file);
+    assert.match(html, /script\.js\?v=20260911-footer-warning-inline/, file);
     assert.doesNotMatch(html, /index\.html#prices|href="#prices"/);
   }
   const source = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
@@ -72,7 +72,11 @@ test('shared footer contains the medical warning and complete navigation', () =>
   assert.match(source, />Главная<\/a>.*>Услуги<\/a>.*>Врачи<\/a>.*>О клинике<\/a>.*>Цены<\/a>.*>Контакты<\/a>/);
   assert.match(source, /const footerPatientLinks/);
   assert.match(source, />Документы<\/a>.*>Прейскурант<\/a>.*>Лицензия<\/a>.*>Контролирующие органы<\/a>.*>Политика конфиденциальности<\/a>/);
-  assert.match(css, /\.footer-medical-warning\{[^}]*font-size:10px/);
+  assert.match(source, /class="shell footer-bottom"[\s\S]*class="footer-medical-warning"[\s\S]*Информация на сайте не является публичной офертой/);
+  assert.match(source, /document\.createElement\('span'\)/);
+  assert.match(css, /\.footer-medical-warning\{white-space:nowrap\}/);
+  assert.match(css, /@media\(max-width:720px\)\{\.footer-bottom\{[^}]*gap:8px[^}]*\}\.footer-medical-warning\{white-space:normal\}\}/);
+  assert.doesNotMatch(css, /\.footer-medical-warning\{[^}]*font-size:/);
 });
 
 test('document pages use the exact homepage chrome classes', () => {

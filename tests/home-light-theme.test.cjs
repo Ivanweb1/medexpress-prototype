@@ -9,7 +9,7 @@ test('homepage alone uses the light sea-blue theme', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
   assert.match(html, /<body class="home-page">/);
-  assert.match(html, /home-design\.css\?v=20260911-footer-navigation/);
+  assert.match(html, /home-design\.css\?v=20260911-footer-warning-inline/);
   for (const selector of [
     '.home-page .header-note',
     '.home-page .featured-service--massage .featured-service__visual',
@@ -45,7 +45,7 @@ test('visible CITILAB mentions use the shared two-colour wordmark', () => {
   assert.match(css, /\.citilab-wordmark__lab\{color:#e84b67\}/);
   for (const file of ['index.html', 'about.html', 'services.html', 'prices.html', 'services/category.html']) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
-    assert.match(html, /home-design\.css\?v=20260911-footer-navigation/, file);
-    assert.match(html, /script\.js\?v=20260911-citilab-uppercase/, file);
+    assert.match(html, /home-design\.css\?v=20260911-footer-warning-inline/, file);
+    assert.match(html, /script\.js\?v=20260911-footer-warning-inline/, file);
   }
 });
