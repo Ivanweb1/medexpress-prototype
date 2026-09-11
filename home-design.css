@@ -155,3 +155,33 @@
 .location-note{display:block;margin-top:5px;color:#8ea5ad;font-size:.88em;font-weight:500}
 .hero-gallery-dots{top:auto;bottom:24px}
 @media(max-width:720px){.hero-gallery-dots{left:50%;bottom:142px;transform:translateX(-50%)}}
+
+/* Homepage light theme: airy clinical whites with calm sea-blue surfaces. */
+.home-page{--home-sea:#dff3f7;--home-sea-strong:#cbeaf1;--home-sea-deep:#176784;background:linear-gradient(180deg,#fbfefe 0,#f7fbfc 100%)}
+.home-page .header-note{background:var(--home-sea);color:var(--ink);border-bottom:1px solid rgba(23,103,132,.12)}
+.home-page .site-header{background:rgba(255,255,255,.96)}
+.home-page .partner-band{background:linear-gradient(110deg,#edf9fb 0,var(--home-sea) 100%)}
+.home-page .about-section{background:linear-gradient(135deg,#f8fbfa 0,#eef7f8 100%)}
+.home-page .featured-service--massage .featured-service__visual{background:linear-gradient(145deg,var(--home-sea-strong),#eaf7f9);color:var(--ink)}
+.home-page .featured-service--massage .featured-service__visual>b{color:var(--home-sea-deep)}
+.home-page .featured-service--massage .featured-service__visual>small{color:var(--blue-dark)}
+.home-page .diagnostic-section{background:linear-gradient(135deg,#eaf8fa 0,var(--home-sea-strong) 100%);color:var(--ink);border-block:1px solid rgba(23,103,132,.1)}
+.home-page .diagnostic-grid>div:first-child p{color:var(--muted)}
+.home-page .diagnostic-grid .text-link{color:var(--blue-dark)}
+.home-page .diagnostic-list div{border-top-color:rgba(18,57,67,.16)}
+.home-page .diagnostic-list b{color:var(--blue-dark)}
+.home-page .diagnostic-list span{color:var(--muted)}
+.home-page .diagnostic-list strong{color:var(--ink)}
+.home-page .reviews-section{background:linear-gradient(180deg,#e5f5f8 0,#d8eff4 100%)}
+.home-page .contact-card{background:linear-gradient(135deg,#e7f6f9,var(--home-sea-strong));border:1px solid rgba(23,103,132,.1)}
+.home-page .hours-card{background:linear-gradient(155deg,#f7fcfd,var(--home-sea));color:var(--ink);border:1px solid rgba(23,103,132,.14)}
+.home-page .hours-card>span,.home-page .hours-contacts>span{color:var(--blue-dark)}
+.home-page .hours-card div{border-top-color:rgba(18,57,67,.14)}
+.home-page .hours-card strong{color:var(--muted)}
+.home-page .hours-contacts>small{color:var(--muted)}
+.home-page .hours-contacts .vk-link{border-color:rgba(23,103,132,.28);color:var(--blue-dark);background:white}
+.home-page .hours-contacts .vk-link:hover{background:var(--blue-dark);color:white}
+.home-page .site-footer{background:linear-gradient(135deg,#d8eff4 0,#c4e5ec 100%);color:var(--ink);border-top:1px solid rgba(23,103,132,.14)}
+.home-page .brand--footer small,.home-page .footer-grid p,.home-page .footer-grid>div:last-child span{color:#536f77}
+.home-page .footer-grid nav strong,.home-page .footer-grid>div:last-child strong{color:var(--blue-dark)}
+.home-page .footer-bottom{border-top-color:rgba(18,57,67,.14);color:#59757d}
