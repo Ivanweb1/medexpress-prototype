@@ -118,3 +118,21 @@ test('intro gallery uses the three supplied photos and advances every three seco
   assert.match(source, /prefers-reduced-motion: reduce/);
   assert.match(css, /\.clinic-intro__photo img\.is-active\{opacity:1/);
 });
+
+test('room photos share one visible height regardless of source orientation', () => {
+  const root = path.join(__dirname, '..');
+  const html = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'about-design.css'), 'utf8');
+  assert.match(html, /about-design\.css\?v=20260911-equal-gallery-height/);
+  assert.match(css, /\.clinic-media-slider--rooms \.clinic-gallery-track img\{aspect-ratio:3\/2;object-fit:cover;object-position:center\}/);
+  assert.doesNotMatch(css, /\.clinic-media-slider--rooms \.clinic-gallery-track img\{aspect-ratio:auto;object-fit:contain\}/);
+});
+
+test('room gallery uses the corrected captions', () => {
+  const root = path.join(__dirname, '..');
+  const html = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
+  assert.equal((html.match(/<figcaption>Массажная кушетка<\/figcaption>/g) || []).length, 3);
+  assert.equal((html.match(/<figcaption>Детский уголок<\/figcaption>/g) || []).length, 2);
+  assert.match(html, /alt="Детский уголок в Мед-ЭКСПРЕСС"/);
+  assert.doesNotMatch(html, /Пеленальный столик|Кабинет аппаратного массажа|Массажная кровать|Оборудование массажного кабинета|Детали массажного кабинета/);
+});
