@@ -39,6 +39,21 @@ test('controlling authorities page publishes supplied contacts and official link
   assert.match(data, /'Контролирующие органы':\s*\{/);
 });
 
+test('privacy policy covers the operator, website processing, user rights and external services', () => {
+  const html = fs.readFileSync(path.join(root, 'documents.html'), 'utf8');
+  const detail = fs.readFileSync(path.join(root, 'documents/document.html'), 'utf8');
+  const data = fs.readFileSync(path.join(root, 'documents-data.js'), 'utf8');
+  assert.match(html, /document\.html\?name=Политика%20конфиденциальности/);
+  assert.match(detail, /documents-data\.js\?v=20260911-privacy-policy/);
+  for (const value of [
+    "'Политика конфиденциальности'", '11 сентября 2026 года', 'ООО «Мед-ЭКСПРЕСС»',
+    '7451351660', '1137451006824', 'IP-адрес', 'Сайт не предназначен для передачи медицинских документов',
+    'Права субъекта персональных данных', 'Защита персональных данных',
+    'privacy.vk.com/policy', 'yandex.ru/legal/confidential/', 'Федерального закона № 152-ФЗ'
+  ]) assert.ok(data.includes(value), value);
+  assert.doesNotMatch(data, /Яндекс\.Метрик|Google Analytics|рекламные cookie используются/);
+});
+
 test('documents page publishes all supplied personal data forms as PDF files', () => {
   const html = fs.readFileSync(path.join(root, 'documents.html'), 'utf8');
   const documents = [
