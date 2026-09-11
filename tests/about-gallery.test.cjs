@@ -89,7 +89,17 @@ test('all local about-page resources and page links exist', () => {
     const file = match[1].split(/[?#]/)[0];
     assert.ok(fs.existsSync(path.join(root, file)), file);
   }
-  assert.equal((html.match(/data-gallery-slide/g) || []).length, 9);
+  assert.equal((html.match(/data-gallery-slide/g) || []).length, 17);
+  assert.equal((html.match(/clinic-gallery-slide--landscape/g) || []).length, 9);
+  assert.equal((html.match(/clinic-gallery-slide--portrait/g) || []).length, 5);
+  for (const image of [
+    'center-procedure-room-wide.jpg', 'center-reception-wide.jpg', 'center-procedure-door-portrait.jpg',
+    'center-child-area-wide.jpg', 'center-changing-area-portrait.jpg', 'center-gynecology-room-wide.jpg',
+    'center-treatment-room-wide.jpg', 'center-massage-room-portrait.jpg', 'center-massage-bed-portrait.jpg',
+    'center-massage-detail-portrait.jpg'
+  ]) assert.match(html, new RegExp(image));
+  assert.doesNotMatch(html, /3L2A6117\.JPG|3L2A6062\.JPG/);
+  assert.ok(html.indexOf('center-procedure-room-wide.jpg') < html.indexOf('3L2A6094.JPG'));
   assert.equal((html.match(/class="clinic-direction__icon"/g) || []).length, 6);
   for (const heading of html.matchAll(/<h[1-3][^>]*>([\s\S]*?)<\/h[1-3]>/g)) {
     assert.ok(!heading[1].includes('.'), 'Heading should not contain a full stop');

@@ -39,6 +39,22 @@ test('controlling authorities page publishes supplied contacts and official link
   assert.match(data, /'Контролирующие органы':\s*\{/);
 });
 
+test('documents page publishes all supplied personal data forms as PDF files', () => {
+  const html = fs.readFileSync(path.join(root, 'documents.html'), 'utf8');
+  const documents = [
+    ['consent-personal-data.pdf', 'Согласие на обработку персональных данных'],
+    ['consent-personal-data-legal-representative.pdf', 'Согласие законного представителя на обработку персональных данных несовершеннолетнего'],
+    ['explanation-refusal-personal-data.pdf', 'Разъяснение юридических последствий отказа предоставить персональные данные'],
+    ['consent-personal-data-website.pdf', 'Согласие на обработку персональных данных на сайте']
+  ];
+
+  for (const [filename, title] of documents) {
+    assert.ok(html.includes(`assets/documents/${filename}`), filename);
+    assert.ok(html.includes(title), title);
+    assert.ok(fs.existsSync(path.join(root, 'assets/documents', filename)), filename);
+  }
+});
+
 test('all local links and assets on the massage and document detail pages resolve', () => {
   for (const file of ['services/spine-massage.html', 'services/cardiology.html', 'documents/document.html']) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');

@@ -78,6 +78,9 @@
 .clinic-gallery-track figure{flex:0 0 calc((100% - 20px)/2);min-width:0;scroll-snap-align:start}
 .clinic-gallery-track img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:24px;background:var(--pale)}
 .clinic-gallery-track figcaption{margin-top:16px;padding:0 2px 4px;font-size:14px;line-height:1.6;overflow-wrap:anywhere;color:var(--muted)}
+.clinic-media-slider--rooms .clinic-gallery-track{align-items:flex-start}
+.clinic-media-slider--rooms .clinic-gallery-track img{aspect-ratio:auto;object-fit:contain}
+.clinic-media-slider--rooms .clinic-gallery-slide--portrait img{border-radius:24px}
 .clinic-media-slider--equipment .clinic-gallery-track figure{flex-basis:100%}
 .clinic-media-slider--equipment .clinic-gallery-track img{aspect-ratio:578/600;object-position:center}
 .clinic-media-slider--equipment figcaption{color:#bdd1d6}
