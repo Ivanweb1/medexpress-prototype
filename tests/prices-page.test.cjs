@@ -50,7 +50,8 @@ test('every page uses either the current header and footer or the shared current
     const staticChrome = html.includes('class="site-header"') && html.includes('class="site-footer"');
     const renderedChrome = html.includes('data-site-header') && html.includes('data-site-footer') && html.includes('home-design.css');
     assert.ok(staticChrome || renderedChrome, file);
-    assert.match(html, /home-design\.css\?v=20260911-footer-warning-inline/, file);
+    const styleVersion = file === 'index.html' ? 'home-heading-3b4b64' : 'footer-warning-inline';
+    assert.match(html, new RegExp(`home-design\\.css\\?v=20260911-${styleVersion}`), file);
     assert.match(html, /script\.js\?v=20260911-footer-warning-inline/, file);
     assert.doesNotMatch(html, /index\.html#prices|href="#prices"/);
   }

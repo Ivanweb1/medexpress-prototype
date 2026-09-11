@@ -9,7 +9,7 @@ test('homepage alone uses the light sea-blue theme', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
   assert.match(html, /<body class="home-page">/);
-  assert.match(html, /home-design\.css\?v=20260911-footer-warning-inline/);
+  assert.match(html, /home-design\.css\?v=20260911-home-heading-3b4b64/);
   for (const selector of [
     '.home-page .header-note',
     '.home-page .featured-service--massage .featured-service__visual',
@@ -19,6 +19,8 @@ test('homepage alone uses the light sea-blue theme', () => {
   ]) assert.ok(css.includes(selector), selector);
   assert.match(css, /--home-sea:#dff3f7/);
   assert.match(css, /--home-heading-soft:#2f6f80/);
+  assert.match(css, /--home-heading-dark:#3b4b64/);
+  assert.match(css, /\.home-page \.hero h1,[^{]+\{color:var\(--home-heading-dark\)\}/);
   assert.match(css, /\.home-page #services \.section-title h2,\.home-page \.doctors-section \.section-title h2\{color:var\(--home-heading-soft\)\}/);
   assert.match(css, /\.home-page \.diagnostic-section\{background:linear-gradient/);
   assert.match(css, /\.home-page \.site-footer\{background:linear-gradient/);
@@ -45,7 +47,8 @@ test('visible CITILAB mentions use the shared two-colour wordmark', () => {
   assert.match(css, /\.citilab-wordmark__lab\{color:#e84b67\}/);
   for (const file of ['index.html', 'about.html', 'services.html', 'prices.html', 'services/category.html']) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
-    assert.match(html, /home-design\.css\?v=20260911-footer-warning-inline/, file);
+    const styleVersion = file === 'index.html' ? 'home-heading-3b4b64' : 'footer-warning-inline';
+    assert.match(html, new RegExp(`home-design\\.css\\?v=20260911-${styleVersion}`), file);
     assert.match(html, /script\.js\?v=20260911-footer-warning-inline/, file);
   }
 });
