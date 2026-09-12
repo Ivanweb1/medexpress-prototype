@@ -50,9 +50,9 @@ test('every page uses either the current header and footer or the shared current
     const staticChrome = html.includes('class="site-header"') && html.includes('class="site-footer"');
     const renderedChrome = html.includes('data-site-header') && html.includes('data-site-footer') && html.includes('home-design.css');
     assert.ok(staticChrome || renderedChrome, file);
-    const styleVersion = file === 'index.html' ? '20260912-citilab-hero-colours' : '20260911-footer-warning-inline';
+    const styleVersion = '20260912-footer-warning-centered';
     assert.match(html, new RegExp(`home-design\\.css\\?v=${styleVersion}`), file);
-    assert.match(html, /script\.js\?v=20260911-footer-warning-inline/, file);
+    assert.match(html, /script\.js\?v=20260912-footer-warning-centered/, file);
     assert.doesNotMatch(html, /index\.html#prices|href="#prices"/);
   }
   const source = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
@@ -68,15 +68,17 @@ test('every page uses either the current header and footer or the shared current
 test('shared footer contains the medical warning and complete navigation', () => {
   const source = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'home-design.css'), 'utf8');
-  assert.match(source, /ИМЕЮТСЯ ПРОТИВОПОКАЗАНИЯ\. НЕОБХОДИМА КОНСУЛЬТАЦИЯ СПЕЦИАЛИСТА/);
+  assert.match(source, /Имеются противопоказания\. Необходима консультация специалиста/);
+  assert.doesNotMatch(source, /ИМЕЮТСЯ ПРОТИВОПОКАЗАНИЯ\. НЕОБХОДИМА КОНСУЛЬТАЦИЯ СПЕЦИАЛИСТА/);
   assert.match(source, /const footerSectionLinks/);
   assert.match(source, />Главная<\/a>.*>Услуги<\/a>.*>Врачи<\/a>.*>О клинике<\/a>.*>Цены<\/a>.*>Контакты<\/a>/);
   assert.match(source, /const footerPatientLinks/);
   assert.match(source, />Документы<\/a>.*>Прейскурант<\/a>.*>Лицензия<\/a>.*>Контролирующие органы<\/a>.*>Политика конфиденциальности<\/a>/);
   assert.match(source, /class="shell footer-bottom"[\s\S]*class="footer-medical-warning"[\s\S]*Информация на сайте не является публичной офертой/);
   assert.match(source, /document\.createElement\('span'\)/);
-  assert.match(css, /\.footer-medical-warning\{white-space:nowrap\}/);
-  assert.match(css, /@media\(max-width:720px\)\{\.footer-bottom\{[^}]*gap:8px[^}]*\}\.footer-medical-warning\{white-space:normal\}\}/);
+  assert.match(css, /\.footer-bottom\{position:relative;align-items:center;gap:20px\}/);
+  assert.match(css, /\.footer-medical-warning\{position:absolute;left:50%;transform:translateX\(-50%\);white-space:nowrap;text-align:center;text-transform:none\}/);
+  assert.match(css, /@media\(max-width:720px\)\{\.footer-bottom\{[^}]*gap:8px[^}]*\}\.footer-medical-warning\{position:static;transform:none;white-space:normal\}\}/);
   assert.doesNotMatch(css, /\.footer-medical-warning\{[^}]*font-size:/);
 });
 

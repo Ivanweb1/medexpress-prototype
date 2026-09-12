@@ -13,7 +13,7 @@ if (headerMount) {
 }
 
 if (footerMount) {
-  footerMount.outerHTML = `<footer class="site-footer"><div class="shell footer-grid"><div><a class="brand brand--footer" href="${pageDepth}index.html"><img src="${pageDepth}assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a><p>Профессиональная медицинская помощь для жителей Аргаяшского района.</p></div><nav>${footerSectionLinks}</nav><nav>${footerPatientLinks}</nav><div><strong>Связаться</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно с 8:00</span></div></div><div class="shell footer-bottom"><span>© Мед-ЭКСПРЕСС</span><a href="${pageDepth}documents/document.html?name=Политика%20конфиденциальности">Политика конфиденциальности</a><span class="footer-medical-warning">ИМЕЮТСЯ ПРОТИВОПОКАЗАНИЯ. НЕОБХОДИМА КОНСУЛЬТАЦИЯ СПЕЦИАЛИСТА</span><span>Информация на сайте не является публичной офертой</span></div></footer>`;
+  footerMount.outerHTML = `<footer class="site-footer"><div class="shell footer-grid"><div><a class="brand brand--footer" href="${pageDepth}index.html"><img src="${pageDepth}assets/medexpress-mark-blue.png" alt=""><span><strong>Мед-ЭКСПРЕСС</strong><small>медицинский центр</small></span></a><p>Профессиональная медицинская помощь для жителей Аргаяшского района.</p></div><nav>${footerSectionLinks}</nav><nav>${footerPatientLinks}</nav><div><strong>Связаться</strong><a href="tel:+79617958759">+7 (961) 795-87-59</a><span>с. Аргаяш, ул. Ленина, 50</span><span>Ежедневно с 8:00</span></div></div><div class="shell footer-bottom"><span>© Мед-ЭКСПРЕСС</span><a href="${pageDepth}documents/document.html?name=Политика%20конфиденциальности">Политика конфиденциальности</a><span class="footer-medical-warning">Имеются противопоказания. Необходима консультация специалиста</span><span>Информация на сайте не является публичной офертой</span></div></footer>`;
 }
 
 const siteFooter = document.querySelector('.site-footer');
@@ -24,7 +24,7 @@ if (siteFooter) {
   if (!siteFooter.querySelector('.footer-medical-warning')) {
     const warning = document.createElement('span');
     warning.className = 'footer-medical-warning';
-    warning.textContent = 'ИМЕЮТСЯ ПРОТИВОПОКАЗАНИЯ. НЕОБХОДИМА КОНСУЛЬТАЦИЯ СПЕЦИАЛИСТА';
+    warning.textContent = 'Имеются противопоказания. Необходима консультация специалиста';
     const footerBottom = siteFooter.querySelector('.footer-bottom');
     if (footerBottom?.lastElementChild) footerBottom.lastElementChild.before(warning);
     else footerBottom?.append(warning);
