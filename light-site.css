@@ -40,6 +40,8 @@ body:not(.home-page) .detail-booking,
 body:not(.home-page) .price-table-card--accent>header{background:var(--blue);color:white}
 body:not(.home-page) .detail-booking :is(h2,p,.detail-phone),
 body:not(.home-page) .price-table-card--accent>header :is(h3,a,small){color:white}
+body:not(.home-page) .detail-booking .btn{background:white;color:var(--blue-dark);box-shadow:none}
+body:not(.home-page) .detail-booking .btn:hover{background:#f4fbfd;color:var(--blue-dark)}
 body:not(.home-page) :is(.service-tile--blue,.service-tile--image) :is(h2,h3,h4){color:white}
 
 @media(max-width:720px){

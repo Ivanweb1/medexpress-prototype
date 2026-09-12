@@ -169,6 +169,12 @@ test('generic profile renderer shows only supplied doctor information', () => {
   }
 });
 
+test('doctor booking CTA keeps the button visible on the bright blue background', () => {
+  const css = fs.readFileSync(path.join(root, 'light-site.css'), 'utf8');
+  assert.match(css, /body:not\(\.home-page\) \.detail-booking \.btn\{background:white;color:var\(--blue-dark\);box-shadow:none\}/);
+  assert.match(css, /body:not\(\.home-page\) \.detail-booking \.btn:hover\{background:#f4fbfd;color:var\(--blue-dark\)\}/);
+});
+
 test('ultrasound is the primary specialty for ultrasound doctors', () => {
   assert.match(doctors['Елена Федоркина'].role, /^Врач УЗД/);
   assert.match(doctors['Елена Федоркина'].specialty, /^Врач ультразвуковой диагностики/);
