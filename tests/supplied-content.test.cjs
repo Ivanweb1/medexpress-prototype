@@ -22,7 +22,15 @@ test('massage page contains the supplied programmes, apparatus description and c
 });
 
 test('document pages publish the current licence and supplied requisites', () => {
+  const html = fs.readFileSync(path.join(root, 'documents.html'), 'utf8');
+  const detail = fs.readFileSync(path.join(root, 'documents/document.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'documents-design.css'), 'utf8');
   const data = fs.readFileSync(path.join(root, 'documents-data.js'), 'utf8');
+  assert.match(html, /documents-design\.css\?v=20260912-license-status-visible/);
+  assert.match(detail, /documents-design\.css\?v=20260912-license-status-visible/);
+  assert.match(html, /<div class="document-license-status"><span>Лицензия действует<\/span>/);
+  assert.match(css, /\.document-license-status\{[^}]*justify-items:center[^}]*text-align:center/);
+  assert.match(css, /\.document-license-status span\{color:rgba\(255,255,255,.86\)/);
   for (const value of ['Л041-01024-74/00355466', '25 августа 2025', '№ 1180-УЛ', 'ул. Ленина, д. 50', '7451351660', '1137451006824', '40702810772000038313']) {
     assert.match(data, new RegExp(value.replace(/[.+?^${}()|[\]\\]/g, '\\$&')));
   }
