@@ -44,10 +44,12 @@ test('inner pages use the shared light theme and slate heading colour', () => {
   for (const file of pages) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
     const prefix = file.includes('/') ? '\\.\\./' : '';
-    assert.match(html, new RegExp(`${prefix}light-site\\.css\\?v=20260911-site-light-theme`), file);
+    assert.match(html, new RegExp(`${prefix}light-site\\.css\\?v=20260912-equipment-video-balance`), file);
   }
   assert.match(css, /--site-heading:#3b4b64/);
   assert.match(css, /body:not\(\.home-page\) main :is\(h1,h2,h3,h4\)\{color:var\(--site-heading\)\}/);
+  assert.match(css, /body:not\(\.home-page\) \.clinic-equipment p,[\s\S]*body:not\(\.home-page\) \.clinic-equipment \.clinic-lead\{color:#526d78!important\}/);
+  assert.match(css, /body:not\(\.home-page\) \.clinic-media-slider--equipment figcaption,[\s\S]*body:not\(\.home-page\) \.clinic-media-slider--equipment \.clinic-gallery-count\{color:#526d78\}/);
   assert.match(css, /body:not\(\.home-page\) \.detail-booking,[\s\S]*background:var\(--blue\);color:white/);
   assert.match(css, /body:not\(\.home-page\) \.site-footer\{background:linear-gradient/);
 });

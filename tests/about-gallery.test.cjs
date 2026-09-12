@@ -25,7 +25,7 @@ function setup({ count = 6, columns = 2, reduced = false } = {}) {
   const mapping = { '[data-gallery-track]': track, '[data-gallery-prev]': previous, '[data-gallery-next]': next, '[data-gallery-count]': counter, '[data-gallery-controls]': controls };
   const gallery = { querySelector: (selector) => mapping[selector], querySelectorAll: () => slides };
   const window = element({ id: 'window', matchMedia: () => ({ matches: reduced }), requestAnimationFrame: (callback) => callback() });
-  vm.runInNewContext(source, { document: { querySelectorAll: () => [gallery] }, window, getComputedStyle: () => ({ gap: '20px' }) });
+  vm.runInNewContext(source, { document: { querySelectorAll: (selector) => selector === '[data-clinic-gallery]' ? [gallery] : [] }, window, getComputedStyle: () => ({ gap: '20px' }) });
   const click = (name) => listeners.get(name + ':click')();
   const key = (name, target = track) => {
     let prevented = false;
@@ -50,7 +50,7 @@ test('arrows advance and stop at the last pair', () => {
   state.click('previous');
   assert.equal(state.counter.textContent, '4–5 / 6');
 });
-test('mobile equipment gallery has three single-image positions', () => {
+test('mobile equipment gallery has three single-slide positions', () => {
   const state = setup({ count: 3, columns: 1 });
   assert.equal(state.counter.textContent, '1 / 3');
   state.click('next');
@@ -124,11 +124,39 @@ test('room photos share one visible height and preserve their natural orientatio
   const root = path.join(__dirname, '..');
   const html = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'about-design.css'), 'utf8');
-  assert.match(html, /about-design\.css\?v=20260911-natural-gallery-ratios/);
+  assert.match(html, /about-design\.css\?v=20260912-equipment-video/);
   assert.match(css, /\.clinic-media-slider--rooms \.clinic-gallery-slide--landscape\{flex-basis:clamp\(345px,46\.5vw,630px\)\}/);
   assert.match(css, /\.clinic-media-slider--rooms \.clinic-gallery-slide--portrait\{flex-basis:clamp\(173px,23\.25vw,315px\)\}/);
   assert.match(css, /\.clinic-media-slider--rooms \.clinic-gallery-track img\{width:100%;height:clamp\(230px,31vw,420px\);aspect-ratio:auto;object-fit:contain/);
   assert.doesNotMatch(css, /\.clinic-media-slider--rooms \.clinic-gallery-track img\{[^}]*object-fit:cover/);
+});
+
+test('equipment section starts its gallery with a poster video without autoplay', () => {
+  const root = path.join(__dirname, '..');
+  const html = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'about-design.css'), 'utf8');
+  const equipmentGallery = html.match(/id="equipment-track"[\s\S]*?<\/div>\s*<div class="clinic-gallery-nav"/)?.[0] || '';
+  assert.match(equipmentGallery, /aria-label="1 из 3"[\s\S]*class="clinic-equipment-video-frame"/);
+  assert.doesNotMatch(equipmentGallery, /assets\/equipment-gallery-2\.png" alt="Аппарат ультразвуковой диагностики"/);
+  assert.match(html, /<video preload="metadata" playsinline aria-label="Видео оборудования Мед-ЭКСПРЕСС">/);
+  assert.doesNotMatch(html, /<video controls/);
+  assert.doesNotMatch(html, /<video[^>]*poster=/);
+  assert.match(html, /class="clinic-equipment-video-poster" src="assets\/equipment-gallery-2\.png"[^>]*data-equipment-video-play/);
+  assert.match(html, /<source src="assets\/equipment-video\.mp4" type="video\/mp4">/);
+  assert.match(html, /data-equipment-video-play aria-label="Запустить видео оборудования"/);
+  assert.ok(fs.existsSync(path.join(root, 'assets', 'equipment-video.mp4')));
+  assert.doesNotMatch(html, /<video[^>]*autoplay/);
+  assert.match(css, /\.clinic-equipment__grid\{display:grid;grid-template-columns:minmax\(280px,\.76fr\) minmax\(0,1fr\)/);
+  assert.match(css, /\.clinic-media-slider--equipment \.clinic-gallery-track :is\(img,\.clinic-equipment-video-frame\)\{max-height:clamp\(430px,44vw,620px\)\}/);
+  assert.match(css, /\.clinic-equipment-video-frame\{position:relative;overflow:hidden;border-radius:24px;background:#102d38;aspect-ratio:578\/600\}/);
+  assert.match(css, /\.clinic-equipment-video-frame video\{display:block;width:100%;height:100%;background:#102d38;object-fit:contain\}/);
+  assert.match(css, /\.clinic-equipment-video-poster\{position:absolute;inset:0;z-index:1;width:100%;height:100%!important;max-height:none!important;object-fit:cover!important/);
+  assert.match(css, /\.clinic-equipment-play\{position:absolute;z-index:2/);
+  assert.match(css, /\.clinic-equipment-play svg\{width:29px;height:29px;fill:currentColor;transform:translateX\(1px\)\}/);
+  assert.match(css, /\.clinic-equipment-video-slide:is\(\.is-loading,\.is-playing\) \.clinic-equipment-play\{opacity:0;pointer-events:none\}/);
+  assert.match(source, /video\.controls = true/);
+  assert.match(source, /video\.addEventListener\('playing'/);
+  assert.match(source, /slide\.querySelectorAll\('\[data-equipment-video-play\]'\)\.forEach/);
 });
 
 test('room gallery uses the corrected captions', () => {

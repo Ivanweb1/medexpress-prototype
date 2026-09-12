@@ -15,7 +15,12 @@ body:not(.home-page) .footer-bottom{border-top-color:rgba(18,57,67,.14);color:#5
 
 /* Previously dark content surfaces become calm sea-blue panels. */
 body:not(.home-page) :is(.clinic-equipment,.catalog-help,.service-hub-card--massage,.catalog-card--spine .catalog-card__visual,.service-tile--dark,.detail-preparation__main,.cardio-signal--urgent,.cardio-package__card,.detail-procedure-card:first-child,.detail-price-heading,.massage-safety,.document-aside){background:linear-gradient(145deg,var(--site-sea-soft),var(--site-sea-strong));color:var(--site-heading);border-color:rgba(23,103,132,.14)}
+body:not(.home-page) .clinic-equipment :is(h2,h3){color:var(--site-heading)}
+body:not(.home-page) .clinic-equipment p,
 body:not(.home-page) .clinic-equipment .clinic-lead{color:#526d78!important}
+body:not(.home-page) .clinic-equipment__tags span{border-color:rgba(23,103,132,.18);background:rgba(255,255,255,.44);color:#526d78}
+body:not(.home-page) .clinic-media-slider--equipment figcaption,
+body:not(.home-page) .clinic-media-slider--equipment .clinic-gallery-count{color:#526d78}
 body:not(.home-page) :is(.catalog-help,.service-hub-card--massage,.service-tile--dark,.detail-preparation__main,.cardio-package__card,.detail-procedure-card:first-child,.massage-safety,.document-aside) p{color:#526d78}
 body:not(.home-page) :is(.service-hub-card--massage,.service-tile--dark) h3,
 body:not(.home-page) :is(.detail-preparation__main,.cardio-package__card,.detail-procedure-card:first-child,.massage-safety,.document-aside) :is(h2,h3,strong){color:var(--site-heading)}

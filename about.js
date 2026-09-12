@@ -71,6 +71,28 @@ document.querySelectorAll('[data-clinic-gallery]').forEach((gallery) => {
   update();
 });
 
+document.querySelectorAll('[data-equipment-video-play]').forEach((button) => {
+  const slide = button.closest('.clinic-equipment-video-slide');
+  const video = slide?.querySelector('video');
+  if (!slide || !video || video.dataset.playButtonReady) return;
+  video.dataset.playButtonReady = 'true';
+
+  const startVideo = () => {
+    video.controls = true;
+    slide.classList.add('is-loading');
+    const playback = video.play();
+    video.focus({ preventScroll: true });
+    if (playback?.catch) playback.catch(() => slide.classList.remove('is-loading', 'is-playing'));
+  };
+  slide.querySelectorAll('[data-equipment-video-play]').forEach((trigger) => trigger.addEventListener('click', startVideo));
+  video.addEventListener('playing', () => {
+    slide.classList.remove('is-loading');
+    slide.classList.add('is-playing');
+  });
+  video.addEventListener('pause', () => slide.classList.remove('is-loading', 'is-playing'));
+  video.addEventListener('ended', () => slide.classList.remove('is-loading', 'is-playing'));
+});
+
 document.querySelectorAll('[data-intro-gallery]').forEach((gallery) => {
   const slides = [...gallery.querySelectorAll('[data-intro-slide]')];
   const dots = [...gallery.querySelectorAll('[data-intro-dots] button')];
