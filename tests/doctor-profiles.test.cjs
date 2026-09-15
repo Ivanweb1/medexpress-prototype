@@ -19,7 +19,7 @@ test('all nine generic profiles contain approved names and services', () => {
     assert.ok(doctor.bookingName);
     assert.ok(doctor.services.length);
   }
-  assert.equal(doctors['Разина Якупова'].schedule, 'По понедельникам и четвергам, по предварительной записи');
+  assert.equal(doctors['Разина Якупова'].schedule, 'С понедельника по четверг, по предварительной записи');
   assert.equal(doctors['Елена Федоркина'].schedule, undefined);
 });
 
@@ -110,14 +110,15 @@ test('key professional facts are preserved from supplied doctor information', ()
   assert.equal(doctors['Елена Федоркина'].photo, 'doctor-fedorkina.png');
   assert.equal(doctors['Юлия Пинаева'].experience, '12 лет');
   assert.equal(doctors['Юлия Пинаева'].photo, 'doctor-pinaeva.png');
-  assert.ok(doctors['Ирина Бойко'].qualifications.includes('Заслуженный врач Российской Федерации'));
+  assert.deepEqual(Array.from(doctors['Ирина Бойко'].awards[0]), ['2022', 'Отличник здравоохранения']);
+  assert.deepEqual(Array.from(doctors['Ирина Бойко'].awards[1]), ['2026', 'Заслуженный врач Российской Федерации']);
   assert.equal(doctors['Ирина Бойко'].photo, 'doctor-boyko.png');
   assert.equal(doctors['Мария Маковецкая'].experience, '13 лет');
   assert.equal(doctors['Мария Маковецкая'].photo, 'doctor-makovetskaya.png');
 });
 
 test('cardiologist schedule uses the supplied appointment days', () => {
-  assert.equal(doctors['Разина Якупова'].schedule, 'По понедельникам и четвергам, по предварительной записи');
+  assert.equal(doctors['Разина Якупова'].schedule, 'С понедельника по четверг, по предварительной записи');
 });
 
 test('cardiologist profile shows supplied training and consultation topics', () => {

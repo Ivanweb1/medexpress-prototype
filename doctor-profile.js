@@ -19,8 +19,10 @@
     : '<div class="profile-portrait__neutral" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2"><circle cx="60" cy="40" r="19"/><path d="M25 102V91a35 35 0 0 1 70 0v11M47 66l13 17 13-17M60 83v19"/></svg></div>';
   const facts = [['Специальность', doctor.role], ...(doctor.experience ? [['Стаж работы', doctor.experience]] : []), ['Место приёма', 'Аргаяш, ул. Ленина, 50']];
   const qualifications = doctor.qualifications?.map((item) => '<article class="detail-draft-card"><span class="detail-block-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 12 2 2 4-4M12 2l8 3v7c0 5-8 10-8 10S4 17 4 12V5l8-3Z"/></svg></span><h3>' + escape(item) + '</h3></article>').join('') || '';
+  const awards = doctor.awards?.map(([year, title]) => '<article class="detail-draft-card"><span class="detail-block-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="m8.5 12-1 9 4.5-2.5 4.5 2.5-1-9M10 8l1.3 1.3L14 6.8"/></svg></span><span class="detail-timeline-date">' + escape(year) + '</span><h3>' + escape(title) + '</h3></article>').join('') || '';
   const education = doctor.education?.map(([year, title, copy]) => '<article><div class="detail-timeline-marker"><span class="detail-block-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m2 8 10-5 10 5-10 5L2 8Zm4 3v6c4 3 8 3 12 0v-6M22 8v8"/></svg></span><span class="detail-timeline-date">' + escape(year) + '</span></div><div><h3>' + escape(title) + '</h3><p>' + escape(copy) + '</p></div></article>').join('') || '';
   const qualificationsSection = qualifications ? '<section class="shell detail-section"><div class="detail-section-heading"><div><span class="eyebrow">Профессиональный уровень</span><h2>Квалификация</h2></div></div><div class="detail-draft-grid">' + qualifications + '</div></section>' : '';
+  const awardsSection = awards ? '<section class="detail-section detail-pale"><div class="shell"><div class="detail-section-heading"><div><span class="eyebrow">Профессиональное признание</span><h2>Награды</h2></div></div><div class="detail-draft-grid">' + awards + '</div></div></section>' : '';
   const educationSection = education ? '<section class="detail-section detail-pale"><div class="shell detail-editorial"><div><span class="eyebrow">Профессиональный путь</span><h2>Образование</h2></div><div class="detail-timeline">' + education + '</div></div></section>' : '';
   const aboutFacts = [
     doctor.experience ? '<p>Стаж работы — ' + escape(doctor.experience) + '.</p>' : '',
@@ -48,6 +50,7 @@
     </section>
     <section class="detail-section detail-cream"><div class="shell detail-editorial"><div><span class="eyebrow">О враче</span><h2>Опыт и<br><em>направления работы</em></h2></div><div class="detail-copy"><p class="detail-lead">${escape(doctor.specialty)}</p>${aboutFacts}</div></div></section>
     ${qualificationsSection}
+    ${awardsSection}
     ${educationSection}
     ${trainingSection}
     ${concerns}

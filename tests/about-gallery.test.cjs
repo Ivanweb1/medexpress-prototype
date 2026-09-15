@@ -89,7 +89,7 @@ test('all local about-page resources and page links exist', () => {
     const file = match[1].split(/[?#]/)[0];
     assert.ok(fs.existsSync(path.join(root, file)), file);
   }
-  assert.equal((html.match(/data-gallery-slide/g) || []).length, 17);
+  assert.equal((html.match(/data-gallery-slide/g) || []).length, 18);
   const galleryClasses = [...html.matchAll(/<figure class="([^"]+)"[^>]*data-gallery-slide/g)].map(match => match[1].split(/\s+/));
   assert.equal(galleryClasses.filter(classes => classes.includes('clinic-gallery-slide--landscape')).length, 9);
   assert.equal(galleryClasses.filter(classes => classes.includes('clinic-gallery-slide--portrait')).length, 5);
@@ -131,12 +131,12 @@ test('room photos share one visible height and preserve their natural orientatio
   assert.doesNotMatch(css, /\.clinic-media-slider--rooms \.clinic-gallery-track img\{[^}]*object-fit:cover/);
 });
 
-test('equipment section starts its gallery with a poster video without autoplay', () => {
+test('equipment section starts with the supplied cutout and continues with the poster video', () => {
   const root = path.join(__dirname, '..');
   const html = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'about-design.css'), 'utf8');
   const equipmentGallery = html.match(/id="equipment-track"[\s\S]*?<\/div>\s*<div class="clinic-gallery-nav"/)?.[0] || '';
-  assert.match(equipmentGallery, /aria-label="1 из 3"[\s\S]*class="clinic-equipment-video-frame"/);
+  assert.match(equipmentGallery, /aria-label="1 из 4"[\s\S]*equipment-ultrasound-cutout\.png[\s\S]*aria-label="2 из 4"[\s\S]*class="clinic-equipment-video-frame"/);
   assert.doesNotMatch(equipmentGallery, /assets\/equipment-gallery-2\.png" alt="Аппарат ультразвуковой диагностики"/);
   assert.match(html, /<video preload="metadata" playsinline aria-label="Видео оборудования Мед-ЭКСПРЕСС">/);
   assert.doesNotMatch(html, /<video controls/);
@@ -145,6 +145,7 @@ test('equipment section starts its gallery with a poster video without autoplay'
   assert.match(html, /<source src="assets\/equipment-video\.mp4" type="video\/mp4">/);
   assert.match(html, /data-equipment-video-play aria-label="Запустить видео оборудования"/);
   assert.ok(fs.existsSync(path.join(root, 'assets', 'equipment-video.mp4')));
+  assert.ok(fs.existsSync(path.join(root, 'assets', 'equipment-ultrasound-cutout.png')));
   assert.doesNotMatch(html, /<video[^>]*autoplay/);
   assert.match(css, /\.clinic-equipment__grid\{display:grid;grid-template-columns:minmax\(280px,\.76fr\) minmax\(0,1fr\)/);
   assert.match(css, /\.clinic-media-slider--equipment \.clinic-gallery-track :is\(img,\.clinic-equipment-video-frame\)\{max-height:clamp\(430px,44vw,620px\)\}/);

@@ -43,7 +43,7 @@
     const analysesPhone = '+7 (900) 093-06-86';
     const analysesHref = 'tel:+79000930686';
     const headingNote = document.querySelector('.category-list-heading p');
-    headingNote.innerHTML = `Все вопросы по анализам и запись: <a class="category-analyses-phone" href="${analysesHref}">${analysesPhone}</a>`;
+    headingNote.innerHTML = `Задать вопрос по анализам: <a class="category-analyses-phone" href="${analysesHref}">${analysesPhone}</a>`;
     const headerRecord = document.querySelector('.header-actions .btn');
     headerRecord.href = analysesHref;
     headerRecord.removeAttribute('target');
@@ -53,7 +53,7 @@
     floatingRecord.href = analysesHref;
     floatingRecord.removeAttribute('target');
     floatingRecord.removeAttribute('rel');
-    floatingRecord.querySelector('span').textContent = 'Анализы';
+    floatingRecord.querySelector('span').textContent = 'Позвонить';
     document.querySelector('[data-analyses-contact]').hidden = false;
   }
 

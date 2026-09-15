@@ -87,6 +87,7 @@
 .clinic-media-slider--rooms .clinic-gallery-track img{width:100%;height:clamp(230px,31vw,420px);aspect-ratio:auto;object-fit:contain;object-position:center;background:white}
 .clinic-media-slider--equipment .clinic-gallery-track figure{flex-basis:100%}
 .clinic-media-slider--equipment .clinic-gallery-track img{aspect-ratio:578/600;object-position:center}
+.clinic-media-slider--equipment .clinic-equipment-cutout-slide img{object-fit:contain;padding:24px;background:radial-gradient(circle at 50% 36%,#23596a 0,#153c49 46%,#0d2c36 100%)}
 .clinic-media-slider--equipment .clinic-gallery-track :is(img,.clinic-equipment-video-frame){max-height:clamp(430px,44vw,620px)}
 .clinic-equipment-video-frame{position:relative;overflow:hidden;border-radius:24px;background:#102d38;aspect-ratio:578/600}
 .clinic-equipment-video-frame video{display:block;width:100%;height:100%;background:#102d38;object-fit:contain}

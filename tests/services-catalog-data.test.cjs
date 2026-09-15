@@ -115,11 +115,11 @@ test('analyses page uses its direct phone instead of online booking', () => {
   const styles = fs.readFileSync(path.join(root, 'services', 'category-design.css'), 'utf8');
   assert.match(renderer, /\+7 \(900\) 093-06-86/);
   assert.match(renderer, /tel:\+79000930686/);
-  assert.match(renderer, /Все вопросы по анализам и запись/);
+  assert.match(renderer, /Задать вопрос по анализам/);
   assert.match(renderer, /Медицинские анализы в лаборатории СИТИЛАБ/);
   assert.match(renderer, /removeAttribute\('target'\)/);
   assert.match(html, /data-analyses-contact hidden/);
-  assert.match(html, /Все вопросы по анализам и запись:/);
+  assert.match(html, /Задать вопрос по анализам:/);
   assert.match(html, /href="tel:\+79000930686">\+7 \(900\) 093-06-86/);
   assert.match(renderer, /querySelector\('\[data-analyses-contact\]'\)\.hidden = false/);
   assert.match(styles, /\.analyses-contact-card\{position:fixed/);
