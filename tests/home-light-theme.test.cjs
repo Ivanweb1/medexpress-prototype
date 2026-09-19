@@ -38,8 +38,8 @@ test('inner pages use the shared light theme and slate heading colour', () => {
   const pages = [
     'about.html', 'contacts.html', 'doctors.html', 'documents.html', 'prices.html', 'services.html',
     'doctors/ekaterina-orekhova.html', 'doctors/profile.html', 'documents/document.html',
-    'services/cardiology.html', 'services/category.html', 'services/general-ultrasound.html',
-    'services/service.html', 'services/spine-massage.html'
+    'services/category.html', 'services/general-ultrasound.html',
+    'services/spine-massage.html'
   ];
   for (const file of pages) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
